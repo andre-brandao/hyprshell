@@ -1,0 +1,28 @@
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+$theme_fg_color: "@theme_fg_color";
+$theme_bg_color: "@theme_bg_color";
+$bg: #212223;
+$fg: #f1f1f1;
+$accent: #378df7;
+$radius: 7px;
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+@use "./widget/notification/Notification.scss";
+
+@use "./widget/bar/Bar.scss";
+
+// window.Bar {
+//     background: transparent;
+//     color: #{$theme_bg_color};
+//     font-weight: bold;
+
+//     >centerbox {
+//         background: #{$theme_bg_color};
+//         border-radius: 10px;
+//         margin: 8px;
+//     }
+
+//     button {
+//         border-radius: 8px;
+//         margin: 2px;
+//     }
+// }
