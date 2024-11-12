@@ -9,6 +9,9 @@ import AudioSlider from "./buttons/AudioSlider";
 import BatteryLevel from "./buttons/Battery";
 import Time from "./buttons/Time";
 import IdleInibitor from "./buttons/IdleInhibitor";
+import { options } from "../../options";
+
+const { center, end, start } = options.bar;
 
 export const barWidget = {
   battery: BatteryLevel,
@@ -22,9 +25,14 @@ export const barWidget = {
   idle: IdleInibitor,
 };
 export type BarWidget = keyof typeof barWidget;
+
 export default function Bar(monitor: Gdk.Monitor) {
   const anchor =
     Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT;
+
+  function getWidgets(ws: BarWidget[]) {
+    return ws.map((w) => barWidget[w]({}));
+  }
 
   return (
     <window
@@ -35,19 +43,22 @@ export default function Bar(monitor: Gdk.Monitor) {
     >
       <centerbox>
         <box hexpand halign={Gtk.Align.START}>
-          <Workspaces />
-          <FocusedClient />
+          {start((value) => getWidgets(value))}
+          {/* <Workspaces />
+          <FocusedClient /> */}
         </box>
         <box>
-          <Media />
+          {center((value) => getWidgets(value))}
+          {/* <Media /> */}
         </box>
         <box hexpand halign={Gtk.Align.END}>
-          <IdleInibitor />
+          {end((value) => getWidgets(value))}
+          {/* <IdleInibitor />
           <SysTray />
           <Wifi />
           <AudioSlider />
           <BatteryLevel />
-          <Time />
+          <Time /> */}
         </box>
       </centerbox>
     </window>
