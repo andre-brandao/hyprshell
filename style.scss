@@ -9,20 +9,6 @@ $radius: 7px;
 @use "./widget/notification/Notification.scss";
 
 @use "./widget/bar/Bar.scss";
+@use "./widget/media-player/MediaPlayer.scss";
 
-// window.Bar {
-//     background: transparent;
-//     color: #{$theme_bg_color};
-//     font-weight: bold;
-
-//     >centerbox {
-//         background: #{$theme_bg_color};
-//         border-radius: 10px;
-//         margin: 8px;
-//     }
-
-//     button {
-//         border-radius: 8px;
-//         margin: 2px;
-//     }
-// }
+@use "./widget/app-launcher/Launcher.scss";

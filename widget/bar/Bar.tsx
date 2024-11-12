@@ -11,7 +11,7 @@ import Time from "./buttons/Time";
 import IdleInibitor from "./buttons/IdleInhibitor";
 import { options } from "../../options";
 
-const { center, end, start } = options.bar;
+const { center, end, start } = options.bar.layout;
 
 export const barWidget = {
   battery: BatteryLevel,

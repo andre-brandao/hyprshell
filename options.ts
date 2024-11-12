@@ -11,14 +11,26 @@ import { barWidget, type BarWidget } from "./widget/bar/Bar";
 //     end: opt<BarWidget[]>(["idle", "tray", "wifi", "audio", "battery", "time"]),
 //   },
 // };
-
-print("OPTIONS", OPTIONS);
 export const options = mkOptions(OPTIONS, {
   bar: {
-    start: opt<BarWidget[]>(["workspaces", "focused"]),
-    center: opt<BarWidget[]>(["media"]),
-    end: opt<BarWidget[]>(["idle", "tray", "wifi", "audio", "battery", "time"]),
+    position: opt<"top" | "bottom">("top"),
+    layout: {
+      start: opt<BarWidget[]>(["workspaces", "focused"]),
+      center: opt<BarWidget[]>(["media"]),
+      end: opt<BarWidget[]>([
+        "idle",
+        "tray",
+        "wifi",
+        "audio",
+        "battery",
+        "time",
+      ]),
+    },
+  },
+
+  notification: {
+    position: opt<"top-right" | "top-left" | "bottom-right" | "bottom-left">(
+      "bottom-left"
+    ),
   },
 });
-
-print("opt", options);
