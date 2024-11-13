@@ -3,7 +3,6 @@ import { divide, type GenericResourceData } from "@/lib/utils";
 
 import { Variable as VariableType } from "astal";
 
-// FIX: Consolidate with Ram service class
 export const computeRamUsage = (): //   round: VariableType<boolean>
 GenericResourceData => {
   try {

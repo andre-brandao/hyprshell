@@ -3,7 +3,6 @@ import GTop from "gi://GTop";
 import { divide, type GenericResourceData } from "@/lib/utils";
 import { Variable as VariableType } from "astal";
 
-// FIX: Consolidate with Storage service class
 export const computeStorage = (): GenericResourceData => {
   try {
     const currentFsUsage = new GTop.glibtop_fsusage();
