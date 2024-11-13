@@ -1,12 +1,9 @@
-import style3 from "inline:./Bar.scss";
-import style5 from "inline:./Launcher.scss";
-import style4 from "inline:./MediaPlayer.scss";
-import style2 from "inline:./Notification.scss";
 // import style1 from "inline:./style.scss";
 import { writeFile } from "astal/file";
 
 import { subprocess, exec, execAsync } from "astal/process";
 import { ensureDirectory, ensureFile } from "@/lib/utils";
+import { App } from "astal/gtk3";
 // import { SRC } from "@/env";
 
 const tempcss = `${TMP}/tmp_styles.scss`;
@@ -21,7 +18,6 @@ function resetCss() {
   const files = fd.split(/\s+/);
   const imports = files.map((f) => `@import '${f}';`);
 
-  // print(imports.join("\n"));
   writeFile(
     tempcss,
     `
@@ -35,14 +31,17 @@ $radius: 7px;
 $fg-color: #{"@theme_fg_color"};
 $bg-color: #{"@theme_bg_color"};
 $error: red;
+${imports.join("\n")}
+`
 
-${style2}
-${style3}
-${style4}
-${style5}
-    `
+    // ${style2}
+    // ${style3}
+    // ${style4}
+    // ${style5}
   );
   exec(`sass ${tempcss} ${css}`);
+
+  App.apply_css(css, true);
 }
 
 resetCss();

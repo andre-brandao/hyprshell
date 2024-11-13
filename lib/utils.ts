@@ -13,7 +13,7 @@ import { subprocess, exec, execAsync } from "astal/process";
 // import { options } from "@/options";
 
 export function ensureDirectory(path: string) {
-  if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
+  if (!GLib.file_test(path, GLib.FileTest.EXISTS)) {
     print(`creating directory: ${path}`);
     GLib.mkdir_with_parents(path, 0o777);
     // exec(["mkdir", "-p", path]);

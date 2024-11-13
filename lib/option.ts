@@ -87,15 +87,15 @@ export function mkOptions<T extends object>(cacheFile: string, object: T) {
   ensureDirectory(cacheFile.split("/").slice(0, -1).join("/"));
   ensureDirectory(configFile.split("/").slice(0, -1).join("/"));
 
-  print("cacheFile", cacheFile);
-  print("configFile", configFile);
+  // print("cacheFile", cacheFile);
+  // print("configFile", configFile);
 
   const values = getOptions(object).reduce(
     (obj, opt) => ({ [opt.id]: opt.get(), ...obj }),
     {}
   );
-  print(values);
-  print(configFile);
+  // print(values);
+  // print(configFile);
 
   writeFile(configFile, JSON.stringify(values, null, 2));
   monitorFile(configFile, () => {
