@@ -12,8 +12,10 @@ import { interval, timeout, idle } from "astal/time";
 import { subprocess, exec, execAsync } from "astal/process";
 
 export function ensureDirectory(path: string) {
-  print("TODO: ensureDirectory");
-  //   Check if directory or file exists if not create it
+  if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
+    print(`creating directory: ${path}`);
+    GLib.mkdir_with_parents(path, 0o777);
+  }
 }
 
 /**

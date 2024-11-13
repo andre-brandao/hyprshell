@@ -8,6 +8,8 @@ import Bar from "./widget/bar/Bar";
 import NotificationPopups from "./widget/notification/NotificationPopups";
 import Launcher from "./widget/app-launcher/Launcher";
 import MediaPlayer from "./widget/media-player/MediaPlayer";
+import Layout from "./widget/settings/Layout";
+import Dialog from "./widget/Dialog";
 
 function handleMonitors() {
   const widgetMap = new Map<Gdk.Monitor, Gtk.Widget[]>();
@@ -33,7 +35,7 @@ function handleMonitors() {
 
 App.start({
   css: style,
-
+  gtkTheme: "adw-gtk3-dark",
   // instanceName: 'js',
   requestHandler(request, res) {
     print(request);
@@ -42,7 +44,15 @@ App.start({
   },
   main() {
     handleMonitors();
-    const LauncherWindow = Launcher();
-    LauncherWindow.hide();
+    Launcher();
+    // Dialog({
+    //   title: "Olamundo",
+    //   action: "test",
+
+    //   yes: () => print("yes"),
+    //   no: () => print("no"),
+    // });
+    // LauncherWindow.hide();
+    // new Widget.Window({}, Layout());
   },
 });

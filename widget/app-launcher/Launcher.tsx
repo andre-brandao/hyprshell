@@ -52,6 +52,7 @@ export default function Applauncher() {
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
       exclusivity={Astal.Exclusivity.IGNORE}
       keymode={Astal.Keymode.ON_DEMAND}
+      visible={false}
       application={App}
       onShow={() => text.set("")}
       onKeyPressEvent={function (self, event: Gdk.Event) {

@@ -47,7 +47,7 @@ export class Opt<T = unknown> extends Variable<T> {
     this.subscribe((v) => {
       const cache = JSON.parse(readFile(cacheFile) || "{}");
       cache[this.id] = this.get();
-      writeFile(JSON.stringify(cache, null, 2), cacheFile);
+      writeFile(cacheFile, JSON.stringify(cache, null, 2));
     });
     // this.connect("changed", () => {
     //   const cache = JSON.parse(Utils.readFile(cacheFile) || "{}");
@@ -87,24 +87,30 @@ function getOptions(object: object, path = ""): Opt[] {
 }
 
 export function mkOptions<T extends object>(cacheFile: string, object: T) {
-  // for (const opt of getOptions(object)) opt.init(cacheFile);
-
-  // ensureDirectory(cacheFile.split("/").slice(0, -1).join("/"));
-
+  for (const opt of getOptions(object)) opt.init(cacheFile);
   const configFile = `${TMP}/config.json`;
-  // const values = getOptions(object).reduce(
-  //   (obj, { id, get }) => ({ [id]: get(), ...obj }),
-  //   {}
-  // );
-  // writeFile(JSON.stringify(values, null, 2), configFile);
-  // monitorFile(configFile, () => {
-  //   const cache = JSON.parse(readFile(configFile) || "{}");
-  //   for (const opt of getOptions(object)) {
-  //     if (JSON.stringify(cache[opt.id]) !== JSON.stringify(opt.get()))
-  //       // opt.value = cache[opt.id];
-  //       opt.set(cache[opt.id]);
-  //   }
-  // });
+  ensureDirectory(cacheFile.split("/").slice(0, -1).join("/"));
+  ensureDirectory(configFile.split("/").slice(0, -1).join("/"));
+
+  print("cacheFile", cacheFile);
+  print("configFile", configFile);
+
+  const values = getOptions(object).reduce(
+    (obj, opt) => ({ [opt.id]: opt.get(), ...obj }),
+    {}
+  );
+  print(values);
+  print(configFile);
+
+  writeFile(configFile, JSON.stringify(values, null, 2));
+  monitorFile(configFile, () => {
+    const cache = JSON.parse(readFile(configFile) || "{}");
+    for (const opt of getOptions(object)) {
+      if (JSON.stringify(cache[opt.id]) !== JSON.stringify(opt.get()))
+        // opt.value = cache[opt.id];
+        opt.set(cache[opt.id]);
+    }
+  });
 
   function sleep(ms = 0) {
     return new Promise((r) => setTimeout(r, ms));

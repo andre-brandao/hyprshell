@@ -1,8 +1,11 @@
 import { exec, subprocess } from "astal/process";
 import { Variable } from "astal";
+import { dependencies } from "@/lib/utils";
 
 type IdleState = "active" | "idle" | "inactive" | "unknown";
 function IdleInhibitor() {
+  if (!dependencies("matcha")) return <></>;
+
   const idleVar = Variable<IdleState>("unknown");
 
   const proc = subprocess(
