@@ -17,7 +17,7 @@ function IdleInhibitor() {
     Notify({
       summary: "Idle Inhibitor",
       body: line,
-      iconName: "󰅶",
+      iconName: "dialog-information",
     });
   };
 
@@ -39,8 +39,7 @@ function IdleInhibitor() {
       }}
       onClicked={toggle}
       tooltipText={"Idle Inhibitor\nClick to toggle"}
-    >
-      {idleVar().as((s) => {
+      label={idleVar().as((s) => {
         switch (s) {
           case "active":
             return "󰅶";
@@ -51,7 +50,7 @@ function IdleInhibitor() {
             return "";
         }
       })}
-    </button>
+    ></button>
   );
 }
 

@@ -45,16 +45,16 @@ export default function Bar(monitor: Gdk.Monitor) {
     >
       <centerbox>
         <box hexpand halign={Gtk.Align.START}>
-          {start((value) => getWidgets(value))}
+          {start(getWidgets)}
           {/* <Workspaces />
           <FocusedClient /> */}
         </box>
         <box>
-          {center((value) => getWidgets(value))}
+          {center(getWidgets)}
           {/* <Media /> */}
         </box>
         <box hexpand halign={Gtk.Align.END}>
-          {end((value) => getWidgets(value))}
+          {end(getWidgets)}
           {/* <IdleInibitor />
           <SysTray />
           <Wifi />

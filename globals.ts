@@ -1,5 +1,6 @@
 import Gtk from "gi://Gtk";
 import GLib from "gi://GLib?version=2.0";
+import { ensureDirectory } from "./lib/utils";
 
 declare global {
   const OPTIONS: string;
@@ -24,3 +25,5 @@ Object.assign(globalThis, {
     FILL: Gtk.Align.FILL,
   },
 });
+
+ensureDirectory(TMP);

@@ -12,6 +12,7 @@ import { barWidget, type BarWidget } from "./widget/bar/Bar";
 //   },
 // };
 export const options = mkOptions(OPTIONS, {
+  theme: {},
   bar: {
     position: opt<"top" | "bottom">("top"),
     layout: {
@@ -25,6 +26,24 @@ export const options = mkOptions(OPTIONS, {
         "battery",
         "time",
       ]),
+    },
+    vitals: {
+      cpu: {
+        icon: opt<string>(" "),
+        interval: opt<number>(1500),
+      },
+      ram: {
+        interval: opt<number>(1500),
+        round: opt<boolean>(true),
+        icon: opt<string>(" "),
+        lblType: opt<"used/total" | "used" | "free" | "percent">("used/total"),
+      },
+      storage: {
+        icon: opt<string>(" "),
+        interval: opt<number>(15000),
+        round: opt<boolean>(true),
+        lblType: opt<"used/total" | "used" | "free" | "percent">("used"),
+      },
     },
   },
 

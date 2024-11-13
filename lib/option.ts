@@ -49,11 +49,6 @@ export class Opt<T = unknown> extends Variable<T> {
       cache[this.id] = this.get();
       writeFile(cacheFile, JSON.stringify(cache, null, 2));
     });
-    // this.connect("changed", () => {
-    //   const cache = JSON.parse(Utils.readFile(cacheFile) || "{}");
-    //   cache[this.id] = this.value;
-    //   Utils.writeFileSync(JSON.stringify(cache, null, 2), cacheFile);
-    // });
   }
 
   reset() {

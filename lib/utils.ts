@@ -12,7 +12,7 @@ import { interval, timeout, idle } from "astal/time";
 import { subprocess, exec, execAsync } from "astal/process";
 
 export function ensureDirectory(path: string) {
-  if (!GLib.file_test(path, GLib.FileTest.EXISTS)) {
+  if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
     print(`creating directory: ${path}`);
     GLib.mkdir_with_parents(path, 0o777);
   }
@@ -145,6 +145,131 @@ export const getPostfix = (sizeInBytes: number): Postfix => {
   if (sizeInBytes >= 1024 ** 1) return "KiB";
 
   return "B";
+};
+
+function formatDataResourseLabel(
+  data: GenericResourceData,
+  options: {
+    icon: Variable<string>;
+    lblType: Variable<"used/total" | "used" | "free" | "percent">;
+    round: Variable<boolean>;
+  }
+) {
+  const { used, total, percentage, free } = data;
+  const { icon, lblType, round } = options;
+
+  const formatFunctions = {
+    TiB: formatSizeInTiB,
+    GiB: formatSizeInGiB,
+    MiB: formatSizeInMiB,
+    KiB: formatSizeInKiB,
+    B: (size: number): number => size,
+  };
+
+  // Get the data in proper GiB, MiB, KiB, TiB, or bytes
+  const totalSizeFormatted = autoFormatSize(total, round().get());
+  // get the postfix: one of [TiB, GiB, MiB, KiB, B]
+  const postfix = getPostfix(total);
+
+  // Determine which format function to use
+  const formatUsed = formatFunctions[postfix] || formatFunctions["B"];
+  const usedSizeFormatted = formatUsed(used, round().get());
+
+  if (lblType().get() === "used/total") {
+    return `${icon().get()}${usedSizeFormatted}/${totalSizeFormatted}${postfix}`;
+  }
+  if (lblType().get() === "used") {
+    return `${icon().get()}${autoFormatSize(used, round().get())} ${getPostfix(
+      used
+    )}`;
+  }
+  if (lblType().get() === "free") {
+    return `${icon().get()}${autoFormatSize(free, round().get())} ${getPostfix(
+      free
+    )}`;
+  }
+  return `${icon().get()}${percentage}%`;
+}
+
+export const formatDataResourse = {
+  label:
+    (options: {
+      icon: Variable<string>;
+      lblType: Variable<"used/total" | "used" | "free" | "percent">;
+      round: Variable<boolean>;
+    }) =>
+    (data: GenericResourceData) => {
+      const { used, total, percentage, free } = data;
+      const { icon, lblType, round } = options;
+
+      const formatFunctions = {
+        TiB: formatSizeInTiB,
+        GiB: formatSizeInGiB,
+        MiB: formatSizeInMiB,
+        KiB: formatSizeInKiB,
+        B: (size: number): number => size,
+      };
+
+      // Get the data in proper GiB, MiB, KiB, TiB, or bytes
+      const totalSizeFormatted = autoFormatSize(total, round().get());
+      // get the postfix: one of [TiB, GiB, MiB, KiB, B]
+      const postfix = getPostfix(total);
+
+      // Determine which format function to use
+      const formatUsed = formatFunctions[postfix] || formatFunctions["B"];
+      const usedSizeFormatted = formatUsed(used, round().get());
+
+      if (lblType().get() === "used/total") {
+        return `${icon().get()}${usedSizeFormatted}/${totalSizeFormatted}${postfix}`;
+      }
+      if (lblType().get() === "used") {
+        return `${icon().get()}${autoFormatSize(
+          used,
+          round().get()
+        )} ${getPostfix(used)}`;
+      }
+      if (lblType().get() === "free") {
+        return `${icon().get()}${autoFormatSize(
+          free,
+          round().get()
+        )} ${getPostfix(free)}`;
+      }
+      return `${icon().get()}${percentage}%`;
+    },
+
+  tooltip:
+    (options: {
+      icon: Variable<string>;
+      lblType: Variable<"used/total" | "used" | "free" | "percent">;
+      round: Variable<boolean>;
+    }) =>
+    (data: GenericResourceData) => {
+      const { used, total, percentage, free } = data;
+      const { icon, lblType, round } = options;
+
+      const formatFunctions = {
+        TiB: formatSizeInTiB,
+        GiB: formatSizeInGiB,
+        MiB: formatSizeInMiB,
+        KiB: formatSizeInKiB,
+        B: (size: number): number => size,
+      };
+
+      // Get the data in proper GiB, MiB, KiB, TiB, or bytes
+
+      const totalSizeFormatted = autoFormatSize(total, round().get());
+      // get the postfix: one of [TiB, GiB, MiB, KiB, B]
+      const postfix = getPostfix(total);
+
+      // Determine which format function to use
+      const formatUsed = formatFunctions[postfix] || formatFunctions["B"];
+      const usedSizeFormatted = formatUsed(used, round().get());
+
+      return `${usedSizeFormatted}/${totalSizeFormatted} ${postfix} (${percentage}% used, ${autoFormatSize(
+        free,
+        round().get()
+      )} ${getPostfix(free)} free)`;
+    },
 };
 
 export const Notify = (notifPayload: {

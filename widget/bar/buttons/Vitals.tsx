@@ -1,5 +1,6 @@
 import { computeCPU } from "@/customModules/cpu";
 import { computeStorage } from "@/customModules/storage";
+import { computeRamUsage } from "@/customModules/ram";
 import { Variable } from "astal";
 import {
   formatSizeInTiB,
@@ -8,65 +9,68 @@ import {
   formatSizeInKiB,
   formatSizeInMiB,
   getPostfix,
+  formatDataResourse,
+  type GenericResourceData,
 } from "@/lib/utils";
+import { options } from "@/options";
+
+const { cpu, storage, ram } = options.bar.vitals;
 
 export function CPU() {
-  const insterval = 1500;
+  const { interval, icon } = cpu;
 
-  const cpuVar = Variable<number>(0).poll(insterval, computeCPU);
-
-  return <label label={cpuVar().as((v) => `${v.toFixed(1)}%`)}></label>;
-}
-
-export function Storage() {
-  const interval = 5000;
-
-  const round = true;
-  const lblType = "used/total";
-
-  const storageVar = Variable(computeStorage()).poll(interval, computeStorage);
+  const cpuVar = Variable<number>(0).poll(interval().get(), computeCPU);
 
   return (
     <label
-      label={storageVar().as((v) => {
-        const { used, total, percentage, free } = v;
-        const formatFunctions = {
-          TiB: formatSizeInTiB,
-          GiB: formatSizeInGiB,
-          MiB: formatSizeInMiB,
-          KiB: formatSizeInKiB,
-          B: (size: number): number => size,
-        };
+      name={"cpu"}
+      className={"cpu"}
+      label={cpuVar().as((v) => `${icon().get()}${v.toFixed(0)}%`)}
+    ></label>
+  );
+}
 
-        // Get the data in proper GiB, MiB, KiB, TiB, or bytes
-        const totalSizeFormatted = autoFormatSize(total, round);
-        // get the postfix: one of [TiB, GiB, MiB, KiB, B]
-        const postfix = getPostfix(total);
+export function RAM() {
+  const { interval, round, icon, lblType } = ram;
+  const ramVar = Variable(computeRamUsage()).poll(
+    interval().get(),
+    computeRamUsage
+  );
 
-        // Determine which format function to use
-        const formatUsed = formatFunctions[postfix] || formatFunctions["B"];
-        const usedSizeFormatted = formatUsed(used, round);
+  return (
+    <label
+      name={"ram"}
+      className={"ram"}
+      label={ramVar().as(formatDataResourse.label(ram))}
+      tooltipText={ramVar().as(formatDataResourse.tooltip(ram))}
+    ></label>
+  );
+}
 
-        if (lblType === "used/total") {
-          return `${usedSizeFormatted}/${totalSizeFormatted} ${postfix}`;
-        }
-        if (lblType === "used") {
-          return `${autoFormatSize(used, round)} ${getPostfix(used)}`;
-        }
-        if (lblType === "free") {
-          return `${autoFormatSize(free, round)} ${getPostfix(free)}`;
-        }
-        return `${percentage}%`;
-      })}
+export function Storage() {
+  const { interval, round, lblType, icon } = storage;
+
+  const storageVar = Variable(computeStorage()).poll(
+    interval().get(),
+    computeStorage
+  );
+
+  return (
+    <label
+      name={"storage"}
+      className={"storage"}
+      label={storageVar().as(formatDataResourse.label(storage))}
+      tooltipText={storageVar().as(formatDataResourse.tooltip(storage))}
     ></label>
   );
 }
 
 export default function Vitals() {
   return (
-    <>
+    <box className={"vitals"}>
       <CPU />
+      <RAM />
       <Storage />
-    </>
+    </box>
   );
 }
