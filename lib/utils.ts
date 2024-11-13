@@ -265,7 +265,7 @@ export const formatDataResourse = {
       const formatUsed = formatFunctions[postfix] || formatFunctions["B"];
       const usedSizeFormatted = formatUsed(used, round().get());
 
-      return `${usedSizeFormatted}/${totalSizeFormatted} ${postfix} (${percentage}% used, ${autoFormatSize(
+      return `${usedSizeFormatted}/${totalSizeFormatted} ${postfix} \n(${percentage}% used, ${autoFormatSize(
         free,
         round().get()
       )} ${getPostfix(free)} free)`;

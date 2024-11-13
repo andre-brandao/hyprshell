@@ -2,16 +2,7 @@ import { computeCPU } from "@/customModules/cpu";
 import { computeStorage } from "@/customModules/storage";
 import { computeRamUsage } from "@/customModules/ram";
 import { Variable } from "astal";
-import {
-  formatSizeInTiB,
-  formatSizeInGiB,
-  autoFormatSize,
-  formatSizeInKiB,
-  formatSizeInMiB,
-  getPostfix,
-  formatDataResourse,
-  type GenericResourceData,
-} from "@/lib/utils";
+import { formatDataResourse } from "@/lib/utils";
 import { options } from "@/options";
 
 const { cpu, storage, ram } = options.bar.vitals;

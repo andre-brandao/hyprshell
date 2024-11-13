@@ -19,6 +19,7 @@ export const options = mkOptions(OPTIONS, {
       start: opt<BarWidget[]>(["vitals", "workspaces", "focused"]),
       center: opt<BarWidget[]>(["media"]),
       end: opt<BarWidget[]>([
+        "kb_layout",
         "idle",
         "tray",
         "wifi",

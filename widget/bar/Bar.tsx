@@ -11,6 +11,7 @@ import Time from "./buttons/Time";
 import IdleInibitor from "./buttons/IdleInhibitor";
 import { options } from "../../options";
 import Vitals, { CPU } from "./buttons/Vitals";
+import KBInput from "./buttons/KBLayout";
 
 const { center, end, start } = options.bar.layout;
 
@@ -25,6 +26,7 @@ export const barWidget = {
   focused: FocusedClient,
   idle: IdleInibitor,
   vitals: Vitals,
+  kb_layout: KBInput,
 };
 export type BarWidget = keyof typeof barWidget;
 
