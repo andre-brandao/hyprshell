@@ -10,6 +10,7 @@ import Launcher from "./widget/app-launcher/Launcher";
 import MediaPlayer from "./widget/media-player/MediaPlayer";
 import Layout from "./widget/settings/Layout";
 import Dialog from "./widget/Dialog";
+import { computeCPU } from "./customModules/cpu";
 
 function handleMonitors() {
   const widgetMap = new Map<Gdk.Monitor, Gtk.Widget[]>();

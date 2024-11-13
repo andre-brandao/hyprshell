@@ -1,30 +1,27 @@
 import { exec, subprocess } from "astal/process";
 import { Variable } from "astal";
-import { dependencies } from "@/lib/utils";
+import { dependencies, Notify } from "@/lib/utils";
 
-type IdleState = "active" | "idle" | "inactive" | "unknown";
+type IdleState = "active" | "inactive" | "unknown";
 function IdleInhibitor() {
   if (!dependencies("matcha")) return <></>;
 
   const idleVar = Variable<IdleState>("unknown");
 
-  const proc = subprocess(
-    ["matcha", "-d"],
-    (line) => {
-      print(line);
-      const match: IdleState = line.startsWith("Starting")
-        ? "inactive"
-        : "idle";
-      idleVar.set(match);
-    },
-    (line) => {
-      print(line);
-      const match: IdleState = line.startsWith("Starting")
-        ? "inactive"
-        : "idle";
-      idleVar.set(match);
-    }
-  );
+  const handleLine = (line: string) => {
+    print(line);
+    const match: IdleState = line.startsWith("Starting")
+      ? "active"
+      : "inactive";
+    idleVar.set(match);
+    Notify({
+      summary: "Idle Inhibitor",
+      body: line,
+      iconName: "󰅶",
+    });
+  };
+
+  const proc = subprocess(["matcha", "-d"], handleLine, handleLine);
 
   function toggle() {
     print("Toggling Idle Inhibitor");
@@ -33,14 +30,27 @@ function IdleInhibitor() {
 
   return (
     <button
+      className={
+        "idle-inhibitor " +
+        idleVar().as((s) => (s === "active" ? "active" : ""))
+      }
       onDestroy={() => {
         idleVar.drop();
       }}
       onClicked={toggle}
+      tooltipText={"Idle Inhibitor\nClick to toggle"}
     >
-      {idleVar().as((s) => (
-        <>{s}</>
-      ))}
+      {idleVar().as((s) => {
+        switch (s) {
+          case "active":
+            return "󰅶";
+          case "inactive":
+            return "󰾫";
+
+          default:
+            return "";
+        }
+      })}
     </button>
   );
 }

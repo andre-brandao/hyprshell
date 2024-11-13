@@ -6,85 +6,94 @@ $accent: #378df7;
 $radius: 7px;
 
 window.Bar {
-    border: none;
-    box-shadow: none;
-    background-color: $bg;
+  border: none;
+  box-shadow: none;
+  background-color: $bg;
+  color: $fg;
+  font-size: 1.1em;
+  font-weight: bold;
+
+  button {
+    all: unset;
+    background-color: transparent;
+
+    &:hover label {
+      background-color: transparentize($fg, 0.84);
+      border-color: transparentize($accent, 0.8);
+    }
+
+    &:active label {
+      background-color: transparentize($fg, 0.8);
+    }
+  }
+
+  label {
+    transition: 200ms;
+    padding: 0 8px;
+    margin: 2px;
+    border-radius: $radius;
+    border: 1pt solid transparent;
+  }
+
+  .idle-inhibitor {
+    background-color: transparent;
+    color: $accent;
+  }
+
+  .idle-inhibitor .active {
     color: $fg;
-    font-size: 1.1em;
-    font-weight: bold;
+  }
 
-    button {
-        all: unset;
-        background-color: transparent;
+  .Workspaces .focused label {
+    color: $accent;
+    border-color: $accent;
+  }
 
-        &:hover label {
-            background-color: transparentize($fg, 0.84);
-            border-color: transparentize($accent, 0.8);
-        }
+  .FocusedClient {
+    color: $accent;
+  }
 
-        &:active label {
-            background-color: transparentize($fg, 0.8)
-        }
+  .Media .Cover {
+    min-height: 1.2em;
+    min-width: 1.2em;
+    border-radius: $radius;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .Battery label {
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  .AudioSlider {
+    * {
+      all: unset;
     }
 
-    label {
-        transition: 200ms;
-        padding: 0 8px;
-        margin: 2px;
-        border-radius: $radius;
-        border: 1pt solid transparent;
+    icon {
+      margin-right: 0.6em;
     }
 
-    .Workspaces .focused label {
-        color: $accent;
-        border-color: $accent;
+    margin: 0 1em;
+
+    trough {
+      background-color: transparentize($fg, 0.8);
+      border-radius: $radius;
     }
 
-    .FocusedClient {
-        color: $accent;
+    highlight {
+      background-color: $accent;
+      min-height: 0.8em;
+      border-radius: $radius;
     }
 
-    .Media .Cover {
-        min-height: 1.2em;
-        min-width: 1.2em;
-        border-radius: $radius;
-        background-position: center;
-        background-size: contain;
+    slider {
+      background-color: $fg;
+      border-radius: $radius;
+      min-height: 1em;
+      min-width: 1em;
+      margin: -0.2em;
     }
-
-    .Battery label {
-        padding-left: 0;
-        margin-left: 0;
-    }
-
-    .AudioSlider {
-        * {
-            all: unset;
-        }
-
-        icon {
-            margin-right: .6em;
-        }
-
-        margin: 0 1em;
-
-        trough {
-            background-color: transparentize($fg, 0.8);
-            border-radius: $radius;
-        }
-
-        highlight {
-            background-color: $accent;
-            min-height: .8em;
-            border-radius: $radius;
-        }
-
-        slider {
-            background-color: $fg;
-            border-radius: $radius;
-            min-height: 1em;
-            min-width: 1em;
-            margin: -.2em;
-        }
-    }
+  }
 }

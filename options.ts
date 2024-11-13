@@ -15,7 +15,7 @@ export const options = mkOptions(OPTIONS, {
   bar: {
     position: opt<"top" | "bottom">("top"),
     layout: {
-      start: opt<BarWidget[]>(["workspaces", "focused"]),
+      start: opt<BarWidget[]>(["vitals", "workspaces", "focused"]),
       center: opt<BarWidget[]>(["media"]),
       end: opt<BarWidget[]>([
         "idle",
