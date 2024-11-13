@@ -10,11 +10,23 @@ import {
 } from "astal/file";
 import { interval, timeout, idle } from "astal/time";
 import { subprocess, exec, execAsync } from "astal/process";
+// import { options } from "@/options";
 
 export function ensureDirectory(path: string) {
   if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
     print(`creating directory: ${path}`);
     GLib.mkdir_with_parents(path, 0o777);
+    // exec(["mkdir", "-p", path]);
+    // writeFile(path, "");
+  }
+}
+export function ensureFile(path: string) {
+  ensureDirectory(path.split("/").slice(0, -1).join("/"));
+  if (!GLib.file_test(path, GLib.FileTest.EXISTS)) {
+    print(`creating file: ${path}`);
+    writeFile(path, "");
+    // exec(["touch", path]);
+    // GLib.file_set_contents(path, "");
   }
 }
 
@@ -29,6 +41,15 @@ export function dependencies(...bins: string[]) {
   });
 
   if (missing.length > 0) {
+    // if (options.debug.notify_missing_deps().get()) {
+    //   Notify({
+    //     appName: "Astal",
+    //     summary: "Missing Dependencies",
+    //     body: `missing dependencies: ${missing.join(", ")}`,
+    //     urgency: "critical",
+    //     iconName: "dialog-error",
+    //   });
+    // }
     console.warn(Error(`missing dependencies: ${missing.join(", ")}`));
     // notify(`missing dependencies: ${missing.join(", ")}`);
   }

@@ -16,9 +16,10 @@ export const options = mkOptions(OPTIONS, {
   bar: {
     position: opt<"top" | "bottom">("top"),
     layout: {
-      start: opt<BarWidget[]>(["vitals", "workspaces", "focused"]),
-      center: opt<BarWidget[]>(["media"]),
+      start: opt<BarWidget[]>(["vitals", "focused"]),
+      center: opt<BarWidget[]>(["workspaces"]),
       end: opt<BarWidget[]>([
+        // "media"
         "kb_layout",
         "idle",
         "tray",
@@ -52,5 +53,9 @@ export const options = mkOptions(OPTIONS, {
     position: opt<"top-right" | "top-left" | "bottom-right" | "bottom-left">(
       "bottom-left"
     ),
+  },
+
+  debug: {
+    notify_missing_deps: opt<boolean>(true),
   },
 });

@@ -3,7 +3,10 @@ import "./globals";
 
 import { Gdk, Gtk } from "astal/gtk3";
 // @ts-expect-error
-import style from "./style.scss";
+// import style from "./style.scss";
+import style from "./style/style.scss";
+import { css } from "./style/style";
+
 import Bar from "./widget/bar/Bar";
 import NotificationPopups from "./widget/notification/NotificationPopups";
 import Launcher from "./widget/app-launcher/Launcher";
@@ -35,8 +38,8 @@ function handleMonitors() {
 }
 
 App.start({
-  css: style,
-  gtkTheme: "adw-gtk3-dark",
+  css: css,
+  // gtkTheme: "adw-gtk3-dark",
   // instanceName: 'js',
   requestHandler(request, res) {
     print(request);
