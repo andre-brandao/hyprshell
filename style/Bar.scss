@@ -3,7 +3,7 @@ window.Bar {
   box-shadow: none;
   background-color: $bg;
   color: $fg;
-  font-size: 1.1em;
+  font-size: $font_size;
   font-weight: bold;
 
   button {
@@ -11,12 +11,12 @@ window.Bar {
     background-color: transparent;
 
     &:hover label {
-      background-color: transparentize($fg, 0.84);
-      border-color: transparentize($accent, 0.8);
+      background-color: gtkalpha($fg, 0.84);
+      border-color: gtkalpha($accent, 0.8);
     }
 
     &:active label {
-      background-color: transparentize($fg, 0.8);
+      background-color: gtkalpha($fg, 0.8);
     }
   }
 
@@ -28,18 +28,17 @@ window.Bar {
     border: 1pt solid transparent;
   }
 
-  .idle-inhibitor {
-    background-color: transparent;
+  .idle-active {
     color: $accent;
-  }
-
-  .idle-inhibitor .active {
-    color: $fg;
   }
 
   .Workspaces .focused label {
     color: $accent;
     border-color: $accent;
+  }
+  .Workspaces .occupied label {
+    color: $accent;
+    border-color: $fg;
   }
 
   .FocusedClient {
@@ -71,7 +70,7 @@ window.Bar {
     margin: 0 1em;
 
     trough {
-      background-color: transparentize($fg, 0.8);
+      background-color: gtkalpha($fg, 0.8);
       border-radius: $radius;
     }
 

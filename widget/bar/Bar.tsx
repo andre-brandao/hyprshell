@@ -12,6 +12,7 @@ import IdleInibitor from "./buttons/IdleInhibitor";
 import { options } from "../../options";
 import Vitals, { CPU } from "./buttons/Vitals";
 import KBInput from "./buttons/KBLayout";
+import COLROS from "./ColorDebug";
 
 const { center, end, start } = options.bar.layout;
 
@@ -44,25 +45,19 @@ export default function Bar(monitor: Gdk.Monitor) {
       gdkmonitor={monitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={anchor}
+      css={``}
     >
       <centerbox>
         <box hexpand halign={Gtk.Align.START}>
           {start(getWidgets)}
-          {/* <Workspaces />
-          <FocusedClient /> */}
         </box>
         <box>
           {center(getWidgets)}
-          {/* <Media /> */}
+
+          {/* <COLROS></COLROS> */}
         </box>
         <box hexpand halign={Gtk.Align.END}>
           {end(getWidgets)}
-          {/* <IdleInibitor />
-          <SysTray />
-          <Wifi />
-          <AudioSlider />
-          <BatteryLevel />
-          <Time /> */}
         </box>
       </centerbox>
     </window>

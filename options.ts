@@ -47,6 +47,16 @@ export const options = mkOptions(OPTIONS, {
         lblType: opt<"used/total" | "used" | "free" | "percent">("used"),
       },
     },
+
+    workspaces: {
+      show: opt<number | "ative">(7),
+      label: opt<string | "id">("id"),
+      focused_label: opt<string | "id">(""),
+    },
+
+    idle_inhibitor: {
+      notify: opt<boolean>(true),
+    },
   },
 
   notification: {

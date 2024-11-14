@@ -1,12 +1,10 @@
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-
 window {
   all: unset;
 }
 
 box.MediaPlayer {
   padding: 0.6rem;
-  background-color: $bg-color;
+  background-color: $bg;
 
   box.cover-art {
     min-width: 120px;
@@ -33,7 +31,7 @@ box.MediaPlayer {
     }
 
     highlight {
-      background-color: $fg-color;
+      background-color: $fg;
     }
 
     slider {

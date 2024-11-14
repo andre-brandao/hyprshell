@@ -1,14 +1,8 @@
-@function gtkalpha($c, $a) {
-  @return string.unquote("alpha(#{$c},#{$a})");
-}
-
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-
 window#launcher {
   all: unset;
 
   box.Applauncher {
-    background-color: $bg-color;
+    background-color: $bg;
     border-radius: 11px;
     margin: 1rem;
     padding: 0.8rem;
@@ -34,7 +28,7 @@ window#launcher {
       }
 
       label.description {
-        color: gtkalpha($fg-color, 0.8);
+        color: gtkalpha($fg, 0.8);
       }
     }
 
@@ -43,11 +37,11 @@ window#launcher {
 
       icon {
         font-size: 6em;
-        color: gtkalpha($fg-color, 0.7);
+        color: gtkalpha($fg, 0.7);
       }
 
       label {
-        color: gtkalpha($fg-color, 0.9);
+        color: gtkalpha($fg, 0.9);
         font-size: 1.2em;
       }
     }

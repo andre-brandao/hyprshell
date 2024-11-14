@@ -1,39 +1,41 @@
 import { exec, subprocess } from "astal/process";
 import { Variable } from "astal";
 import { dependencies, Notify } from "@/lib/utils";
+import { options } from "@/options";
 
 type IdleState = "active" | "inactive" | "unknown";
 function IdleInhibitor() {
   if (!dependencies("matcha")) return <></>;
 
   const idleVar = Variable<IdleState>("unknown");
-
-  const handleLine = (line: string) => {
-    print(line);
-    const match: IdleState = line.startsWith("Starting")
-      ? "active"
-      : "inactive";
-    idleVar.set(match);
-    Notify({
-      summary: "Idle Inhibitor",
-      body: line,
-      iconName: "dialog-information",
-    });
-  };
-
-  const proc = subprocess(["matcha", "-d"], handleLine, handleLine);
+  const proc = subprocess(
+    ["matcha", "-d", "-b", "yambar"]
+    // handleLine
+    // handleLine
+  );
 
   function toggle() {
-    print("Toggling Idle Inhibitor");
-    exec(["matcha", "-t"]);
+    // print("Toggling Idle Inhibitor");
+    const resp = exec(["matcha", "-t", "-b", "waybar"]);
+    if (options.bar.idle_inhibitor.notify().get()) {
+      Notify({
+        appName: "Matcha",
+        summary: "Idle Inhibitor",
+        body: resp,
+        iconName: "dialog-information",
+      });
+      if (resp.endsWith("Disabled")) {
+        idleVar.set("inactive");
+      }
+      if (resp.endsWith("Enabled")) {
+        idleVar.set("active");
+      }
+    }
   }
 
   return (
     <button
-      className={
-        "idle-inhibitor " +
-        idleVar().as((s) => (s === "active" ? "active" : ""))
-      }
+      className={idleVar().as((s) => (s === "active" ? "idle-active" : ""))}
       onDestroy={() => {
         idleVar.drop();
       }}
@@ -47,6 +49,7 @@ function IdleInhibitor() {
             return "󰾫";
 
           default:
+            return "󰅶";
             return "";
         }
       })}

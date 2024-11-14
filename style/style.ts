@@ -22,22 +22,29 @@ function resetCss() {
     tempcss,
     `
 @use "sass:string";
-$theme_fg_color: "@theme_fg_color";
-$theme_bg_color: "@theme_bg_color";
-$bg: #212223;
-$fg: #f1f1f1;
-$accent: #378df7;
+// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+
+$fg: #{"@theme_fg_color"};
+$bg: #{"@theme_bg_color"};
+
+$text: #{"@theme_text_color"};
+$base: #{"@theme_base_color"};
+$selected_bg: #{"@theme_selected_bg_color"};
+$selected_fg: #{"@theme_selected_fg_color"};
+$border: #{"@theme_borders_color"};
+
+$accent: #{"@theme_selected_bg_color"};
 $radius: 7px;
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
 $error: red;
+
+$font-size: 1.3em;
+
+@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c},#{$a})");
+}
+
 ${imports.join("\n")}
 `
-
-    // ${style2}
-    // ${style3}
-    // ${style4}
-    // ${style5}
   );
   exec(`sass ${tempcss} ${css}`);
 
