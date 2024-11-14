@@ -43,14 +43,14 @@ function resetCss() {
     tmpCSS,
     `
             @use "sass:string";
-            ${variables()}
             ${functions()}
+            ${variables()}
             ${imports()}
             `
   );
   exec(`sass ${tmpCSS} ${css}`);
 
-  print(readFile(tmpCSS));
+  // print(readFile(tmpCSS));
   App.apply_css(css, true);
 }
 

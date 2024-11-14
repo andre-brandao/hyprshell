@@ -29,8 +29,8 @@ window.Bar {
 
     &:hover {
       background-color: gtkalpha($fg, 0.84);
-      border-color: gtkalpha($accent, 0.8);
-      color: $accent;
+      border-color: gtkalpha($border-color, 0.8);
+      color: $primary-bg;
     }
 
     &:active {
@@ -46,7 +46,7 @@ window.Bar {
 
   .Workspaces {
     border-color: $fg;
-    border: 1pt solid;
+    border: $border;
     padding: 0.1em;
 
     border-radius: $radius * 2;
@@ -60,24 +60,24 @@ window.Bar {
     }
     .focused label {
       color: $bg;
-      border-color: $accent;
-      background-color: $accent;
+      border-color: $border-color;
+      background-color: $selected-bg;
     }
     .occupied label {
-      color: $accent;
+      color: $fg;
       border-color: $fg;
     }
   }
 
   .IdleInhibitor {
     &.active {
-      color: $accent;
+      color: $selected-bg;
     }
   }
 
   .Vitals {
     border: 1pt solid;
-    border-color: $accent;
+    border-color: $border-color;
     border-radius: $radius;
 
     // .CPU {
@@ -92,7 +92,7 @@ window.Bar {
   }
 
   .FocusedClient {
-    color: $accent;
+    color: $widget-bg;
   }
 
   .Media .Cover {
@@ -111,7 +111,7 @@ window.Bar {
   }
 
   .Wifi {
-    color: $accent;
+    color: $widget-bg;
   }
 
   .AudioSlider {
@@ -131,7 +131,7 @@ window.Bar {
     }
 
     highlight {
-      background-color: $accent;
+      background-color: $primary-bg;
       min-height: 0.8em;
       border-radius: $radius;
     }
@@ -158,14 +158,14 @@ window.Bar {
 
     button:hover {
       background-color: gtkalpha($fg, 0.84);
-      border-color: gtkalpha($accent, 0.8);
-      color: $accent;
+      border-color: gtkalpha($border-color, 0.8);
+      color: $primary-bg;
     }
   }
 
   .KBLayout {
     label {
-      color: $accent;
+      color: $primary-bg;
     }
   }
 }

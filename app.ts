@@ -1,7 +1,6 @@
-import { App, Widget } from "astal/gtk3";
-import "./globals";
+import { App, Widget, Gdk, Gtk } from "astal/gtk3";
 
-import { Gdk, Gtk } from "astal/gtk3";
+import "./globals";
 import "./options";
 import { css } from "./style/style";
 
@@ -35,6 +34,7 @@ function handleMonitors() {
 
 App.start({
   css: css,
+  icons: "/home/andre/.config/ags/assets/icons",
   // gtkTheme: "adw-gtk3-dark",
   // instanceName: 'js',
   requestHandler(request, res) {

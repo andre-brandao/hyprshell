@@ -19,7 +19,6 @@ export const options = mkOptions(OPTIONS, {
       base: opt(` #{"@theme_base_color"}`),
       selected_bg: opt(` #{"@theme_selected_bg_color"}`),
       selected_fg: opt(` #{"@theme_selected_fg_color"}`),
-      accent: opt(` #{"@theme_selected_bg_color"}`),
 
       fg: opt(`#{"@theme_fg_color"}`),
       bg: opt(` #{"@theme_bg_color"}`),
@@ -37,15 +36,15 @@ export const options = mkOptions(OPTIONS, {
       transition: opt("300ms"),
       shadows: opt(true),
 
-      "widget-bg": opt(`gtkalpha(#eeeeee, 0.94)`),
+      "widget-bg": opt(`gtkalpha(#fff, 0.94)`),
 
-      "hover-bg": opt(`gtkalpha(#eeeeee, 0.94)`),
+      "hover-bg": opt(`gtkalpha(#fff, 0.94)`),
       "hover-fg": opt(` #{"@theme_text_color"}`),
 
       // border: opt(` #{"@theme_borders_color"}`),
       "border-width": opt("1px"),
       "border-color": opt(` #{"@theme_borders_color"}`),
-      border: opt(`$border-width 1px solid`),
+      border: opt(`$border-width solid $border-color`),
 
       // "active-gradient": opt(`linear-gradient(to right, $bg, darken($bg, 4%))`),
       "shadow-color": opt(`rgba(0,0,0,.6)`),
