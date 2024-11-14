@@ -49,7 +49,7 @@ function IdleInhibitor() {
         {/* TODO: fix icon */}
         <icon
           icon={idleVar().as((s) =>
-            s === "active" ? "dialog-information" : "dialog-warning"
+            s === "active" ? "mug-hot-symbolic" : "mug-symbolic"
           )}
         />
       </button>
