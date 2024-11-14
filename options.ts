@@ -14,15 +14,18 @@ import { barWidget, type BarWidget } from "./widget/bar/Bar";
 export const options = mkOptions(OPTIONS, {
   theme: {},
   bar: {
+    padding: opt<string>("0.5em"),
+    margin: opt<string>("0.5em"),
+    border_radius: opt<string>("0.5em"),
     position: opt<"top" | "bottom">("top"),
     layout: {
-      start: opt<BarWidget[]>(["vitals", "focused"]),
+      start: opt<BarWidget[]>(["vitals", "tray", "focused"]),
       center: opt<BarWidget[]>(["workspaces"]),
       end: opt<BarWidget[]>([
         // "media"
         "kb_layout",
         "idle",
-        "tray",
+
         "wifi",
         "audio",
         "battery",
@@ -49,7 +52,8 @@ export const options = mkOptions(OPTIONS, {
     },
 
     workspaces: {
-      show: opt<number | "ative">(7),
+      mode: opt<"active" | "number">("number"),
+      show: opt<number>(7),
       label: opt<string | "id">("id"),
       focused_label: opt<string | "id">(""),
     },

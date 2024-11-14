@@ -8,7 +8,7 @@ export function FocusedClient() {
   const focused = bind(hypr, "focusedClient");
 
   return (
-    <box className="Focused" visible={focused.as(Boolean)}>
+    <box className="FocusedClient" visible={focused.as(Boolean)}>
       {focused.as(
         (client) =>
           client && (

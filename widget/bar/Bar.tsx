@@ -15,7 +15,7 @@ import KBInput from "./buttons/KBLayout";
 import COLROS from "./ColorDebug";
 
 const { center, end, start } = options.bar.layout;
-
+const { padding, margin, border_radius } = options.bar;
 export const barWidget = {
   battery: BatteryLevel,
   time: Time,
@@ -47,16 +47,23 @@ export default function Bar(monitor: Gdk.Monitor) {
       anchor={anchor}
       css={``}
     >
-      <centerbox>
-        <box hexpand halign={Gtk.Align.START}>
+      <centerbox
+        className={"BarContainer"}
+        css={`
+          padding: ${padding().get()};
+          margin: ${margin().get()};
+          border-radius: ${border_radius().get()};
+        `}
+      >
+        <box className={"BarStart"} hexpand halign={Gtk.Align.START}>
           {start(getWidgets)}
         </box>
-        <box>
+        <box className={"BarCenter"}>
           {center(getWidgets)}
 
           {/* <COLROS></COLROS> */}
         </box>
-        <box hexpand halign={Gtk.Align.END}>
+        <box className={"BarEnd"} hexpand halign={Gtk.Align.END}>
           {end(getWidgets)}
         </box>
       </centerbox>

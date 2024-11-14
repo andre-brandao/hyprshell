@@ -1,21 +1,39 @@
 window.Bar {
   border: none;
   box-shadow: none;
-  background-color: $bg;
-  color: $fg;
+
   font-size: $font_size;
   font-weight: bold;
+
+  .BarContainer {
+    background-color: $bg;
+    color: $fg;
+    // select box childs
+  }
+
+  // not workspace btns
+  button:not(.Workspaces):not(.SysTray) {
+    // make it a with a aspect ratio
+  }
 
   button {
     all: unset;
     background-color: transparent;
+    border: 1pt solid transparent;
+    border-radius: 0.2em;
 
-    &:hover label {
+    // make it a square
+    min-width: 1.2em;
+    min-height: 1.2em;
+    // padding: 0.1em;
+
+    &:hover {
       background-color: gtkalpha($fg, 0.84);
       border-color: gtkalpha($accent, 0.8);
+      color: $accent;
     }
 
-    &:active label {
+    &:active {
       background-color: gtkalpha($fg, 0.8);
     }
   }
@@ -23,22 +41,54 @@ window.Bar {
   label {
     transition: 200ms;
     padding: 0 8px;
-    margin: 2px;
-    border-radius: $radius;
-    border: 1pt solid transparent;
+    // margin: 2px;
   }
 
-  .idle-active {
-    color: $accent;
-  }
-
-  .Workspaces .focused label {
-    color: $accent;
-    border-color: $accent;
-  }
-  .Workspaces .occupied label {
-    color: $accent;
+  .Workspaces {
     border-color: $fg;
+    border: 1pt solid;
+    padding: 0.1em;
+
+    border-radius: $radius * 2;
+
+    button {
+      border-radius: $radius;
+    }
+    label {
+      border-radius: $radius;
+      transition: 250ms background, 250ms border-radius;
+    }
+    .focused label {
+      color: $bg;
+      border-color: $accent;
+      background-color: $accent;
+    }
+    .occupied label {
+      color: $accent;
+      border-color: $fg;
+    }
+  }
+
+  .IdleInhibitor {
+    &.active {
+      color: $accent;
+    }
+  }
+
+  .Vitals {
+    border: 1pt solid;
+    border-color: $accent;
+    border-radius: $radius;
+
+    // .CPU {
+    //   color: $accent;
+    // }
+    // .RAM {
+    //   color: $accent;
+    // }
+    // .STORAGE {
+    //   color: $accent;
+    // }
   }
 
   .FocusedClient {
@@ -53,9 +103,15 @@ window.Bar {
     background-size: contain;
   }
 
-  .Battery label {
-    padding-left: 0;
-    margin-left: 0;
+  .Battery {
+    label {
+      padding-left: 0;
+      margin-left: 0;
+    }
+  }
+
+  .Wifi {
+    color: $accent;
   }
 
   .AudioSlider {
@@ -86,6 +142,30 @@ window.Bar {
       min-height: 1em;
       min-width: 1em;
       margin: -0.2em;
+    }
+  }
+  .SysTray {
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+
+    button {
+      min-width: 1.2em;
+      min-height: 1.2em;
+      border-radius: $radius;
+      padding: 0.1em;
+      margin: 0.1em;
+    }
+
+    button:hover {
+      background-color: gtkalpha($fg, 0.84);
+      border-color: gtkalpha($accent, 0.8);
+      color: $accent;
+    }
+  }
+
+  .KBLayout {
+    label {
+      color: $accent;
     }
   }
 }

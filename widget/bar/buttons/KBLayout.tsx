@@ -15,16 +15,17 @@ export default function KBInput() {
   const hypr = Hyprland.get_default();
   // TODO: Fix not showing up on startup
   return (
-    <label
-      className={"kb-layout"}
-      setup={(self) => {
-        hypr.connect("keyboard-layout", (hypr_self, kb, layout) => {
-          print("keyboard-layout", kb, layout);
-          self.label = `${layoutMap[layout as LayoutKeys] ?? ".."}`;
+    <box className={"KBLayout"}>
+      <label
+        setup={(self) => {
+          hypr.connect("keyboard-layout", (hypr_self, kb, layout) => {
+            print("keyboard-layout", kb, layout);
+            self.label = `${layoutMap[layout as LayoutKeys] ?? ".."}`;
 
-          self.tooltipText = `kb: ${kb} \nlayout: ${layout}`;
-        });
-      }}
-    ></label>
+            self.tooltipText = `kb: ${kb} \nlayout: ${layout}`;
+          });
+        }}
+      ></label>
+    </box>
   );
 }

@@ -14,8 +14,8 @@ export function CPU() {
 
   return (
     <label
-      name={"cpu"}
-      className={"cpu"}
+      name={"CPU"}
+      className={"CPU"}
       label={cpuVar().as((v) => `${icon().get()}${v.toFixed(0)}%`)}
     ></label>
   );
@@ -30,8 +30,8 @@ export function RAM() {
 
   return (
     <label
-      name={"ram"}
-      className={"ram"}
+      name={"RAM"}
+      className={"RAM"}
       label={ramVar().as(formatDataResourse.label(ram))}
       tooltipText={ramVar().as(formatDataResourse.tooltip(ram))}
     ></label>
@@ -48,8 +48,8 @@ export function Storage() {
 
   return (
     <label
-      name={"storage"}
-      className={"storage"}
+      name={"STORAGE"}
+      className={"STORAGE"}
       label={storageVar().as(formatDataResourse.label(storage))}
       tooltipText={storageVar().as(formatDataResourse.tooltip(storage))}
     ></label>
@@ -58,7 +58,7 @@ export function Storage() {
 
 export default function Vitals() {
   return (
-    <box className={"vitals"}>
+    <box className={"Vitals"}>
       <CPU />
       <RAM />
       <Storage />

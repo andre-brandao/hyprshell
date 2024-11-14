@@ -34,7 +34,7 @@ $selected_fg: #{"@theme_selected_fg_color"};
 $border: #{"@theme_borders_color"};
 
 $accent: #{"@theme_selected_bg_color"};
-$radius: 7px;
+$radius: 15px;
 $error: red;
 
 $font-size: 1.3em;
@@ -52,3 +52,7 @@ ${imports.join("\n")}
 }
 
 resetCss();
+
+export function applyCss() {
+  resetCss();
+}

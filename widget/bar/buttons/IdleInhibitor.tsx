@@ -34,26 +34,26 @@ function IdleInhibitor() {
   }
 
   return (
-    <button
-      className={idleVar().as((s) => (s === "active" ? "idle-active" : ""))}
-      onDestroy={() => {
-        idleVar.drop();
-      }}
-      onClicked={toggle}
-      tooltipText={"Idle Inhibitor\nClick to toggle"}
-      label={idleVar().as((s) => {
-        switch (s) {
-          case "active":
-            return "󰅶";
-          case "inactive":
-            return "󰾫";
-
-          default:
-            return "󰅶";
-            return "";
-        }
-      })}
-    ></button>
+    <box
+      className={idleVar().as((s) =>
+        s === "active" ? "IdleInhibitor active" : "IdleInhibitor"
+      )}
+    >
+      <button
+        onDestroy={() => {
+          idleVar.drop();
+        }}
+        onClicked={toggle}
+        tooltipText={"Idle Inhibitor\nClick to toggle"}
+      >
+        {/* TODO: fix icon */}
+        <icon
+          icon={idleVar().as((s) =>
+            s === "active" ? "dialog-information" : "dialog-warning"
+          )}
+        />
+      </button>
+    </box>
   );
 }
 
