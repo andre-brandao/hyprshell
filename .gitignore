@@ -1,2 +1,8 @@
+# libs and types
 @girs/
 node_modules/
+
+# build output
+result/
+result
+
