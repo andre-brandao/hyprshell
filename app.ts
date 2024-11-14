@@ -2,18 +2,14 @@ import { App, Widget } from "astal/gtk3";
 import "./globals";
 
 import { Gdk, Gtk } from "astal/gtk3";
-// @ts-expect-error
-// import style from "./style.scss";
-import style from "./style/style.scss";
+import "./options";
 import { css } from "./style/style";
 
 import Bar from "./widget/bar/Bar";
 import NotificationPopups from "./widget/notification/NotificationPopups";
 import Launcher from "./widget/app-launcher/Launcher";
-import MediaPlayer from "./widget/media-player/MediaPlayer";
-import Layout from "./widget/settings/Layout";
-import Dialog from "./widget/Dialog";
-import { computeCPU } from "./customModules/cpu";
+
+import { TestRWindow } from "./widget/RegularWindow";
 
 function handleMonitors() {
   const widgetMap = new Map<Gdk.Monitor, Gtk.Widget[]>();
@@ -49,6 +45,7 @@ App.start({
   main() {
     handleMonitors();
     Launcher();
+    // TestRWindow();
     // Dialog({
     //   title: "Olamundo",
     //   action: "test",

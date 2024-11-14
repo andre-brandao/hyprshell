@@ -12,10 +12,12 @@ export default function Layout() {
         children={[
           <Group
             title="Style"
-            rows={[<Row title="Start" opt={bar.layout.start} />]}
+            rows={[
+              <Row title="Border Radius" opt={bar.border_radius} />,
+              <Row title="Margin" opt={bar.margin} />,
+              <Row title="Padding" opt={bar.padding} />,
+            ]}
           />,
-          <Group title="Center" rows={[]} />,
-          <Group title="Right" rows={[]} />,
         ]}
       />
     </>
