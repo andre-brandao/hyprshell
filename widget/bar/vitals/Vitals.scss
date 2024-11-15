@@ -1,0 +1,21 @@
+.Vitals {
+  border: 1pt solid;
+  border-color: $border-color;
+  border-radius: $radius;
+
+  label {
+    transition: 200ms;
+    padding: 0 8px;
+    // margin: 2px;
+  }
+
+  // .CPU {
+  //   color: $accent;
+  // }
+  // .RAM {
+  //   color: $accent;
+  // }
+  // .STORAGE {
+  //   color: $accent;
+  // }
+}

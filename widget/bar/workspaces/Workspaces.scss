@@ -1,0 +1,39 @@
+.Workspaces {
+  // font-size: 0;
+  min-width: 5pt;
+  // max-height: 5pt;
+  border-radius: $radius * 2;
+  border: $border;
+  box-shadow: inset 0 0 0 $border-width $border-color;
+  margin: 0 $padding * 0.5;
+  transition: $transition * 0.5;
+  background-color: transparentize($fg, 0.8);
+  padding: 0.2em;
+  label {
+    transition: 200ms;
+    padding: 0 8px;
+    // margin: 2px;
+  }
+  button {
+    // font-size: $;
+    border-radius: $radius * 2;
+    transition: 250ms background, 250ms border-radius;
+    padding: 1px;
+    margin: 2px;
+    &.focused {
+      // background-image: $active-gradient;;
+      background-color: transparentize($fg, 0.5);
+      color: $bg;
+      // border-color: $primary-bg;
+      min-width: 30pt;
+      min-height: 12pt;
+    }
+    &.occupied {
+      color: $bg;
+
+      background-color: transparentize($fg, 0.2);
+      min-width: 7pt;
+      min-height: 7pt;
+    }
+  }
+}

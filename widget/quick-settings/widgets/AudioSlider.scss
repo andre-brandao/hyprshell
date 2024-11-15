@@ -1,0 +1,30 @@
+.AudioSlider {
+  * {
+    all: unset;
+  }
+
+  icon {
+    margin-right: 0.6em;
+  }
+
+  margin: 0 1em;
+
+  trough {
+    background-color: gtkalpha($primary-bg, 0.5);
+    border-radius: $radius;
+  }
+
+  highlight {
+    background-color: $primary-bg;
+    min-height: 0.8em;
+    border-radius: $radius;
+  }
+
+  slider {
+    background-color: $fg;
+    border-radius: $radius;
+    min-height: 1em;
+    min-width: 1em;
+    margin: -0.2em;
+  }
+}

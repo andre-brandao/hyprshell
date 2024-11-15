@@ -1,16 +1,16 @@
 import { Astal, Gtk, Gdk } from "astal/gtk3";
 
-import Workspaces from "./buttons/Workspaces";
+import Workspaces from "./workspaces/Workspaces";
 import FocusedClient from "./buttons/FocusedClient";
 import Media from "./buttons/Media";
-import SysTray from "./buttons/SysTray";
+import SysTray from "./sys-tray/SysTray";
 // import Wifi from "./buttons/Wifi";
 // import AudioSlider from "./buttons/AudioSlider";
-import BatteryLevel from "./buttons/Battery";
-import Time from "./buttons/Time";
+import BatteryLevel from "./battery/Battery";
+import Time from "./time/Time";
 import IdleInibitor from "./buttons/IdleInhibitor";
-import { options } from "../../options";
-import Vitals, { CPU } from "./buttons/Vitals";
+import { options } from "@/options";
+import Vitals, { CPU } from "./vitals/Vitals";
 import KBInput from "./buttons/KBLayout";
 import COLROS from "./ColorDebug";
 import DistroIcon from "./buttons/DistroIcon";
