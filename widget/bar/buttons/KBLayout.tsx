@@ -7,7 +7,7 @@ import {
   type LayoutKeys,
   type LayoutValues,
   getKeyboardLayout,
-} from "@/customModules/kbLayout";
+} from "@/lib/modules/kbLayout";
 import { bind, execAsync, Variable } from "astal";
 import Hyprland from "gi://AstalHyprland";
 

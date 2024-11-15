@@ -1,6 +1,6 @@
-import { computeCPU } from "@/customModules/cpu";
-import { computeStorage } from "@/customModules/storage";
-import { computeRamUsage } from "@/customModules/ram";
+import { computeCPU } from "@/lib/modules/cpu";
+import { computeStorage } from "@/lib/modules/storage";
+import { computeRamUsage } from "@/lib/modules/ram";
 import { Binding, Variable } from "astal";
 import { formatDataResourse } from "@/lib/utils";
 import { options } from "@/options";
