@@ -1,4 +1,3 @@
-// import style1 from "inline:./style.scss";
 import { readFile, writeFile } from "astal/file";
 
 import { subprocess, exec, execAsync } from "astal/process";
@@ -6,7 +5,9 @@ import { ensureDirectory, ensureFile } from "@/lib/utils";
 import { App } from "astal/gtk3";
 import { Opt } from "@/lib/option";
 import { options } from "@/options";
-// import { SRC } from "@/env";
+
+// @ts-expect-error
+import mixins from "inline:./mixins.scss";
 
 const themeCSS = options.theme.css;
 
@@ -21,7 +22,7 @@ const variables = () =>
     .join("\n");
 
 const imports = () => {
-  const fd = exec(`fd ".scss" /home/andre/.config/ags/style`);
+  const fd = exec(`fd ".scss" /home/andre/.config/ags/style/widgets`);
   const files = fd.split(/\s+/);
   return files
     .map((f) => `@import '${f}';`)
@@ -45,11 +46,13 @@ function resetCss() {
             @use "sass:string";
             ${functions()}
             ${variables()}
+            ${mixins}
             ${imports()}
             `
   );
   exec(`sass ${tmpCSS} ${css}`);
 
+  print(mixins);
   // print(readFile(tmpCSS));
   App.apply_css(css, true);
 }

@@ -15,38 +15,41 @@ export const options = mkOptions(OPTIONS, {
   theme: {
     // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
     css: {
-      text: opt(` #{"@theme_text_color"}`),
-      base: opt(` #{"@theme_base_color"}`),
+      text: opt<string | `#{"@theme_text_color"}`>("#141414"),
+      base: opt<string | ` #{"@theme_base_color"}>`>(`#{"@theme_base_color"}`),
       selected_bg: opt(` #{"@theme_selected_bg_color"}`),
       selected_fg: opt(` #{"@theme_selected_fg_color"}`),
 
-      fg: opt(`#{"@theme_fg_color"}`),
-      bg: opt(` #{"@theme_bg_color"}`),
+      fg: opt(`#51a4e7`),
+      bg: opt(`#141414`),
 
-      "primary-bg": opt(` #{"@theme_selected_bg_color"}`),
-      "primary-fg": opt(` #{"@theme_selected_fg_color"}`),
+      // fg: opt(`#{"@theme_fg_color"}`),
+      // bg: opt(` #{"@theme_bg_color"}`),
+
+      "primary-bg": opt(`#51a4e7`),
+      "primary-fg": opt(`#141414`),
 
       error: opt("red"),
-      "error-bg": opt(` #FF0000`),
-      "error-fg": opt(` #FFFFFF`),
+      "error-bg": opt(`#b13558`),
+      "error-fg": opt(`#eeeeee`),
 
-      padding: opt("4px"),
-      spacing: opt("0.5em"),
-      radius: opt("15px"),
+      padding: opt("7pt"),
+      spacing: opt("12pt"),
+      radius: opt("11px"),
       transition: opt("300ms"),
       shadows: opt(true),
 
-      "widget-bg": opt(`gtkalpha(#fff, 0.94)`),
+      "widget-bg": opt(`gtkalpha(#eeeeee, 0.94)`),
 
-      "hover-bg": opt(`gtkalpha(#fff, 0.94)`),
-      "hover-fg": opt(` #{"@theme_text_color"}`),
+      "hover-bg": opt(`gtkalpha(#eeeeee, 0.94)`),
+      "hover-fg": opt(`lighten($fg,8%)`),
 
       // border: opt(` #{"@theme_borders_color"}`),
       "border-width": opt("1px"),
       "border-color": opt(` #{"@theme_borders_color"}`),
       border: opt(`$border-width solid $border-color`),
 
-      // "active-gradient": opt(`linear-gradient(to right, $bg, darken($bg, 4%))`),
+      "active-gradient": opt(`linear-gradient(to right, $bg, darken($bg, 4%))`),
       "shadow-color": opt(`rgba(0,0,0,.6)`),
       "text-shadow": opt(`2pt 2pt 2pt $shadow-color`),
       "box-shadow": opt(
@@ -55,6 +58,7 @@ export const options = mkOptions(OPTIONS, {
 
       "popover-padding": opt("$padding * 1.6"),
       "popover-radius": opt("$radius + $popover-padding"),
+      "popover-border-color": opt(`$border-color`),
 
       "font-size": opt("1.3em"),
       "font-name": opt("Ubuntu"),
@@ -67,6 +71,7 @@ export const options = mkOptions(OPTIONS, {
     margin: opt<string>("0.5em"),
     border_radius: opt<string>("0.5em"),
     position: opt<"top" | "bottom">("top"),
+    flat_buttons: opt<boolean>(true),
     layout: {
       start: opt<BarWidget[]>(["vitals", "tray", "focused"]),
       center: opt<BarWidget[]>(["workspaces"]),
@@ -101,7 +106,8 @@ export const options = mkOptions(OPTIONS, {
     },
 
     workspaces: {
-      mode: opt<"active" | "number">("number"),
+      show_empty: opt<boolean>(true),
+      mode: opt<"mini" | "full">("mini"),
       show: opt<number>(7),
       label: opt<string | "id">("id"),
       focused_label: opt<string | "id">(""),

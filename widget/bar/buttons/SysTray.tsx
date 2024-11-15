@@ -4,6 +4,7 @@ import { Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable, GLib, bind } from "astal";
 import { App } from "astal/gtk3";
 
+import PanelButton from "../PannelButton";
 function SysTray() {
   const tray = Tray.get_default();
 
@@ -16,7 +17,8 @@ function SysTray() {
           const menu = item.create_menu();
 
           return (
-            <button
+            <PanelButton
+              window={""}
               tooltipMarkup={bind(item, "tooltipMarkup")}
               onDestroy={() => menu?.destroy()}
               onClickRelease={(self) => {
@@ -29,7 +31,7 @@ function SysTray() {
               }}
             >
               <icon gIcon={bind(item, "gicon")} />
-            </button>
+            </PanelButton>
           );
         })
       )}

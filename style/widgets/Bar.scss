@@ -1,6 +1,27 @@
+$bar-spacing: $spacing * 0.3;
+
+@mixin panel-button($flat: true, $reactive: true) {
+  @include accs-button($flat, $reactive);
+
+  > * {
+    border-radius: $radius;
+    margin: $bar-spacing;
+  }
+
+  label,
+  image {
+    font-weight: bold;
+  }
+
+  > * {
+    padding: $padding * 0.4 $padding * 0.8;
+  }
+}
+
 window.Bar {
   border: none;
   box-shadow: none;
+  transition: $transition;
 
   font-size: $font_size;
   font-weight: bold;
@@ -11,30 +32,11 @@ window.Bar {
     // select box childs
   }
 
-  // not workspace btns
-  button:not(.Workspaces):not(.SysTray) {
-    // make it a with a aspect ratio
-  }
+  .panel-button {
+    @include panel-button;
 
-  button {
-    all: unset;
-    background-color: transparent;
-    border: 1pt solid transparent;
-    border-radius: 0.2em;
-
-    // make it a square
-    min-width: 1.2em;
-    min-height: 1.2em;
-    // padding: 0.1em;
-
-    &:hover {
-      background-color: gtkalpha($fg, 0.84);
-      border-color: gtkalpha($border-color, 0.8);
-      color: $primary-bg;
-    }
-
-    &:active {
-      background-color: gtkalpha($fg, 0.8);
+    &:not(.flat) {
+      @include accs-button($flat: false);
     }
   }
 
@@ -45,35 +47,46 @@ window.Bar {
   }
 
   .Workspaces {
-    border-color: $fg;
-    border: $border;
-    padding: 0.1em;
-
-    border-radius: $radius * 2;
+    // font-size: 0;
+    min-width: 5pt;
+    min-height: 5pt;
+    border-radius: $radius * 0.6;
+    box-shadow: inset 0 0 0 $border-width $border-color;
+    margin: 0 $padding * 0.5;
+    transition: $transition * 0.5;
+    background-color: transparentize($fg, 0.8);
 
     button {
       border-radius: $radius;
-    }
-    label {
-      border-radius: $radius;
       transition: 250ms background, 250ms border-radius;
-    }
-    .focused label {
-      color: $bg;
-      border-color: $border-color;
-      background-color: $selected-bg;
-    }
-    .occupied label {
-      color: $fg;
-      border-color: $fg;
+      &.focused {
+        // background-image: $active-gradient;
+        background-color: transparentize($fg, 0.5);
+        min-width: 20pt;
+        min-height: 12pt;
+      }
+      &.occupied {
+        color: $bg;
+
+        background-color: transparentize($fg, 0.2);
+        min-width: 7pt;
+        min-height: 7pt;
+      }
     }
   }
 
-  .IdleInhibitor {
-    &.active {
-      color: $selected-bg;
-    }
-  }
+  // .IdleInhibitor {
+  //   &.active {
+  //     color: $selected-bg;
+  //   }
+  // }
+
+  // .Wifi {
+  //   color: $widget-bg;
+  //   button {
+  //     @include button();
+  //   }
+  // }
 
   .Vitals {
     border: 1pt solid;
@@ -108,10 +121,6 @@ window.Bar {
       padding-left: 0;
       margin-left: 0;
     }
-  }
-
-  .Wifi {
-    color: $widget-bg;
   }
 
   .AudioSlider {
@@ -149,18 +158,18 @@ window.Bar {
     padding-right: 0.2em;
 
     button {
-      min-width: 1.2em;
-      min-height: 1.2em;
-      border-radius: $radius;
+      // min-width: 1.2em;
+      // min-height: 1.2em;
+      // border-radius: $radius;
       padding: 0.1em;
       margin: 0.1em;
     }
 
-    button:hover {
-      background-color: gtkalpha($fg, 0.84);
-      border-color: gtkalpha($border-color, 0.8);
-      color: $primary-bg;
-    }
+    // button:hover {
+    //   background-color: gtkalpha($fg, 0.84);
+    //   border-color: gtkalpha($border-color, 0.8);
+    //   color: $primary-bg;
+    // }
   }
 
   .KBLayout {

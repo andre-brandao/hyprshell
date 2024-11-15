@@ -2,8 +2,10 @@ import { Variable, GLib, bind } from "astal";
 import { Astal, Gtk, Gdk } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
 import { options } from "@/options";
+import PanelButton from "../PannelButton";
+import { range } from "@/lib/utils";
 
-const { show, label, focused_label, mode } = options.bar.workspaces;
+const { show, label, focused_label, mode, show_empty } = options.bar.workspaces;
 
 function Workspaces() {
   const hypr = Hyprland.get_default();
@@ -15,22 +17,34 @@ function Workspaces() {
   return (
     <box className="Workspaces">
       {wssBind.as((wss) => {
-        switch (mode.get()) {
-          case "active":
-            return wss.map((ws) => <WsButton index={ws.id} />);
-
-          case "number":
-          default:
-            return Array.from(
-              { length: +show().get() },
-              // (_, i) => i + 1
-              (_, i) => <WsButton index={i + 1} />
-            );
-        }
+        return range(!show_empty().get() ? wss.length : show().get(), 1).map(
+          (i) => <WsButton index={i} />
+        );
       })}
     </box>
   );
 }
+
+// function MiniWorkspaces({ index }: { index: number }) {
+//   const hypr = Hyprland.get_default();
+
+//   const ws = hypr.get_workspace(index);
+//   return (
+//     <label
+//       valign={ALIGN.CENTER}
+//       label={`${index}`}
+//       setup={(self) => {
+//         self.toggleClassName(
+//           "acitve",
+//           bind(hypr, "focusedWorkspace")
+//             .as((fw) => fw.id === index)
+//             .get()
+//         );
+//         self.toggleClassName("occupied", ws !== null);
+//       }}
+//     ></label>
+//   );
+// }
 
 function WsButton({ index, className }: { index: number; className?: string }) {
   const hypr = Hyprland.get_default();
