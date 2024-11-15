@@ -4,8 +4,12 @@ import { Variable } from "astal";
 
 const MAX_ITEMS = 8;
 
-function hide() {
+export function hide() {
   App.get_window("launcher")!.hide();
+}
+
+export function show() {
+  App.get_window("launcher")!.show();
 }
 
 function AppButton({ app }: { app: Apps.Application }) {

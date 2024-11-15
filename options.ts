@@ -56,7 +56,7 @@ export const options = mkOptions(OPTIONS, {
         `2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color`
       ),
 
-      "popover-padding": opt("$padding * 1.6"),
+      "popover-padding": opt("4px"),
       "popover-radius": opt("$radius + $popover-padding"),
       "popover-border-color": opt(`$border-color`),
 
@@ -73,7 +73,7 @@ export const options = mkOptions(OPTIONS, {
     position: opt<"top" | "bottom">("top"),
     flat_buttons: opt<boolean>(true),
     layout: {
-      start: opt<BarWidget[]>(["vitals", "focused"]),
+      start: opt<BarWidget[]>(["distro", "vitals", "focused"]),
       center: opt<BarWidget[]>(["workspaces"]),
       end: opt<BarWidget[]>([
         // "media"

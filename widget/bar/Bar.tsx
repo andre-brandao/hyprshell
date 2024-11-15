@@ -13,10 +13,12 @@ import { options } from "../../options";
 import Vitals, { CPU } from "./buttons/Vitals";
 import KBInput from "./buttons/KBLayout";
 import COLROS from "./ColorDebug";
+import DistroIcon from "./buttons/DistroIcon";
 
 const { center, end, start } = options.bar.layout;
 const { padding, margin, border_radius } = options.bar;
 export const barWidget = {
+  distro: DistroIcon,
   battery: BatteryLevel,
   time: Time,
   audio: AudioSlider,
