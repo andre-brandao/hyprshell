@@ -1,5 +1,5 @@
 import { Variable, GLib, bind } from "astal";
-import { Astal, Gtk, Gdk } from "astal/gtk3";
+import { Astal, Gtk, Gdk, App } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
 
 const formatTooltip = (client: Hyprland.Client) =>
@@ -24,7 +24,11 @@ export function FocusedClient() {
   const focused = bind(hypr, "focusedClient");
 
   return (
-    <box className="FocusedClient" visible={focused.as(Boolean)}>
+    <button
+      className="FocusedClient"
+      visible={focused.as(Boolean)}
+      onClicked={() => App.get_window("Settings")?.show()}
+    >
       {focused.as(
         (client) =>
           client && (
@@ -36,7 +40,7 @@ export function FocusedClient() {
             />
           )
       )}
-    </box>
+    </button>
   );
 }
 

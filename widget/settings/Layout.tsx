@@ -8,7 +8,7 @@ const { bar, notification } = options;
 export default function Layout() {
   return (
     <RegularWindow
-      // visible={false}
+      visible={false}
       name={"Settings"}
       application={App}
       // @ts-expect-error

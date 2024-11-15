@@ -4,8 +4,8 @@ import Workspaces from "./buttons/Workspaces";
 import FocusedClient from "./buttons/FocusedClient";
 import Media from "./buttons/Media";
 import SysTray from "./buttons/SysTray";
-import Wifi from "./buttons/Wifi";
-import AudioSlider from "./buttons/AudioSlider";
+// import Wifi from "./buttons/Wifi";
+// import AudioSlider from "./buttons/AudioSlider";
 import BatteryLevel from "./buttons/Battery";
 import Time from "./buttons/Time";
 import IdleInibitor from "./buttons/IdleInhibitor";
@@ -21,8 +21,8 @@ export const barWidget = {
   distro: DistroIcon,
   battery: BatteryLevel,
   time: Time,
-  audio: AudioSlider,
-  wifi: Wifi,
+  // audio: AudioSlider,
+  // wifi: Wifi,
   tray: SysTray,
   media: Media,
   workspaces: Workspaces,

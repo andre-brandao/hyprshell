@@ -60,7 +60,7 @@ export const options = mkOptions(OPTIONS, {
       "popover-radius": opt("$radius + $popover-padding"),
       "popover-border-color": opt(`$border-color`),
 
-      "font-size": opt("1.3em"),
+      "font-size": opt("0.9em"),
       "font-name": opt("Ubuntu"),
 
       "charging-bg": opt(`green`),
@@ -73,7 +73,12 @@ export const options = mkOptions(OPTIONS, {
     position: opt<"top" | "bottom">("top"),
     flat_buttons: opt<boolean>(true),
     layout: {
-      start: opt<BarWidget[]>(["distro", "vitals", "focused"]),
+      start: opt<BarWidget[]>([
+        "distro",
+        "vitals",
+        // "focused",
+        "media",
+      ]),
       center: opt<BarWidget[]>(["workspaces"]),
       end: opt<BarWidget[]>([
         // "media"
@@ -81,8 +86,8 @@ export const options = mkOptions(OPTIONS, {
         "kb_layout",
         "idle",
 
-        "wifi",
-        "audio",
+        // "wifi",
+        // "audio",
         "battery",
         "time",
       ]),

@@ -22,7 +22,7 @@ const variables = () =>
     .join("\n");
 
 const imports = () => {
-  const fd = exec(`fd ".scss" /home/andre/.config/ags/style/widgets`);
+  const fd = exec(`fd ".scss" /home/andre/.config/ags/widget`);
   const files = fd.split(/\s+/);
   return files
     .map((f) => `@import '${f}';`)
