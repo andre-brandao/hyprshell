@@ -3,6 +3,7 @@ import { Variable, GLib, bind } from "astal";
 import Network from "gi://AstalNetwork";
 
 import PanelButton from "../PannelButton";
+import Icon from "@/widget/Icon";
 
 export function Wifi() {
   const { wifi } = Network.get_default();
@@ -12,9 +13,9 @@ export function Wifi() {
       window={"Wifi"}
       onClicked={() => print("TODO: implement wifi menu")}
     >
-      <icon
+      <Icon
         tooltipText={bind(wifi, "ssid").as(String)}
-        icon={bind(wifi, "iconName")}
+        name={bind(wifi, "iconName")}
       />
     </PanelButton>
   );

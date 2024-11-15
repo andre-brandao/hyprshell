@@ -8,6 +8,8 @@ import Bar from "./widget/bar/Bar";
 import NotificationPopups from "./widget/notification/NotificationPopups";
 import Launcher from "./widget/app-launcher/Launcher";
 import { forEachMonitor } from "./lib/utils";
+import { RegularWindow } from "./widget/RegularWindow";
+import Layout from "./widget/settings/Layout";
 
 App.start({
   css: css,
@@ -15,12 +17,19 @@ App.start({
   // gtkTheme: "adw-gtk3-dark",
   // instanceName: 'js',
   requestHandler(request, res) {
-    print(request);
-
-    res("ok");
+    try {
+      print(request);
+      // const foo = Layout();
+      // print(foo);
+      res("ok");
+    } catch (error) {
+      printerr(error);
+      res("error");
+    }
   },
   main() {
     forEachMonitor((m: Gdk.Monitor) => [Bar(m), NotificationPopups(m)]);
     Launcher();
+    Layout();
   },
 });

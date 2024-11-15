@@ -122,10 +122,10 @@ export function Setter<T>({
 
 export function Group({
   title,
-  ...rows
+  children,
 }: {
   title: string;
-  rows: ReturnType<typeof Row<any>>[];
+  children: ReturnType<typeof Row<any>>[];
 }) {
   return (
     <box className={"group"} vertical={true}>
@@ -141,7 +141,7 @@ export function Group({
             IconP
           </button>
         ) : (
-          <box />
+          <box>Hello</box>
         )}
       </box>
     </box>

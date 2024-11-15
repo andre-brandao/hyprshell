@@ -4,6 +4,7 @@ import { dependencies, Notify } from "@/lib/utils";
 import { options } from "@/options";
 
 import PanelButton from "../PannelButton";
+import Icon from "@/widget/Icon";
 
 type IdleState = "active" | "inactive" | "unknown";
 function IdleInhibitor() {
@@ -51,8 +52,8 @@ function IdleInhibitor() {
       }}
     >
       <box>
-        <icon
-          icon={idleVar().as((s) =>
+        <Icon
+          name={idleVar().as((s) =>
             s === "active" ? "mug-hot-symbolic" : "mug-symbolic"
           )}
         />
