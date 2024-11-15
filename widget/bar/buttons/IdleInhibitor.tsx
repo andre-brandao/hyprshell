@@ -17,9 +17,8 @@ function IdleInhibitor() {
     const resp = exec(["matcha", "-t", "-b", "waybar"]);
     if (options.bar.idle_inhibitor.notify().get()) {
       Notify({
-        appName: "Matcha",
-        summary: "Idle Inhibitor",
-        body: resp,
+        appName: "Idle Inhibitor",
+        summary: resp,
         iconName: "dialog-information",
       });
       if (resp.endsWith("Disabled")) {
@@ -41,7 +40,7 @@ function IdleInhibitor() {
       tooltipText={"Idle Inhibitor\nClick to toggle"}
       setup={(but) => {
         but.toggleClassName("IdleInhibitor");
-        bind(idleVar).as((s) => {
+        bind(idleVar).subscribe((s) => {
           if (s === "inactive") {
             but.toggleClassName("active", false);
           }
@@ -51,11 +50,7 @@ function IdleInhibitor() {
         });
       }}
     >
-      <box
-        className={idleVar().as((s) =>
-          s === "active" ? "IdleInhibitor active" : "IdleInhibitor"
-        )}
-      >
+      <box>
         <icon
           icon={idleVar().as((s) =>
             s === "active" ? "mug-hot-symbolic" : "mug-symbolic"

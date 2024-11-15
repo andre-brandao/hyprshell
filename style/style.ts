@@ -52,7 +52,7 @@ function resetCss() {
   );
   exec(`sass ${tmpCSS} ${css}`);
 
-  print(mixins);
+  // print(mixins);
   // print(readFile(tmpCSS));
   App.apply_css(css, true);
 }

@@ -39,7 +39,7 @@ export const options = mkOptions(OPTIONS, {
       transition: opt("300ms"),
       shadows: opt(true),
 
-      "widget-bg": opt(`gtkalpha(#eeeeee, 0.94)`),
+      "widget-bg": opt(`gtkalpha(#080808, 0.94)`),
 
       "hover-bg": opt(`gtkalpha(#eeeeee, 0.94)`),
       "hover-fg": opt(`lighten($fg,8%)`),
@@ -73,10 +73,11 @@ export const options = mkOptions(OPTIONS, {
     position: opt<"top" | "bottom">("top"),
     flat_buttons: opt<boolean>(true),
     layout: {
-      start: opt<BarWidget[]>(["vitals", "tray", "focused"]),
+      start: opt<BarWidget[]>(["vitals", "focused"]),
       center: opt<BarWidget[]>(["workspaces"]),
       end: opt<BarWidget[]>([
         // "media"
+        "tray",
         "kb_layout",
         "idle",
 

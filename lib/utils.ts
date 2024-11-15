@@ -1,5 +1,5 @@
 import { Variable, GLib, bind } from "astal";
-import { Astal, Gtk, Gdk } from "astal/gtk3";
+import { Astal, Gtk, Gdk, App } from "astal/gtk3";
 import {
   readFile,
   readFileAsync,
@@ -11,7 +11,24 @@ import {
 import { interval, timeout, idle } from "astal/time";
 import { subprocess, exec, execAsync } from "astal/process";
 // import { options } from "@/options";
+export function forEachMonitor(
+  createWidgets: (mon: Gdk.Monitor) => Gtk.Widget[]
+) {
+  const widgetMap = new Map<Gdk.Monitor, Gtk.Widget[]>();
 
+  for (const gdkmonitor of App.get_monitors()) {
+    widgetMap.set(gdkmonitor, createWidgets(gdkmonitor));
+  }
+
+  App.connect("monitor-added", (_, gdkmonitor) => {
+    widgetMap.set(gdkmonitor, createWidgets(gdkmonitor));
+  });
+
+  App.connect("monitor-removed", (_, gdkmonitor) => {
+    widgetMap.get(gdkmonitor)?.forEach((w) => w.destroy());
+    widgetMap.delete(gdkmonitor);
+  });
+}
 export function ensureDirectory(path: string) {
   if (!GLib.file_test(path, GLib.FileTest.EXISTS)) {
     print(`creating directory: ${path}`);
@@ -83,10 +100,6 @@ export async function bash(
     console.error(cmd, err);
     return "";
   });
-}
-export function forMonitors(widget: (monitor: number) => Gtk.Window) {
-  const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
-  return range(n, 0).flatMap(widget);
 }
 
 /**

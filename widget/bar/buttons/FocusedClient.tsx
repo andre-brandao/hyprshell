@@ -1,8 +1,24 @@
 import { Variable, GLib, bind } from "astal";
 import { Astal, Gtk, Gdk } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
-import { mergeBindings } from "../../../../../.local/share/ags/gtk3/astalify";
 
+const formatTooltip = (client: Hyprland.Client) =>
+  Variable.derive(
+    [
+      bind(client, "address"),
+      bind(client, "title"),
+      bind(client, "class"),
+      bind(client, "initialClass"),
+      bind(client, "initialTitle"),
+    ],
+    (address, title, wm_class) => {
+      return `Address: ${address}
+Title: ${title}
+Class: ${wm_class}
+Initial Class: ${client.initialClass}
+Initial Title: ${client.initialTitle}`;
+    }
+  );
 export function FocusedClient() {
   const hypr = Hyprland.get_default();
   const focused = bind(hypr, "focusedClient");
@@ -16,10 +32,7 @@ export function FocusedClient() {
               label={bind(client, "title").as((v) =>
                 v.length < 20 ? v : v.slice(0, 20) + "..."
               )}
-              // tooltipText={mergeBindings([
-              //   bind(client, "address"),
-              //   bind(client, "title"),
-              // ]).as(([address, title]) => `${address}\n${title}`)}
+              tooltipText={formatTooltip(client)()}
             />
           )
       )}
