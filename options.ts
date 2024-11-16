@@ -2,7 +2,7 @@ import { Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable } from "astal/variable";
 import { mkOptions, opt } from "./lib/option";
 
-import { barWidget, type BarWidget } from "./widget/bar/Bar";
+import { barWidget, type BarWidget } from "@/components/bar/Bar";
 
 // export const options = {
 //   bar: {

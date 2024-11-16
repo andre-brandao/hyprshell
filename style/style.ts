@@ -112,7 +112,7 @@ const variables = () =>
   ].join("\n");
 
 const imports = () => {
-  const fd = exec(`fd ".scss" /home/andre/.config/ags/widget`);
+  const fd = exec(`fd ".scss" /home/andre/.config/ags/components`);
   const files = fd.split(/\s+/);
   return files
     .map((f) => `@import '${f}';`)
