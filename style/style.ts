@@ -1,4 +1,4 @@
-import { readFile, writeFile } from "astal/file";
+import { monitorFile, readFile, writeFile } from "astal/file";
 
 import { subprocess, exec, execAsync } from "astal/process";
 import { ensureDirectory, ensureFile } from "@/lib/utils";
@@ -146,6 +146,18 @@ function resetCss() {
   App.apply_css(css, true);
 }
 
+// monitorFile
+options.handler(
+  [
+    "font",
+    "theme",
+    "bar.flatButtons",
+    "bar.position",
+    "bar.battery.charging",
+    "bar.battery.blocks",
+  ],
+  resetCss,
+);
 resetCss();
 
 export function applyCss() {

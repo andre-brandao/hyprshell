@@ -9,7 +9,7 @@ import NotificationPopups from "./widget/notification/NotificationPopups";
 import Launcher from "./widget/app-launcher/Launcher";
 import { forEachMonitor } from "./lib/utils";
 import { RegularWindow } from "./widget/RegularWindow";
-import Layout from "./widget/settings/Layout";
+import SettingsWindow from "./widget/settings/Settings";
 import OSD from "./widget/osd/OSD";
 
 App.start({
@@ -32,7 +32,7 @@ App.start({
   main() {
     forEachMonitor((m: Gdk.Monitor) => [Bar(m), NotificationPopups(m)]);
     Launcher();
-    Layout();
+    SettingsWindow();
     OSD();
   },
 });

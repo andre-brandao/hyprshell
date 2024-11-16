@@ -92,7 +92,7 @@ export function mkOptions<T extends object>(cacheFile: string, object: T) {
 
   const values = getOptions(object).reduce(
     (obj, opt) => ({ [opt.id]: opt.get(), ...obj }),
-    {}
+    {},
   );
   // print(values);
   // print(configFile);
@@ -113,7 +113,7 @@ export function mkOptions<T extends object>(cacheFile: string, object: T) {
 
   async function reset(
     [opt, ...list] = getOptions(object),
-    id = opt?.reset()
+    id = opt?.reset(),
   ): Promise<Array<string>> {
     if (!opt) return sleep().then(() => []);
 
@@ -130,7 +130,9 @@ export function mkOptions<T extends object>(cacheFile: string, object: T) {
     },
     handler(deps: string[], callback: () => void) {
       for (const opt of getOptions(object)) {
-        if (deps.some((i) => opt.id.startsWith(i))) opt.subscribe(callback);
+        if (deps.some((i) => opt.id.startsWith(i))) {
+          opt.subscribe(callback);
+        }
         //   opt.connect("changed", callback);
       }
     },
