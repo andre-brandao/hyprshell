@@ -27,8 +27,8 @@ window.Bar {
   font-weight: bold;
 
   .BarContainer {
-    background-color: $bg;
-    color: $fg;
+    // background-color: $bg;
+    // color: $fg;
     // border: $border;
     // select box childs
   }
@@ -43,12 +43,12 @@ window.Bar {
 
   .IdleInhibitor {
     &.active {
-      color: $selected-bg;
+      color: $primary-bg;
     }
   }
 
   .FocusedClient {
-    color: $selected-bg;
+    color: $primary-bg;
   }
 
   .Media {

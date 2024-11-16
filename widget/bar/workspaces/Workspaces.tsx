@@ -2,7 +2,7 @@ import { Variable, GLib, bind } from "astal";
 import { Astal, Gtk, Gdk } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
 import { options } from "@/options";
-import PanelButton from "@/widget/PannelButton";
+import PanelButton from "@/widget/bar/PannelButton";
 import { range } from "@/lib/utils";
 
 const { show, label, focused_label, mode, show_empty } = options.bar.workspaces;
@@ -11,14 +11,14 @@ function Workspaces() {
   const hypr = Hyprland.get_default();
 
   const wssBind = bind(hypr, "workspaces").as((wss) =>
-    wss.filter((ws) => ws.id > 0).sort((a, b) => a.id - b.id)
+    wss.filter((ws) => ws.id > 0).sort((a, b) => a.id - b.id),
   );
 
   return (
     <box className="Workspaces">
       {wssBind.as((wss) => {
         return range(!show_empty().get() ? wss.length : show().get(), 1).map(
-          (i) => <WsButton index={i} />
+          (i) => <WsButton index={i} />,
         );
       })}
     </box>

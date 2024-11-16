@@ -7,7 +7,7 @@ import { Astal, Gtk, Gdk, App } from "astal/gtk3";
 import PopupWindow from "@/widget/PopUp";
 import MediaPlayer from "@/widget/media-player/MediaPlayer";
 
-import PanelButton from "@/widget/PannelButton";
+import PanelButton from "@/widget/bar/PannelButton";
 function Media() {
   const mpris = Mpris.get_default();
 
@@ -30,19 +30,19 @@ function Media() {
               className="Cover"
               valign={Gtk.Align.CENTER}
               css={bind(ps[0], "coverArt").as(
-                (cover) => `background-image: url('${cover}');`
+                (cover) => `background-image: url('${cover}');`,
               )}
               // onClicked={() => (popup.visible ? popup.hide() : popup.show())}
             />
             <label
               label={bind(ps[0], "title").as(
-                () => `${ps[0].title} - ${ps[0].artist}`
+                () => `${ps[0].title} - ${ps[0].artist}`,
               )}
             />
           </box>
         ) : (
           "Nothing Playing"
-        )
+        ),
       )}
     </box>
   );

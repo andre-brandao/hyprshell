@@ -1,15 +1,20 @@
 import { Variable, GLib, bind } from "astal";
 
 import PopupWindow from "@/widget/PopUp";
-import PannelButton from "@/widget/PannelButton";
+import PannelButton from "@/widget/bar/PannelButton";
 import { Gtk, Astal } from "astal/gtk3";
 
-const Divider = () => <box className="divider" vertical />;
+const Divider = () => (
+  <box
+    className="divider"
+    vertical
+  />
+);
 
 const Time = () => {
   const time = Variable<string>("").poll(
     1000,
-    () => GLib.DateTime.new_now_local().format("%H:%M")!
+    () => GLib.DateTime.new_now_local().format("%H:%M")!,
   );
 
   const fullDate = Variable<string>("").poll(1000, () => {
@@ -23,17 +28,29 @@ const Time = () => {
   });
 
   return (
-    <box className="timebox" vertical>
+    <box
+      className="timebox"
+      vertical
+    >
       <box
         className="time-container"
         halign={Gtk.Align.CENTER}
         valign={Gtk.Align.CENTER}
       >
-        <label className="content" label={bind(time)} />
+        <label
+          className="content"
+          label={bind(time)}
+        />
       </box>
 
-      <box className="date-container" halign={Gtk.Align.CENTER}>
-        <label css="font-size: 20px;" label={bind(fullDate)} />
+      <box
+        className="date-container"
+        halign={Gtk.Align.CENTER}
+      >
+        <label
+          css="font-size: 20px;"
+          label={bind(fullDate)}
+        />
       </box>
     </box>
   );
@@ -42,7 +59,7 @@ const Time = () => {
 export default function ({ format = "%H:%M - %A %e." }) {
   const time = Variable<string>("").poll(
     1000,
-    () => GLib.DateTime.new_now_local().format(format)!
+    () => GLib.DateTime.new_now_local().format(format)!,
   );
   const cal = new Gtk.Calendar({
     show_day_names: true,

@@ -3,7 +3,7 @@ import { bind, Variable } from "astal";
 import { dependencies, Notify } from "@/lib/utils";
 import { options } from "@/options";
 
-import PanelButton from "@/widget/PannelButton";
+import PanelButton from "@/widget/bar/PannelButton";
 import Icon from "@/widget/Icon";
 
 type IdleState = "active" | "inactive" | "unknown";
@@ -54,7 +54,7 @@ function IdleInhibitor() {
       <box>
         <Icon
           name={idleVar().as((s) =>
-            s === "active" ? "mug-hot-symbolic" : "mug-symbolic"
+            s === "active" ? "mug-hot-symbolic" : "mug-symbolic",
           )}
         />
       </box>

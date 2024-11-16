@@ -2,7 +2,7 @@ import { Notify } from "@/lib/utils";
 import { Variable, GLib, bind } from "astal";
 import Network from "gi://AstalNetwork";
 
-import PanelButton from "@/widget/PannelButton";
+import PanelButton from "@/widget/bar/PannelButton";
 import Icon from "@/widget/Icon";
 import Wp from "gi://AstalWp";
 

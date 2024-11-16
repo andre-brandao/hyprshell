@@ -11,60 +11,52 @@ import { barWidget, type BarWidget } from "./widget/bar/Bar";
 //     end: opt<BarWidget[]>(["idle", "tray", "wifi", "audio", "battery", "time"]),
 //   },
 // };
+// dark: {
+//   primary: {
+//       bg: opt("#51a4e7"),
+//       fg: opt("#141414"),
+//   },
+//   error: {
+//       bg: opt("#e55f86"),
+//       fg: opt("#141414"),
+//   },
+//   bg: opt("#171717"),
+//   fg: opt("#eeeeee"),
+//   widget: opt("#eeeeee"),
+//   border: opt("#eeeeee"),
+// },
 export const options = mkOptions(OPTIONS, {
+  font: {
+    size: opt("0.9em"),
+    name: opt("Ubuntu"),
+  },
+  // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
   theme: {
-    // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-    css: {
-      text: opt<string | `#{"@theme_text_color"}`>("#141414"),
-      base: opt<string | ` #{"@theme_base_color"}>`>(`#{"@theme_base_color"}`),
-      selected_bg: opt(` #{"@theme_selected_bg_color"}`),
-      selected_fg: opt(` #{"@theme_selected_fg_color"}`),
-
+    bg: opt("#171717"),
+    fg: opt("#eeeeee"),
+    primary: {
       fg: opt(`#51a4e7`),
       bg: opt(`#141414`),
-
-      // fg: opt(`#{"@theme_fg_color"}`),
-      // bg: opt(` #{"@theme_bg_color"}`),
-
-      "primary-bg": opt(`#51a4e7`),
-      "primary-fg": opt(`#141414`),
-
-      error: opt("red"),
-      "error-bg": opt(`#b13558`),
-      "error-fg": opt(`#eeeeee`),
-
-      padding: opt("7pt"),
-      spacing: opt("8pt"),
-      radius: opt("11px"),
-      transition: opt("300ms"),
-      shadows: opt(true),
-
-      "widget-bg": opt(`gtkalpha(#080808, 0.94)`),
-
-      "hover-bg": opt(`gtkalpha(#eeeeee, 0.94)`),
-      "hover-fg": opt(`lighten($fg,8%)`),
-
-      // border: opt(` #{"@theme_borders_color"}`),
-      "border-width": opt("1px"),
-      "border-color": opt(` #{"@theme_borders_color"}`),
-      border: opt(`$border-width solid $border-color`),
-
-      "active-gradient": opt(`linear-gradient(to right, $bg, darken($bg, 4%))`),
-      "shadow-color": opt(`rgba(0,0,0,.6)`),
-      "text-shadow": opt(`2pt 2pt 2pt $shadow-color`),
-      "box-shadow": opt(
-        `2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color`,
-      ),
-
-      "popover-padding": opt("4px"),
-      "popover-radius": opt("$radius + $popover-padding"),
-      "popover-border-color": opt(`$border-color`),
-
-      "font-size": opt("0.9em"),
-      "font-name": opt("Ubuntu"),
-
-      "charging-bg": opt(`green`),
     },
+    error: {
+      bg: opt("#e55f86"),
+      fg: opt("#141414"),
+    },
+    border: {
+      color: opt(`#51a4e7`),
+      width: opt("1px"),
+      opacity: opt(50),
+    },
+    widget: {
+      color: opt(`#080808`),
+      opacity: opt(94),
+    },
+    blur: opt(0),
+    shadows: opt(true),
+    padding: opt("7pt"),
+    spacing: opt("8pt"),
+    radius: opt("11px"),
+    transition: opt("300ms"),
   },
   bar: {
     padding: opt<string>("0.5em"),
@@ -118,6 +110,9 @@ export const options = mkOptions(OPTIONS, {
       show: opt<number>(7),
       label: opt<string | "id">("id"),
       focused_label: opt<string | "id">(""),
+    },
+    battery: {
+      charging: opt<string>("#51a4e7"),
     },
 
     idle_inhibitor: {

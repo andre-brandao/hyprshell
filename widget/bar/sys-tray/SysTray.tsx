@@ -4,7 +4,7 @@ import { Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable, GLib, bind } from "astal";
 import { App } from "astal/gtk3";
 
-import PanelButton from "@/widget/PannelButton";
+import PanelButton from "@/widget/bar/PannelButton";
 function SysTray() {
   const tray = Tray.get_default();
 
@@ -26,14 +26,14 @@ function SysTray() {
                   self,
                   Gdk.Gravity.SOUTH,
                   Gdk.Gravity.NORTH,
-                  null
+                  null,
                 );
               }}
             >
               <icon gIcon={bind(item, "gicon")} />
             </PanelButton>
           );
-        })
+        }),
       )}
     </box>
   );
