@@ -19,9 +19,13 @@ function SettingsMenu() {
         <box>
           <Avatar />
 
-          <button onClicked={() => App.get_window("Settings")?.show()}>
-            Settings
-          </button>
+          <box vertical>
+            <button onClicked={() => App.get_window("Settings")?.show()}>
+              Settings
+            </button>
+
+            <button onClicked={() => print("Not Implemented")}>Power</button>
+          </box>
         </box>
         <box
           vertical

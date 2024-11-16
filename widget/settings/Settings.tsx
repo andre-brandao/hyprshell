@@ -6,18 +6,65 @@ import { options } from "@/options";
 import { Layout } from "./Layout";
 
 import { Variable, GLib, bind, Binding } from "astal";
+import icons from "@/lib/icons";
+import Icon from "../Icon";
 
-function Header({ title }: { title: string | Binding<string> }) {
+const current = Variable(Layout[0].name);
+
+function Header() {
+  // { title }: { title: string | Binding<string> }
   return (
-    <box>
-      <label label="Settings" />
-      <label label={title} />
+    <centerbox
+      className="Header"
+      startWidget={
+        <button className="reset">
+          <Icon name={icons.ui.refresh} />
+        </button>
+      }
+      centerWidget={
+        <box>
+          <label label="Settings" />
+          -
+          <label label={current()} />
+        </box>
+      }
+      endWidget={
+        <button
+          // halign={ALIGN.END}
+          // hexpand={false}
+          className="close"
+          onClicked={() => App.get_window("Settings")?.hide()}
+        >
+          <Icon name={icons.ui.close} />
+        </button>
+      }
+    />
+  );
+}
+
+function Pager() {
+  return (
+    <box
+      className="Pager"
+      vertical
+    >
+      {Layout.map(({ name }) => (
+        <button
+          // xalign={0}
+
+          className={current().as((v) => `${v === name ? "active" : ""}`)}
+          onClick={() => current.set(name)}
+        >
+          <box>
+            {/* <Icon name={icon} /> */}
+            <label label={name} />
+          </box>
+        </button>
+      ))}
     </box>
   );
 }
 export default function SettingsWindow() {
-  // const current = Variable(Layout()[0].);
-
   return (
     <RegularWindow
       visible={false}
@@ -29,13 +76,16 @@ export default function SettingsWindow() {
         return true;
       }}
     >
-      <box vertical>
-        <Header title={bind(Layout[0], "name").as((n) => `${n}`)} />
-        <stack
-          // vertical
-          shown={"Theme"}
-          children={Layout}
-        />
+      <box>
+        <Pager />
+        <box vertical>
+          <Header title={bind(Layout[0], "name").as((n) => `${n}`)} />
+          <stack
+            // vertical
+            shown={current()}
+            children={Layout}
+          />
+        </box>
       </box>
     </RegularWindow>
   );

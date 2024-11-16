@@ -2,7 +2,7 @@ window#Settings {
   background-color: $bg;
   color: $fg;
 
-  .header {
+  .Header {
     .pager {
       @include spacing(0.5);
     }
@@ -29,6 +29,26 @@ window#Settings {
     }
   }
 
+  .Pager {
+    padding: 5px;
+    background-color: $widget-bg;
+    border: $border;
+    border-radius: $radius;
+    margin: 5px;
+    @include spacing(0.5);
+
+    button {
+      @include button;
+      padding: $padding;
+
+      min-width: 100px;
+
+      &:disabled {
+        color: transparent;
+      }
+    }
+  }
+
   .page {
     @include scrollable($top: true);
 
@@ -40,8 +60,9 @@ window#Settings {
 
   .group {
     .group-title {
-      color: $primary-bg;
+      color: $fg;
       margin-bottom: $spacing * 0.5;
+      font-size: $font-size * 1.2;
     }
 
     .group-reset {
@@ -114,31 +135,31 @@ window#Settings {
       }
     }
 
-    .enum-setter {
-      label {
-        background-color: $widget-bg;
-        border: $border;
-        padding: 0 $padding;
-        border-radius: $radius 0 0 $radius;
-      }
+    // .enum-setter {
+    //   label {
+    //     background-color: $widget-bg;
+    //     border: $border;
+    //     padding: 0 $padding;
+    //     border-radius: $radius 0 0 $radius;
+    //   }
 
-      button {
-        border-radius: 0;
-      }
+    //   button {
+    //     border-radius: 0;
+    //   }
 
-      button:last-child {
-        border-radius: 0 $radius $radius 0;
-      }
-    }
+    //   button:last-child {
+    //     border-radius: 0 $radius $radius 0;
+    //   }
+    // }
 
-    &.wallpaper {
-      button {
-        margin-top: $spacing * 0.5;
-      }
+    // &.wallpaper {
+    //   button {
+    //     margin-top: $spacing * 0.5;
+    //   }
 
-      .preview {
-        border-radius: $radius;
-      }
-    }
+    //   .preview {
+    //     border-radius: $radius;
+    //   }
+    // }
   }
 }

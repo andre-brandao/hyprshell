@@ -80,7 +80,7 @@ export function Row<T>(props: RowProps<T>) {
         onClicked={() => props.opt.reset()}
         valign={ALIGN.CENTER}
       >
-        Reset
+        <Icon name={icons.ui.refresh} />
       </button>
     </box>
   );
@@ -200,26 +200,26 @@ export function Group({
           className={"group-title"}
           label={title}
         ></label>
-        {/* {title ? (
+        {title ? (
           <button
             hexpand={true}
             halign={ALIGN.END}
             className={"group-reset"}
             // sensitive= () merger binds of rows
-            onClicked={()=> children.forEach(row => row.)}
+            // onClicked={()=> children.forEach(row => row.op)}
           >
             <Icon
               name={icons.ui.refresh}
-              sensitive={Variable.derive(
-                children.map(({ attribute: { opt } }) =>
-                  opt.bind().as((v) => v !== opt.initial),
-                ),
-              )()}
+              // sensitive={Variable.derive(
+              //   children.map(({ attribute: { opt } }) =>
+              //     opt.bind().as((v) => v !== opt.initial),
+              //   ),
+              // )()}
             />
           </button>
         ) : (
           <box></box>
-        )} */}
+        )}
       </box>
       <box
         vertical
