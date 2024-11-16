@@ -1,6 +1,6 @@
-import { App, Astal, Gdk, Gtk, Widget } from "astal/gtk3"
+import { App, Astal, type Gdk, type Gtk, Widget } from "astal/gtk3"
 import { property, register } from "astal/gobject"
-import { Binding, idle } from "astal"
+import { type Binding, idle } from "astal"
 import AstalHyprland from "gi://AstalHyprland"
 const Hyprland = AstalHyprland.get_default()
 
@@ -131,7 +131,6 @@ export class PopupWindow extends Widget.Window {
 			this.gdkmonitor ??
 			this.get_display().get_monitor_at_point(alloc.x, alloc.y)
 
-		// @ts-expect-error
 		const transform = get_hyprland_monitor(monitor)?.transform
 
 		let width: number

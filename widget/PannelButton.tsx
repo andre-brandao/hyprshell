@@ -4,7 +4,7 @@ import { computeRamUsage } from "@/lib/modules/ram"
 import { Binding, Variable } from "astal"
 import { formatDataResourse } from "@/lib/utils"
 import { options } from "@/options"
-import { App, Widget } from "astal/gtk3"
+import { App, type Widget } from "astal/gtk3"
 
 const { cpu, storage, ram } = options.bar.vitals
 
@@ -28,7 +28,7 @@ function PanelButton({
 			className={options.bar
 				.flat_buttons()
 				.as((v) => (v ? "panel-buton flat" : "panel-buton"))
-				.as((v) => v + " " + window)}
+				.as((v) => `${v} ${window}`)}
 			{...rest}
 		>
 			<box>{child}</box>

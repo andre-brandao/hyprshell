@@ -7,7 +7,7 @@ const { EXCLUSIVE } = Astal.Keymode
 const { CENTER } = Gtk.Align
 
 function hide() {
-	App.get_window("dialog")!.hide()
+	App.get_window("dialog")?.hide()
 }
 
 interface DialogProps {

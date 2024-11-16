@@ -1,5 +1,5 @@
 import { substitutes } from "@/lib/icons"
-import { App, Astal, Gtk, Gdk, Widget } from "astal/gtk3"
+import { App, Astal, Gtk, Gdk, type Widget } from "astal/gtk3"
 import GLib from "gi://GLib"
 import { Binding } from "astal"
 type IconProps = Omit<Widget.IconProps, "icon"> & {

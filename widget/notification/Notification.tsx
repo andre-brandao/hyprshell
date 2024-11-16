@@ -1,6 +1,6 @@
 import { GLib } from "astal"
 import { Gtk, Astal } from "astal/gtk3"
-import { type EventBox } from "astal/gtk3/widget"
+import type { EventBox } from "astal/gtk3/widget"
 import Notifd from "gi://AstalNotifd"
 
 const isIcon = (icon: string) => !!Astal.Icon.lookup_icon(icon)
@@ -8,6 +8,7 @@ const isIcon = (icon: string) => !!Astal.Icon.lookup_icon(icon)
 const fileExists = (path: string) => GLib.file_test(path, GLib.FileTest.EXISTS)
 
 const time = (time: number, format = "%H:%M") =>
+	// biome-ignore lint/style/noNonNullAssertion: <explanation>
 	GLib.DateTime.new_from_unix_local(time).format(format)!
 
 const urgency = (n: Notifd.Notification) => {
