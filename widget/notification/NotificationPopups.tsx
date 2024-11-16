@@ -1,7 +1,7 @@
-import { Astal, Gtk, Gdk } from "astal/gtk3"
+import { Astal, type Gtk, type Gdk } from "astal/gtk3"
 import Notifd from "gi://AstalNotifd"
 import Notification from "./Notification"
-import { type Subscribable } from "astal/binding"
+import type { Subscribable } from "astal/binding"
 import { GLib, Variable, bind, timeout } from "astal"
 import { options } from "@/options"
 
@@ -40,6 +40,7 @@ class NotifiationMap implements Subscribable {
 			this.set(
 				id,
 				Notification({
+					// biome-ignore lint/style/noNonNullAssertion: <explanation>
 					notification: notifd.get_notification(id)!,
 
 					// once hovering over the notification is done

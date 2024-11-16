@@ -20,7 +20,7 @@ export function CPU() {
 			className={"CPU"}
 		>
 			<Icon name="cpu-symbolic" />
-			<label label={cpuVar().as((v) => `${v.toFixed(0)}%`)}></label>
+			<label label={cpuVar().as((v) => `${v.toFixed(0)}%`)} />
 		</box>
 	)
 }
@@ -41,7 +41,7 @@ export function RAM() {
 			<label
 				label={ramVar().as(formatDataResourse.label(ram))}
 				tooltipText={ramVar().as(formatDataResourse.tooltip(ram))}
-			></label>
+			/>
 		</box>
 	)
 }
@@ -63,7 +63,7 @@ export function Storage() {
 			<label
 				label={storageVar().as(formatDataResourse.label(storage))}
 				tooltipText={storageVar().as(formatDataResourse.tooltip(storage))}
-			></label>
+			/>
 		</box>
 	)
 }

@@ -52,8 +52,8 @@ export default function Bar(monitor: Gdk.Monitor) {
 			// css={``}
 		>
 			<centerbox
-				className={tranparent().as((t) =>
-					t ? "BarContainer transparent" : "BarContainer opaque",
+				className={tranparent((v) =>
+					v ? "transparent BarContainer" : "BarContainer opaque",
 				)}
 				css={Variable.derive(
 					[padding, margin, border_radius],

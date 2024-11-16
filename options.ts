@@ -32,11 +32,15 @@ export const options = mkOptions(OPTIONS, {
   },
   // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
   theme: {
-    bg: opt("#171717"),
     fg: opt("#eeeeee"),
+    // bg: opt("#171717"),
+
+    bg: opt("#141414"),
     primary: {
       fg: opt("#51a4e7"),
-      bg: opt("#141414"),
+      bg: opt("#171717"),
+
+      // bg: opt("#141414"),
     },
     error: {
       bg: opt("#e55f86"),

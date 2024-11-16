@@ -12,6 +12,7 @@ import PannelBox from "../PannelBox"
 export function QuickSettings() {
 	const { wifi } = Network.get_default()
 
+	// biome-ignore lint/style/noNonNullAssertion: <explanation>
 	const audio = Wp.get_default()?.audio!
 
 	const { defaultSpeaker: speaker, defaultMicrophone: mic } = audio

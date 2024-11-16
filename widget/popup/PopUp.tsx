@@ -87,13 +87,16 @@ export class PopupWindow extends Widget.Window {
 			namespace: `win-${name}`,
 			visible: false,
 			layer,
-			setup: () =>
+			// css: "all: unset;",
+			setup: (self) => {
 				idle(() => {
 					// Add way to make window open on startup
 					if (visible) {
 						this.visible = true
 					}
-				}),
+				})
+				self.toggleClassName("PopupWindow")
+			},
 		})
 
 		App.add_window(this)

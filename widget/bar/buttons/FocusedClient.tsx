@@ -34,7 +34,7 @@ export function FocusedClient() {
 					client && (
 						<label
 							label={bind(client, "title").as((v) =>
-								v.length < 20 ? v : v.slice(0, 20) + "...",
+								v.length < 20 ? v : `${v.slice(0, 20)}...`,
 							)}
 							tooltipText={formatTooltip(client)()}
 						/>

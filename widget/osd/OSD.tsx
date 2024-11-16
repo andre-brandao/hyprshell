@@ -11,7 +11,7 @@ import {
 
 import AstalWp from "gi://AstalWp"
 
-import PopupWindow from "../PopUp"
+import PopupWindow from "../popup/PopUp"
 import Icon from "../Icon"
 
 // /* Types */

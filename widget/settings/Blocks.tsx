@@ -1,6 +1,6 @@
-import { Opt } from "@/lib/option"
+import type { Opt } from "@/lib/option"
 // import Gtk from "gi://Gtk?version=3.0";
-import { Variable, GLib, bind, Binding } from "astal"
+import { Variable, GLib, bind, type Binding } from "astal"
 import Icon from "../Icon"
 import icons from "@/lib/icons"
 import GObject from "gi://GObject"
@@ -46,7 +46,7 @@ export function Row<T>(props: RowProps<T>) {
 					xalign={0}
 					className={"id"}
 					label={props.opt.id}
-				></label>
+				/>
 			</box>
 			<box hexpand={true} />
 			<box valign={ALIGN.CENTER}>
@@ -75,6 +75,7 @@ export function Group({
 	children,
 }: {
 	title: string
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	children?: ReturnType<typeof Row<any>>[]
 }) {
 	return (
@@ -86,7 +87,7 @@ export function Group({
 				<label
 					className={"group-title"}
 					label={title}
-				></label>
+				/>
 				{title ? (
 					<button
 						hexpand={true}
@@ -105,13 +106,15 @@ export function Group({
 						/>
 					</button>
 				) : (
-					<box></box>
+					<box />
 				)}
 			</box>
 			<box
 				vertical
-				children={children}
-			/>
+				// children={}
+			>
+				{children}
+			</box>
 		</box>
 	)
 }
@@ -135,8 +138,10 @@ export function Page<T>({
 					vexpand
 					vertical
 					className={"page-content"}
-					children={children}
-				/>
+					// children={children}
+				>
+					{children}
+				</box>
 			</scrollable>
 		</box>
 	)

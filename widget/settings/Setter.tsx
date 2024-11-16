@@ -1,16 +1,16 @@
-import { Opt } from "@/lib/option"
+import type { Opt } from "@/lib/option"
 // import Gtk from "gi://Gtk?version=3.0";
 import { Variable, GLib, bind, Binding } from "astal"
 import Icon from "../Icon"
 import icons from "@/lib/icons"
 import GObject from "gi://GObject"
 import { Gtk, Gdk, Widget, astalify, type ConstructProps } from "astal/gtk3"
-import { RowProps } from "./Blocks"
+import type { RowProps } from "./Blocks"
 
 // subclass, register, define constructor props
 class ColorButton extends astalify(Gtk.ColorButton) {
 	static {
-		GObject.registerClass(this)
+		GObject.registerClass(ColorButton)
 	}
 
 	constructor(
@@ -20,13 +20,14 @@ class ColorButton extends astalify(Gtk.ColorButton) {
 			{ onColorSet: [] } // signals of Gtk.ColorButton have to be manually typed
 		>,
 	) {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		super(props as any)
 	}
 }
 
 class SpinButton extends astalify(Gtk.SpinButton) {
 	static {
-		GObject.registerClass(this)
+		GObject.registerClass(SpinButton)
 	}
 
 	constructor(
@@ -36,11 +37,19 @@ class SpinButton extends astalify(Gtk.SpinButton) {
 			{ onValueChanged: [] } // signals of Gtk.ColorButton have to be manually typed
 		>,
 	) {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		super(props as any)
 	}
 }
 
-function EnumSetter({ opt, values }: { opt: Opt<string>; values: string[] }) {
+function EnumSetter({
+	opt,
+	values,
+}: { opt: Opt<string>; values: string[] | undefined }) {
+	if (!values) {
+		return <label label={"no values"} />
+	}
+
 	const step = (dir: 1 | -1) => {
 		const i = values.findIndex((i) => i === opt().get())
 		opt.set(
@@ -55,7 +64,7 @@ function EnumSetter({ opt, values }: { opt: Opt<string>; values: string[] }) {
 	}
 	return (
 		<box className={"enum-setter"}>
-			<label>{bind(opt).as((v) => `${v}`)}</label>
+			<label label={bind(opt).as((v) => `${v}`)} />
 			<button onClicked={() => step(-1)}>-</button>
 			<button onClicked={() => step(1)}>+</button>
 		</box>
@@ -76,7 +85,9 @@ export function Setter<T>({
 					setup={(self) => {
 						self.set_range(min, max)
 						self.set_increments(1, 5)
-						self.hook(opt, (self) => (self.value = opt.get() as number))
+						self.hook(opt, (self) => {
+							self.value = opt.get() as number
+						})
 						self.value = opt.get() as number
 					}}
 					onValueChanged={(self) => {
@@ -91,13 +102,15 @@ export function Setter<T>({
 				<entry
 					setup={(self) => {
 						self.text = JSON.stringify(opt.get())
-						self.hook(opt, (self) => (self.text = JSON.stringify(opt.get())))
+						self.hook(opt, (self) => {
+							self.text = JSON.stringify(opt.get())
+						})
 					}}
 					onActivate={(self) => {
 						print("set obj", self.text)
 						opt.set(JSON.parse(self.text || ""))
 					}}
-				></entry>
+				/>
 			)
 
 		case "string":
@@ -105,26 +118,37 @@ export function Setter<T>({
 				<entry
 					setup={(self) => {
 						self.text = opt.get() as string
-						self.hook(opt, (self) => (self.text = opt.get() as string))
+						self.hook(opt, (self) => {
+							self.text = opt.get() as string
+						})
 					}}
 					onActivate={(self) => {
 						print("set text", self.text)
 						opt.set(self.text as T)
 					}}
-				></entry>
+				/>
 			)
 
 		case "enum":
 			return (
 				<EnumSetter
 					opt={opt as unknown as Opt<string>}
-					values={enums!}
+					values={enums}
 				/>
 			)
 		case "boolean":
-			return <switch active={bind(opt as Opt<boolean>)}></switch>
+			return (
+				<switch
+					onButtonReleaseEvent={(self) => {
+						print("pressed bool", self.active)
+						// self.active = !self.active
+						opt.set(self.active as T)
+					}}
+					active={bind(opt as Opt<boolean>)}
+				/>
+			)
 
-		case "color":
+		case "color": {
 			const color = new Gdk.RGBA()
 			color.parse(opt.get() as string)
 
@@ -135,7 +159,7 @@ export function Setter<T>({
 						self.hook(opt, (self) => {
 							const rgba = new Gdk.RGBA()
 							rgba.parse(opt.get() as string)
-							print("rgba" + opt.get(), rgba)
+							print(`rgba${opt.get()}`, rgba)
 							self.rgba = rgba
 						})
 					}
@@ -146,14 +170,13 @@ export function Setter<T>({
 						}
 						opt.set(`#${hex(red)}${hex(green)}${hex(blue)}` as T)
 					}}
-				></ColorButton>
+				/>
 			)
+		}
 
 		// case "img":
 		//   return <></>;
 		default:
-			return <label label={"no setter with type " + type}></label>
-			break
+			return <label label={`no setter with type ${type}`} />
 	}
-	return <label label={"no setter"}></label>
 }

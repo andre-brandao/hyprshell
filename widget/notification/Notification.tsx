@@ -19,6 +19,7 @@ const urgency = (n: Notifd.Notification) => {
 			return "low"
 		case CRITICAL:
 			return "critical"
+		// biome-ignore lint/complexity/noUselessSwitchCase: <explanation>
 		case NORMAL:
 		default:
 			return "normal"

@@ -1,6 +1,5 @@
 import { App, Astal, Gdk, Gtk } from "astal/gtk3"
 import { RegularWindow } from "../RegularWindow"
-import { Group, Page, Row, Setter } from "./Blocks"
 import { options } from "@/options"
 
 import { Layout } from "./Layout"
@@ -83,8 +82,10 @@ export default function SettingsWindow() {
 					<stack
 						// vertical
 						shown={current()}
-						children={Layout}
-					/>
+						// children={Layout}
+					>
+						{Layout}
+					</stack>
 				</box>
 			</box>
 		</RegularWindow>

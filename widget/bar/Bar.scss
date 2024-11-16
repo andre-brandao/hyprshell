@@ -30,8 +30,8 @@ window.Bar {
     // not .transparent
 
     &.opaque {
-      background-color: $primary-bg;
-      color: $primary-fg;
+      background-color: $bg;
+      // color: $primary-fg;
     }
   }
 

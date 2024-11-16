@@ -5,11 +5,11 @@ import { Variable } from "astal"
 const MAX_ITEMS = 8
 
 export function hide() {
-	App.get_window("launcher")!.hide()
+	App.get_window("launcher")?.hide()
 }
 
 export function show() {
-	App.get_window("launcher")!.show()
+	App.get_window("launcher")?.show()
 }
 
 function AppButton({ app }: { app: Apps.Application }) {
@@ -67,7 +67,7 @@ export default function Applauncher() {
 			visible={false}
 			application={App}
 			onShow={() => text.set("")}
-			onKeyPressEvent={function (self, event: Gdk.Event) {
+			onKeyPressEvent={(self, event: Gdk.Event) => {
 				if (event.get_keyval()[1] === Gdk.KEY_Escape) self.hide()
 			}}
 		>

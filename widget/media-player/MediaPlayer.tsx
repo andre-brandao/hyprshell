@@ -59,7 +59,9 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 				/>
 				<slider
 					visible={bind(player, "length").as((l) => l > 0)}
-					onDragged={({ value }) => (player.position = value * player.length)}
+					onDragged={({ value }) => {
+						player.position = value * player.length
+					}}
 					value={position}
 				/>
 				<centerbox className="actions">

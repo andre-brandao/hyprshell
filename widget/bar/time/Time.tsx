@@ -1,6 +1,6 @@
 import { Variable, GLib, bind } from "astal"
 
-import PopupWindow from "@/widget/PopUp"
+import PopupWindow from "@/widget/popup/PopUp"
 import PannelButton from "@/widget/PannelButton"
 import { Gtk, Astal } from "astal/gtk3"
 import PannelBox from "../../PannelBox"
@@ -15,6 +15,7 @@ const Divider = () => (
 const Time = () => {
 	const time = Variable<string>("").poll(
 		1000,
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		() => GLib.DateTime.new_now_local().format("%H:%M")!,
 	)
 
@@ -60,6 +61,7 @@ const Time = () => {
 export default function ({ format = "%H:%M - %A %e." }) {
 	const time = Variable<string>("").poll(
 		1000,
+		// biome-ignore lint/style/noNonNullAssertion: <explanation>
 		() => GLib.DateTime.new_now_local().format(format)!,
 	)
 	const cal = new Gtk.Calendar({

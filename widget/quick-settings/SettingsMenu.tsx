@@ -2,7 +2,7 @@ import { AudioSlider, MicSlider } from "./widgets/Slider"
 
 import MprisPlayers from "../media-player/MediaPlayer"
 
-import PopupWindow from "../PopUp"
+import PopupWindow from "../popup/PopUp"
 import { App, Astal } from "astal/gtk3"
 import Avatar from "./widgets/Avatar"
 

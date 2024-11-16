@@ -154,6 +154,12 @@ export const Layout = [
 
 		<Group title="Bar Container">
 			<Row
+				title="Position"
+				opt={bar.position}
+				type="enum"
+				enums={["top", "bottom"]}
+			/>
+			<Row
 				title="Padding"
 				opt={bar.BarContainer.padding}
 			/>
@@ -173,15 +179,20 @@ export const Layout = [
 	</Page>,
 
 	<Page
-		name="Notification"
+		name="Other"
 		icon="i"
 	>
-		<Group title="">
+		<Group title="Other">
 			<Row
 				title="Position"
 				opt={notification.position}
-				// type="enum"
-				// enums={["top-left", "top-right", "bottom-left", "bottom-right"]}
+				type="enum"
+				enums={["top-left", "top-right", "bottom-left", "bottom-right"]}
+			/>
+			<Row
+				title="Flat Buttons"
+				opt={bar.flat_buttons}
+				type="boolean"
 			/>
 		</Group>
 	</Page>,
