@@ -16,10 +16,18 @@ function SettingsMenu() {
         vertical
         className="SettingsMenu"
       >
-        <box>
+        <box
+          css={`
+            padding: 10px;
+          `}
+        >
           <Avatar />
 
-          <box vertical>
+          <box
+            vertical
+            hexpand
+            halign={ALIGN.END}
+          >
             <button onClicked={() => App.get_window("Settings")?.show()}>
               Settings
             </button>

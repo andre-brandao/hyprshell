@@ -14,6 +14,7 @@ import mixins from "inline:./mixins.scss";
 const tmpCSS = `${TMP}/tmp_styles.scss`;
 export const css = `${TMP}/style.css`;
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const $ = (name: string, value: string | Opt<any>) => {
   if (value instanceof Opt) {
     return `$${name}: ${value.get()};`;
@@ -147,17 +148,7 @@ function resetCss() {
 }
 
 // monitorFile
-options.handler(
-  [
-    "font",
-    "theme",
-    "bar.flatButtons",
-    "bar.position",
-    "bar.battery.charging",
-    "bar.battery.blocks",
-  ],
-  resetCss,
-);
+options.handler(["font", "theme", "bar"], resetCss);
 resetCss();
 
 export function applyCss() {

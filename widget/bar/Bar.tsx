@@ -1,4 +1,4 @@
-import { Astal, Gtk, Gdk } from "astal/gtk3";
+import { Astal, Gtk, type Gdk } from "astal/gtk3";
 
 import Workspaces from "./workspaces/Workspaces";
 import FocusedClient from "./buttons/FocusedClient";
@@ -49,12 +49,16 @@ export default function Bar(monitor: Gdk.Monitor) {
       gdkmonitor={monitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={anchor}
-      css={``}
+      // css={``}
     >
       <centerbox
-        className={tranparent().as((t) =>
-          t ? "BarContainer transparent" : "BarContainer opaque",
-        )}
+        className={tranparent().as((t) => {
+          print("t", t);
+          if (t) {
+            return "BarContainer transparent";
+          }
+          return "BarContainer";
+        })}
         css={Variable.derive(
           [padding, margin, border_radius],
           (p, m, br) => `

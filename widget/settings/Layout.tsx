@@ -6,6 +6,7 @@ import { options } from "@/options";
 const { bar, notification, theme, font } = options;
 
 export const Layout = [
+  // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
   <Page
     name="Theme"
     icon="i"
@@ -59,7 +60,9 @@ export const Layout = [
         type="color"
         opt={theme.error.fg}
       />
+    </Group>
 
+    <Group title="Border">
       <Row
         title="Border Color"
         type="color"
@@ -71,13 +74,71 @@ export const Layout = [
         type="string"
         opt={theme.border.width}
       />
+
+      <Row
+        title="Border Opacity"
+        type="number"
+        opt={theme.border.opacity}
+      />
+    </Group>
+
+    <Group title="Widget">
+      <Row
+        title="Widget Color"
+        type="color"
+        opt={theme.widget.color}
+      />
+
+      <Row
+        title="Widget Opacity"
+        type="number"
+        opt={theme.widget.opacity}
+      />
+    </Group>
+
+    <Group title="Other">
+      <Row
+        title="Blur"
+        type="number"
+        opt={theme.blur}
+      />
+
+      <Row
+        title="Shadows"
+        type="boolean"
+        opt={theme.shadows}
+      />
+
+      <Row
+        title="Padding"
+        type="string"
+        opt={theme.padding}
+      />
+
+      <Row
+        title="Spacing"
+        type="string"
+        opt={theme.spacing}
+      />
+
+      <Row
+        title="Radius"
+        type="string"
+        opt={theme.radius}
+      />
+
+      <Row
+        title="Transition"
+        type="string"
+        opt={theme.transition}
+      />
     </Group>
   </Page>,
   <Page
     name="Bar"
     icon="i"
   >
-    <Group title="Bar">
+    <Group title="Widgets">
       <Row
         title="Widgets"
         opt={bar.layout.start}
@@ -89,6 +150,39 @@ export const Layout = [
       <Row
         title="Widgets"
         opt={bar.layout.end}
+      />
+    </Group>
+
+    <Group title="Bar Container">
+      <Row
+        title="Padding"
+        opt={bar.BarContainer.padding}
+      />
+      <Row
+        title="Margin"
+        opt={bar.BarContainer.margin}
+      />
+      <Row
+        title="Border Radius"
+        opt={bar.BarContainer.border_radius}
+      />
+      <Row
+        title="Transparent"
+        opt={bar.BarContainer.tranparent}
+      />
+    </Group>
+  </Page>,
+
+  <Page
+    name="Notification"
+    icon="i"
+  >
+    <Group title="">
+      <Row
+        title="Position"
+        opt={notification.position}
+        // type="enum"
+        // enums={["top-left", "top-right", "bottom-left", "bottom-right"]}
       />
     </Group>
   </Page>,

@@ -71,14 +71,15 @@ export default function ({ format = "%H:%M - %A %e." }) {
 
   const popup = (
     <PopupWindow
-      name="time"
+      name="calendar"
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
     >
-      <box vertical>
+      <box
+        vertical
+        className="date widget"
+      >
         <Time />
-        {/* <box> */}
-        {cal}
-        {/* </box> */}
+        <box className="cal-box">{cal}</box>
       </box>
     </PopupWindow>
   );
@@ -101,4 +102,3 @@ export default function ({ format = "%H:%M - %A %e." }) {
     </PannelBox>
   );
 }
-// export default Time;

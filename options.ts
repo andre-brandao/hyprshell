@@ -27,7 +27,7 @@ import { barWidget, type BarWidget } from "./widget/bar/Bar";
 // },
 export const options = mkOptions(OPTIONS, {
   font: {
-    size: opt("0.9em"),
+    size: opt("1.2em"),
     name: opt("Ubuntu"),
   },
   // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
@@ -35,20 +35,20 @@ export const options = mkOptions(OPTIONS, {
     bg: opt("#171717"),
     fg: opt("#eeeeee"),
     primary: {
-      fg: opt(`#51a4e7`),
-      bg: opt(`#141414`),
+      fg: opt("#51a4e7"),
+      bg: opt("#141414"),
     },
     error: {
       bg: opt("#e55f86"),
       fg: opt("#141414"),
     },
     border: {
-      color: opt(`#51a4e7`),
+      color: opt("#51a4e7"),
       width: opt("1px"),
       opacity: opt(50),
     },
     widget: {
-      color: opt(`#080808`),
+      color: opt("#080808"),
       opacity: opt(40),
     },
     blur: opt(0),

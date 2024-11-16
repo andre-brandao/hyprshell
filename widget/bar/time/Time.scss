@@ -1,0 +1,60 @@
+.date {
+  margin-top: 0;
+}
+
+.timebox {
+  margin: 30px 0;
+
+  .time-container {
+    .content {
+      font-weight: bolder;
+      font-size: 60px;
+    }
+  }
+
+  .date-container {
+    margin-top: 2px;
+  }
+}
+
+.cal-box {
+  padding: 0 1rem 0.2rem;
+  margin: 0 12px 18px;
+
+  calendar {
+    font-size: 20px;
+    background-color: inherit;
+    padding: 0.5rem 0.1rem 0;
+    margin-left: 10px;
+
+    & > * {
+      border: solid 0 transparent;
+    }
+
+    &.highlight {
+      padding: 10rem;
+    }
+  }
+}
+
+calendar:selected {
+  color: $primary-fg;
+}
+
+calendar.header {
+  color: $primary-fg;
+  font-weight: bold;
+}
+
+calendar.button {
+  color: $primary-fg;
+}
+
+calendar.highlight {
+  color: $fg;
+  font-weight: bold;
+}
+
+calendar:indeterminate {
+  color: $widget-bg;
+}
