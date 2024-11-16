@@ -1,28 +1,44 @@
-import { substitutes } from "@/lib/icons";
-import { App, Astal, Gtk, Gdk, Widget } from "astal/gtk3";
-import GLib from "gi://GLib";
-import { Binding } from "astal";
+import { substitutes } from "@/lib/icons"
+import { App, Astal, Gtk, Gdk, Widget } from "astal/gtk3"
+import GLib from "gi://GLib"
+import { Binding } from "astal"
 type IconProps = Omit<Widget.IconProps, "icon"> & {
-  name: string | Binding<string>;
-  fallback?: string;
-};
+	name: string | Binding<string>
+	fallback?: string
+}
 
 function get(value: string | Binding<string>): string {
-  return value instanceof Binding ? value.get() : value;
+	return value instanceof Binding ? value.get() : value
 }
 function Icon({
-  name,
-  fallback = "image-missing-symbolic",
-  ...rest
+	name,
+	fallback = "image-missing-symbolic",
+	...rest
 }: IconProps) {
-  if (Astal.Icon.lookup_icon(get(name))) return <icon icon={name} {...rest} />;
+	if (Astal.Icon.lookup_icon(get(name)))
+		return (
+			<icon
+				icon={name}
+				{...rest}
+			/>
+		)
 
-  // @ts-expect-error
-  const icon_sub = substitutes[get(name)] || name;
-  if (Astal.Icon.lookup_icon(icon_sub))
-    return <icon icon={icon_sub} {...rest} />;
+	// @ts-expect-error
+	const icon_sub = substitutes[get(name)] || name
+	if (Astal.Icon.lookup_icon(icon_sub))
+		return (
+			<icon
+				icon={icon_sub}
+				{...rest}
+			/>
+		)
 
-  return <icon icon={fallback} {...rest} />;
+	return (
+		<icon
+			icon={fallback}
+			{...rest}
+		/>
+	)
 }
 
-export default Icon;
+export default Icon

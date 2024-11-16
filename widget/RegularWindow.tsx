@@ -1,5 +1,5 @@
 // import GObject from "gi://GObject";
-import { Gtk, Gdk, Widget, astalify, type ConstructProps } from "astal/gtk3";
+import { Gtk, Gdk, Widget, astalify, type ConstructProps } from "astal/gtk3"
 // import COLROS from "./bar/ColorDebug";
 // import Layout from "./settings/Layout";
 
@@ -20,4 +20,4 @@ import { Gtk, Gdk, Widget, astalify, type ConstructProps } from "astal/gtk3";
 //     super(props as any);
 //   }
 // }
-export const RegularWindow = astalify(Gtk.Window);
+export const RegularWindow = astalify(Gtk.Window)

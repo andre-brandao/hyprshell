@@ -1,43 +1,43 @@
-import Tray from "gi://AstalTray";
+import Tray from "gi://AstalTray"
 
-import { Astal, Gtk, Gdk } from "astal/gtk3";
-import { Variable, GLib, bind } from "astal";
-import { App } from "astal/gtk3";
+import { Astal, Gtk, Gdk } from "astal/gtk3"
+import { Variable, GLib, bind } from "astal"
+import { App } from "astal/gtk3"
 
-import PanelButton from "@/widget/PannelButton";
-import PannelBox from "../../PannelBox";
+import PanelButton from "@/widget/PannelButton"
+import PannelBox from "../../PannelBox"
 function SysTray() {
-  const tray = Tray.get_default();
+	const tray = Tray.get_default()
 
-  return (
-    <PannelBox className="SysTray">
-      {bind(tray, "items").as((items) =>
-        items.map((item) => {
-          if (item.iconThemePath) App.add_icons(item.iconThemePath);
+	return (
+		<PannelBox className="SysTray">
+			{bind(tray, "items").as((items) =>
+				items.map((item) => {
+					if (item.iconThemePath) App.add_icons(item.iconThemePath)
 
-          const menu = item.create_menu();
+					const menu = item.create_menu()
 
-          return (
-            <PanelButton
-              window={""}
-              tooltipMarkup={bind(item, "tooltipMarkup")}
-              onDestroy={() => menu?.destroy()}
-              onClickRelease={(self) => {
-                menu?.popup_at_widget(
-                  self,
-                  Gdk.Gravity.SOUTH,
-                  Gdk.Gravity.NORTH,
-                  null,
-                );
-              }}
-            >
-              <icon gIcon={bind(item, "gicon")} />
-            </PanelButton>
-          );
-        }),
-      )}
-    </PannelBox>
-  );
+					return (
+						<PanelButton
+							window={""}
+							tooltipMarkup={bind(item, "tooltipMarkup")}
+							onDestroy={() => menu?.destroy()}
+							onClickRelease={(self) => {
+								menu?.popup_at_widget(
+									self,
+									Gdk.Gravity.SOUTH,
+									Gdk.Gravity.NORTH,
+									null,
+								)
+							}}
+						>
+							<icon gIcon={bind(item, "gicon")} />
+						</PanelButton>
+					)
+				}),
+			)}
+		</PannelBox>
+	)
 }
 
-export default SysTray;
+export default SysTray

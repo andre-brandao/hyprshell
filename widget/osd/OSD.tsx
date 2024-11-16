@@ -1,18 +1,18 @@
-import { bind, timeout } from "astal";
-import { register } from "astal/gobject";
+import { bind, timeout } from "astal"
+import { register } from "astal/gobject"
 import {
-  App,
-  Astal,
-  astalify,
-  Gtk,
-  Widget,
-  type ConstructProps,
-} from "astal/gtk3";
+	App,
+	Astal,
+	astalify,
+	Gtk,
+	Widget,
+	type ConstructProps,
+} from "astal/gtk3"
 
-import AstalWp from "gi://AstalWp";
+import AstalWp from "gi://AstalWp"
 
-import PopupWindow from "../PopUp";
-import Icon from "../Icon";
+import PopupWindow from "../PopUp"
+import Icon from "../Icon"
 
 // /* Types */
 // declare global {
@@ -20,113 +20,113 @@ import Icon from "../Icon";
 // }
 @register()
 class ProgressBar extends astalify(Gtk.ProgressBar) {
-  constructor(
-    props: ConstructProps<ProgressBar, Gtk.ProgressBar.ConstructorProps>
-  ) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    super(props as any);
-  }
+	constructor(
+		props: ConstructProps<ProgressBar, Gtk.ProgressBar.ConstructorProps>,
+	) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		super(props as any)
+	}
 }
 
-const HIDE_DELAY = 2000;
-const transition_duration = 300;
+const HIDE_DELAY = 2000
+const transition_duration = 300
 
 export default () => {
-  let n_showing = 0;
-  let stack: Widget.Stack | undefined;
+	let n_showing = 0
+	let stack: Widget.Stack | undefined
 
-  const popup = (osd: string) => {
-    if (!stack) {
-      return;
-    }
+	const popup = (osd: string) => {
+		if (!stack) {
+			return
+		}
 
-    ++n_showing;
-    stack.shown = osd;
+		++n_showing
+		stack.shown = osd
 
-    App.get_window("win-osd")?.set_visible(true);
+		App.get_window("win-osd")?.set_visible(true)
 
-    timeout(HIDE_DELAY, () => {
-      --n_showing;
+		timeout(HIDE_DELAY, () => {
+			--n_showing
 
-      if (n_showing === 0) {
-        App.get_window("win-osd")?.set_visible(false);
-      }
-    });
-  };
+			if (n_showing === 0) {
+				App.get_window("win-osd")?.set_visible(false)
+			}
+		})
+	}
 
-  //   globalThis.popup_osd = popup;
+	//   globalThis.popup_osd = popup;
 
-  const speaker = AstalWp.get_default()?.audio.default_speaker;
-  const microphone = AstalWp.get_default()?.audio.default_microphone;
+	const speaker = AstalWp.get_default()?.audio.default_speaker
+	const microphone = AstalWp.get_default()?.audio.default_microphone
 
-  if (!speaker || !microphone) {
-    throw new Error("Could not find default audio devices.");
-  }
+	if (!speaker || !microphone) {
+		throw new Error("Could not find default audio devices.")
+	}
 
-  return (
-    <PopupWindow
-      name="osd"
-      anchor={Astal.WindowAnchor.BOTTOM}
-      exclusivity={Astal.Exclusivity.IGNORE}
-      close_on_unfocus="stay"
-      transition="slide bottom"
-      application={App}
-    >
-      <stack
-        className="osd"
-        transitionDuration={transition_duration}
-        setup={(self) => {
-          timeout(3 * 1000, () => {
-            stack = self;
-          });
-        }}
-      >
-        <box
-          name="speaker"
-          //   css="margin-bottom: 80px;"
-          setup={(self) => {
-            self.hook(speaker, "notify::mute", () => {
-              print("notified mute speaker");
-              popup("speaker");
-            });
-            self.hook(speaker, "notify::volume", () => {
-              print("notified volume speaker");
-              popup("speaker");
-            });
-          }}
-        >
-          <box className="osd-item widget">
-            <icon icon={bind(speaker, "volumeIcon")} />
+	return (
+		<PopupWindow
+			name="osd"
+			anchor={Astal.WindowAnchor.BOTTOM}
+			exclusivity={Astal.Exclusivity.IGNORE}
+			close_on_unfocus="stay"
+			transition="slide bottom"
+			application={App}
+		>
+			<stack
+				className="osd"
+				transitionDuration={transition_duration}
+				setup={(self) => {
+					timeout(3 * 1000, () => {
+						stack = self
+					})
+				}}
+			>
+				<box
+					name="speaker"
+					//   css="margin-bottom: 80px;"
+					setup={(self) => {
+						self.hook(speaker, "notify::mute", () => {
+							print("notified mute speaker")
+							popup("speaker")
+						})
+						self.hook(speaker, "notify::volume", () => {
+							print("notified volume speaker")
+							popup("speaker")
+						})
+					}}
+				>
+					<box className="osd-item widget">
+						<icon icon={bind(speaker, "volumeIcon")} />
 
-            <ProgressBar
-              fraction={bind(speaker, "volume")}
-              sensitive={bind(speaker, "mute").as((v) => !v)}
-              valign={Gtk.Align.CENTER}
-            />
-          </box>
-        </box>
+						<ProgressBar
+							fraction={bind(speaker, "volume")}
+							sensitive={bind(speaker, "mute").as((v) => !v)}
+							valign={Gtk.Align.CENTER}
+						/>
+					</box>
+				</box>
 
-        <box
-          name="microphone"
-          //   css="margin-bottom: 80px;"
-          setup={(self) => {
-            self.hook(microphone, "notify::mute", () => {
-              popup("microphone");
-            });
-          }}
-        >
-          <box className="osd-item widget">
-            <icon icon={bind(microphone, "volumeIcon")} />
+				<box
+					name="microphone"
+					//   css="margin-bottom: 80px;"
+					setup={(self) => {
+						self.hook(microphone, "notify::mute", () => {
+							popup("microphone")
+						})
+					}}
+				>
+					<box className="osd-item widget">
+						<icon icon={bind(microphone, "volumeIcon")} />
 
-            <ProgressBar
-              fraction={bind(microphone, "volume")}
-              sensitive={bind(microphone, "mute").as((v) => !v)}
-              valign={Gtk.Align.CENTER}
-            />
-          </box>
-        </box>
+						<ProgressBar
+							fraction={bind(microphone, "volume")}
+							sensitive={bind(microphone, "mute").as((v) => !v)}
+							valign={Gtk.Align.CENTER}
+						/>
+					</box>
+				</box>
 
-        {/* <box
+				{/* <box
           name="brightness"
           css="margin-bottom: 80px;"
           setup={(self) => {
@@ -185,7 +185,7 @@ export default () => {
             <label label="Caps Lock" />
           </box>
         </box> */}
-      </stack>
-    </PopupWindow>
-  );
-};
+			</stack>
+		</PopupWindow>
+	)
+}
