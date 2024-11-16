@@ -14,6 +14,7 @@ import Vitals, { CPU } from "./vitals/Vitals";
 import KBInput from "./buttons/KBLayout";
 import COLROS from "./ColorDebug";
 import DistroIcon from "./buttons/DistroIcon";
+import QuickSettings from "../quick-settings/QuickSettings";
 
 const { center, end, start } = options.bar.layout;
 const { padding, margin, border_radius } = options.bar;
@@ -30,6 +31,7 @@ export const barWidget = {
   idle: IdleInibitor,
   vitals: Vitals,
   kb_layout: KBInput,
+  quick_settings: QuickSettings,
 };
 export type BarWidget = keyof typeof barWidget;
 

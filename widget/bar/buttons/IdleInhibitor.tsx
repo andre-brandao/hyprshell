@@ -3,7 +3,7 @@ import { bind, Variable } from "astal";
 import { dependencies, Notify } from "@/lib/utils";
 import { options } from "@/options";
 
-import PanelButton from "../PannelButton";
+import PanelButton from "@/widget/PannelButton";
 import Icon from "@/widget/Icon";
 
 type IdleState = "active" | "inactive" | "unknown";

@@ -29,6 +29,7 @@ window.Bar {
   .BarContainer {
     background-color: $bg;
     color: $fg;
+    // border: $border;
     // select box childs
   }
 
@@ -45,13 +46,6 @@ window.Bar {
       color: $selected-bg;
     }
   }
-
-  // .Wifi {
-  //   color: $widget-bg;
-  //   button {
-  //     @include button();
-  //   }
-  // }
 
   .FocusedClient {
     color: $selected-bg;

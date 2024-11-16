@@ -67,7 +67,7 @@ export class PopupWindow extends Widget.Window {
   on_close: PopupCallback;
 
   constructor({
-    transition = "slide top",
+    transition = "slide right",
     close_on_unfocus = "released",
     on_open = () => {
       /**/

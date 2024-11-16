@@ -12,7 +12,7 @@ import { interval, timeout, idle } from "astal/time";
 import { subprocess, exec, execAsync } from "astal/process";
 // import { options } from "@/options";
 export function forEachMonitor(
-  createWidgets: (mon: Gdk.Monitor) => Gtk.Widget[]
+  createWidgets: (mon: Gdk.Monitor) => Gtk.Widget[],
 ) {
   const widgetMap = new Map<Gdk.Monitor, Gtk.Widget[]>();
 
@@ -119,28 +119,28 @@ export const divide = ([total, used]: number[], round: boolean): number => {
 
 export const formatSizeInKiB = (
   sizeInBytes: number,
-  round: boolean
+  round: boolean,
 ): number => {
   const sizeInGiB = sizeInBytes / 1024 ** 1;
   return round ? Math.round(sizeInGiB) : parseFloat(sizeInGiB.toFixed(2));
 };
 export const formatSizeInMiB = (
   sizeInBytes: number,
-  round: boolean
+  round: boolean,
 ): number => {
   const sizeInGiB = sizeInBytes / 1024 ** 2;
   return round ? Math.round(sizeInGiB) : parseFloat(sizeInGiB.toFixed(2));
 };
 export const formatSizeInGiB = (
   sizeInBytes: number,
-  round: boolean
+  round: boolean,
 ): number => {
   const sizeInGiB = sizeInBytes / 1024 ** 3;
   return round ? Math.round(sizeInGiB) : parseFloat(sizeInGiB.toFixed(2));
 };
 export const formatSizeInTiB = (
   sizeInBytes: number,
-  round: boolean
+  round: boolean,
 ): number => {
   const sizeInGiB = sizeInBytes / 1024 ** 4;
   return round ? Math.round(sizeInGiB) : parseFloat(sizeInGiB.toFixed(2));
@@ -187,7 +187,7 @@ function formatDataResourseLabel(
     icon: Variable<string>;
     lblType: Variable<"used/total" | "used" | "free" | "percent">;
     round: Variable<boolean>;
-  }
+  },
 ) {
   const { used, total, percentage, free } = data;
   const { icon, lblType, round } = options;
@@ -210,17 +210,13 @@ function formatDataResourseLabel(
   const usedSizeFormatted = formatUsed(used, round().get());
 
   if (lblType().get() === "used/total") {
-    return `${icon().get()}${usedSizeFormatted}/${totalSizeFormatted}${postfix}`;
+    return `${usedSizeFormatted}/${totalSizeFormatted}${postfix}`;
   }
   if (lblType().get() === "used") {
-    return `${icon().get()}${autoFormatSize(used, round().get())} ${getPostfix(
-      used
-    )}`;
+    return `${autoFormatSize(used, round().get())} ${getPostfix(used)}`;
   }
   if (lblType().get() === "free") {
-    return `${icon().get()}${autoFormatSize(free, round().get())} ${getPostfix(
-      free
-    )}`;
+    return `${autoFormatSize(free, round().get())} ${getPostfix(free)}`;
   }
   return `${icon().get()}${percentage}%`;
 }
@@ -254,21 +250,15 @@ export const formatDataResourse = {
       const usedSizeFormatted = formatUsed(used, round().get());
 
       if (lblType().get() === "used/total") {
-        return `${icon().get()}${usedSizeFormatted}/${totalSizeFormatted}${postfix}`;
+        return `${usedSizeFormatted}/${totalSizeFormatted}${postfix}`;
       }
       if (lblType().get() === "used") {
-        return `${icon().get()}${autoFormatSize(
-          used,
-          round().get()
-        )} ${getPostfix(used)}`;
+        return `${autoFormatSize(used, round().get())} ${getPostfix(used)}`;
       }
       if (lblType().get() === "free") {
-        return `${icon().get()}${autoFormatSize(
-          free,
-          round().get()
-        )} ${getPostfix(free)}`;
+        return `${autoFormatSize(free, round().get())} ${getPostfix(free)}`;
       }
-      return `${icon().get()}${percentage}%`;
+      return `${percentage}%`;
     },
 
   tooltip:
@@ -301,7 +291,7 @@ export const formatDataResourse = {
 
       return `${usedSizeFormatted}/${totalSizeFormatted} ${postfix} \n(${percentage}% used, ${autoFormatSize(
         free,
-        round().get()
+        round().get(),
       )} ${getPostfix(free)} free)`;
     },
 };

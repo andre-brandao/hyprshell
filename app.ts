@@ -10,6 +10,7 @@ import Launcher from "./widget/app-launcher/Launcher";
 import { forEachMonitor } from "./lib/utils";
 import { RegularWindow } from "./widget/RegularWindow";
 import Layout from "./widget/settings/Layout";
+import OSD from "./widget/osd/OSD";
 
 App.start({
   css: css,
@@ -21,6 +22,7 @@ App.start({
       print(request);
       // const foo = Layout();
       // print(foo);
+      // if (request.startsWith("popup")) popup_osd(request.replace("popup ", ""));
       res("ok");
     } catch (error) {
       printerr(error);
@@ -31,5 +33,6 @@ App.start({
     forEachMonitor((m: Gdk.Monitor) => [Bar(m), NotificationPopups(m)]);
     Launcher();
     Layout();
+    OSD();
   },
 });

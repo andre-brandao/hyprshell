@@ -1,5 +1,6 @@
 import Icon from "@/widget/Icon";
-import PanelButton from "../PannelButton";
+
+import PanelButton from "@/widget/PannelButton";
 import { App } from "astal/gtk3";
 import { show as showLauncher } from "@/widget/app-launcher/Launcher";
 

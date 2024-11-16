@@ -4,6 +4,7 @@ import { computeRamUsage } from "@/lib/modules/ram";
 import { Variable } from "astal";
 import { formatDataResourse } from "@/lib/utils";
 import { options } from "@/options";
+import Icon from "@/widget/Icon";
 
 const { cpu, storage, ram } = options.bar.vitals;
 
@@ -13,11 +14,13 @@ export function CPU() {
   const cpuVar = Variable<number>(0).poll(interval().get(), computeCPU);
 
   return (
-    <label
+    <box
       name={"CPU"}
       className={"CPU"}
-      label={cpuVar().as((v) => `${icon().get()}${v.toFixed(0)}%`)}
-    ></label>
+    >
+      <Icon name="cpu-symbolic" />
+      <label label={cpuVar().as((v) => `${v.toFixed(0)}%`)}></label>
+    </box>
   );
 }
 
@@ -25,16 +28,20 @@ export function RAM() {
   const { interval, round, icon, lblType } = ram;
   const ramVar = Variable(computeRamUsage()).poll(
     interval().get(),
-    computeRamUsage
+    computeRamUsage,
   );
 
   return (
-    <label
+    <box
       name={"RAM"}
       className={"RAM"}
-      label={ramVar().as(formatDataResourse.label(ram))}
-      tooltipText={ramVar().as(formatDataResourse.tooltip(ram))}
-    ></label>
+    >
+      <Icon name="ram-symbolic" />
+      <label
+        label={ramVar().as(formatDataResourse.label(ram))}
+        tooltipText={ramVar().as(formatDataResourse.tooltip(ram))}
+      ></label>
+    </box>
   );
 }
 
@@ -43,16 +50,20 @@ export function Storage() {
 
   const storageVar = Variable(computeStorage()).poll(
     interval().get(),
-    computeStorage
+    computeStorage,
   );
 
   return (
-    <label
+    <box
       name={"STORAGE"}
       className={"STORAGE"}
-      label={storageVar().as(formatDataResourse.label(storage))}
-      tooltipText={storageVar().as(formatDataResourse.tooltip(storage))}
-    ></label>
+    >
+      <Icon name="drive-harddisk-symbolic" />
+      <label
+        label={storageVar().as(formatDataResourse.label(storage))}
+        tooltipText={storageVar().as(formatDataResourse.tooltip(storage))}
+      ></label>
+    </box>
   );
 }
 

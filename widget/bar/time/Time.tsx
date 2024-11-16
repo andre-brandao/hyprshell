@@ -1,7 +1,7 @@
 import { Variable, GLib, bind } from "astal";
 
 import PopupWindow from "@/widget/PopUp";
-import PannelButton from "../PannelButton";
+import PannelButton from "@/widget/PannelButton";
 import { Gtk, Astal } from "astal/gtk3";
 
 const Divider = () => <box className="divider" vertical />;

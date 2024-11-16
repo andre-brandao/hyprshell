@@ -34,7 +34,7 @@ export const options = mkOptions(OPTIONS, {
       "error-fg": opt(`#eeeeee`),
 
       padding: opt("7pt"),
-      spacing: opt("12pt"),
+      spacing: opt("8pt"),
       radius: opt("11px"),
       transition: opt("300ms"),
       shadows: opt(true),
@@ -53,7 +53,7 @@ export const options = mkOptions(OPTIONS, {
       "shadow-color": opt(`rgba(0,0,0,.6)`),
       "text-shadow": opt(`2pt 2pt 2pt $shadow-color`),
       "box-shadow": opt(
-        `2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color`
+        `2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color`,
       ),
 
       "popover-padding": opt("4px"),
@@ -86,10 +86,11 @@ export const options = mkOptions(OPTIONS, {
         "kb_layout",
         "idle",
 
+        "quick_settings",
         // "wifi",
         // "audio",
-        "battery",
         "time",
+        "battery",
       ]),
     },
     vitals: {
@@ -126,7 +127,7 @@ export const options = mkOptions(OPTIONS, {
 
   notification: {
     position: opt<"top-right" | "top-left" | "bottom-right" | "bottom-left">(
-      "bottom-left"
+      "bottom-left",
     ),
   },
 

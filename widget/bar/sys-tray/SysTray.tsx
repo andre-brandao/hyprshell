@@ -4,7 +4,7 @@ import { Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable, GLib, bind } from "astal";
 import { App } from "astal/gtk3";
 
-import PanelButton from "../PannelButton";
+import PanelButton from "@/widget/PannelButton";
 function SysTray() {
   const tray = Tray.get_default();
 
