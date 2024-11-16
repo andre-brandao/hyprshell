@@ -2,7 +2,7 @@ import { Variable, GLib, bind } from "astal";
 import { Astal, Gtk, Gdk } from "astal/gtk3";
 import Hyprland from "gi://AstalHyprland";
 import { options } from "@/options";
-import PanelButton from "@/widget/bar/PannelButton";
+import PanelButton from "@/widget/PannelButton";
 import { range } from "@/lib/utils";
 
 const { show, label, focused_label, mode, show_empty } = options.bar.workspaces;

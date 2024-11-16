@@ -4,12 +4,13 @@ import { Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable, GLib, bind } from "astal";
 import { App } from "astal/gtk3";
 
-import PanelButton from "@/widget/bar/PannelButton";
+import PanelButton from "@/widget/PannelButton";
+import PannelBox from "../../PannelBox";
 function SysTray() {
   const tray = Tray.get_default();
 
   return (
-    <box className={"SysTray"}>
+    <PannelBox className="SysTray">
       {bind(tray, "items").as((items) =>
         items.map((item) => {
           if (item.iconThemePath) App.add_icons(item.iconThemePath);
@@ -35,7 +36,7 @@ function SysTray() {
           );
         }),
       )}
-    </box>
+    </PannelBox>
   );
 }
 

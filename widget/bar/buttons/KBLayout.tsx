@@ -10,15 +10,17 @@ import {
 } from "@/lib/modules/kbLayout";
 import { bind, execAsync, Variable } from "astal";
 import Hyprland from "gi://AstalHyprland";
+import PannelBox from "../../PannelBox";
 
 export default function KBInput() {
   const hypr = Hyprland.get_default();
   // TODO: Fix not showing up on startup
   return (
-    <box className={"KBLayout"}>
+    <PannelBox className={"KBLayout"}>
       <label
         setup={(self) => {
-          hypr.connect("keyboard-layout", (hypr_self, kb, layout) => {
+          self.label = " ";
+          hypr.connect("keyboard-layout", (_, kb, layout) => {
             print("keyboard-layout", kb, layout);
             self.label = `${layoutMap[layout as LayoutKeys] ?? ".."}`;
 
@@ -26,6 +28,6 @@ export default function KBInput() {
           });
         }}
       ></label>
-    </box>
+    </PannelBox>
   );
 }

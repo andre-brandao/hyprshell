@@ -49,7 +49,7 @@ export const options = mkOptions(OPTIONS, {
     },
     widget: {
       color: opt(`#080808`),
-      opacity: opt(94),
+      opacity: opt(40),
     },
     blur: opt(0),
     shadows: opt(true),
@@ -59,11 +59,15 @@ export const options = mkOptions(OPTIONS, {
     transition: opt("300ms"),
   },
   bar: {
-    padding: opt<string>("0.5em"),
-    margin: opt<string>("0.5em"),
-    border_radius: opt<string>("0.5em"),
     position: opt<"top" | "bottom">("top"),
     flat_buttons: opt<boolean>(true),
+    BarContainer: {
+      padding: opt<string>("0.5em"),
+      margin: opt<string>("0.5em"),
+      border_radius: opt<string>("0.5em"),
+      tranparent: opt<boolean>(true),
+    },
+    PannelBox: {},
     layout: {
       start: opt<BarWidget[]>([
         "distro",

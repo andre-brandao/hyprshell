@@ -3,8 +3,9 @@ import { bind, Variable } from "astal";
 import { dependencies, Notify } from "@/lib/utils";
 import { options } from "@/options";
 
-import PanelButton from "@/widget/bar/PannelButton";
+import PanelButton from "@/widget/PannelButton";
 import Icon from "@/widget/Icon";
+import PannelBox from "../../PannelBox";
 
 type IdleState = "active" | "inactive" | "unknown";
 function IdleInhibitor() {
@@ -32,33 +33,34 @@ function IdleInhibitor() {
   }
 
   return (
-    <PanelButton
-      window=""
-      onDestroy={() => {
-        idleVar.drop();
-      }}
-      onClicked={toggle}
-      tooltipText={"Idle Inhibitor\nClick to toggle"}
-      setup={(but) => {
-        but.toggleClassName("IdleInhibitor");
-        bind(idleVar).subscribe((s) => {
-          if (s === "inactive") {
-            but.toggleClassName("active", false);
-          }
-          if (s === "active") {
-            but.toggleClassName("active", true);
-          }
-        });
-      }}
-    >
-      <box>
-        <Icon
-          name={idleVar().as((s) =>
-            s === "active" ? "mug-hot-symbolic" : "mug-symbolic",
-          )}
-        />
-      </box>
-    </PanelButton>
+    <PannelBox className="IdleInhibitor">
+      <PanelButton
+        window=""
+        onDestroy={() => {
+          idleVar.drop();
+        }}
+        onClicked={toggle}
+        tooltipText={"Idle Inhibitor\nClick to toggle"}
+        setup={(but) => {
+          bind(idleVar).subscribe((s) => {
+            if (s === "inactive") {
+              but.toggleClassName("active", false);
+            }
+            if (s === "active") {
+              but.toggleClassName("active", true);
+            }
+          });
+        }}
+      >
+        <box>
+          <Icon
+            name={idleVar().as((s) =>
+              s === "active" ? "mug-hot-symbolic" : "mug-symbolic",
+            )}
+          />
+        </box>
+      </PanelButton>
+    </PannelBox>
   );
 }
 

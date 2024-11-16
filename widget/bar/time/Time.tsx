@@ -1,8 +1,9 @@
 import { Variable, GLib, bind } from "astal";
 
 import PopupWindow from "@/widget/PopUp";
-import PannelButton from "@/widget/bar/PannelButton";
+import PannelButton from "@/widget/PannelButton";
 import { Gtk, Astal } from "astal/gtk3";
+import PannelBox from "../../PannelBox";
 
 const Divider = () => (
   <box
@@ -83,19 +84,21 @@ export default function ({ format = "%H:%M - %A %e." }) {
   );
 
   return (
-    <PannelButton
-      window={"win-time"}
-      onClicked={() => (popup.visible ? popup.hide() : popup.show())}
-    >
-      <label
-        className="Time"
-        onDestroy={() => {
-          time.drop();
-          popup.destroy();
-        }}
-        label={time()}
-      />
-    </PannelButton>
+    <PannelBox className="">
+      <PannelButton
+        window={"win-time"}
+        onClicked={() => (popup.visible ? popup.hide() : popup.show())}
+      >
+        <label
+          className="Time"
+          onDestroy={() => {
+            time.drop();
+            popup.destroy();
+          }}
+          label={time()}
+        />
+      </PannelButton>
+    </PannelBox>
   );
 }
 // export default Time;

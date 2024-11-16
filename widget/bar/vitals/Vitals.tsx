@@ -5,6 +5,7 @@ import { Variable } from "astal";
 import { formatDataResourse } from "@/lib/utils";
 import { options } from "@/options";
 import Icon from "@/widget/Icon";
+import PannelBox from "../../PannelBox";
 
 const { cpu, storage, ram } = options.bar.vitals;
 
@@ -69,10 +70,10 @@ export function Storage() {
 
 export default function Vitals() {
   return (
-    <box className={"Vitals"}>
+    <PannelBox className={"Vitals"}>
       <CPU />
       <RAM />
       <Storage />
-    </box>
+    </PannelBox>
   );
 }

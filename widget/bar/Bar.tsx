@@ -12,12 +12,12 @@ import IdleInibitor from "./buttons/IdleInhibitor";
 import { options } from "@/options";
 import Vitals, { CPU } from "./vitals/Vitals";
 import KBInput from "./buttons/KBLayout";
-import COLROS from "./ColorDebug";
 import DistroIcon from "./buttons/DistroIcon";
 import QuickSettings from "../quick-settings/QuickSettings";
+import { Variable } from "astal";
 
 const { center, end, start } = options.bar.layout;
-const { padding, margin, border_radius } = options.bar;
+const { padding, margin, border_radius, tranparent } = options.bar.BarContainer;
 export const barWidget = {
   distro: DistroIcon,
   battery: BatteryLevel,
@@ -52,14 +52,23 @@ export default function Bar(monitor: Gdk.Monitor) {
       css={``}
     >
       <centerbox
-        className={"BarContainer"}
-        css={`
-          padding: ${padding().get()};
-          margin: ${margin().get()};
-          border-radius: ${border_radius().get()};
-        `}
+        className={tranparent().as((t) =>
+          t ? "BarContainer transparent" : "BarContainer opaque",
+        )}
+        css={Variable.derive(
+          [padding, margin, border_radius],
+          (p, m, br) => `
+          padding: ${p};
+          margin: ${m};
+          border-radius: ${br};
+          `,
+        )()}
       >
-        <box className={"BarStart"} hexpand halign={Gtk.Align.START}>
+        <box
+          className={"BarStart"}
+          hexpand
+          halign={Gtk.Align.START}
+        >
           {start(getWidgets)}
         </box>
         <box className={"BarCenter"}>
@@ -67,7 +76,11 @@ export default function Bar(monitor: Gdk.Monitor) {
 
           {/* <COLROS></COLROS> */}
         </box>
-        <box className={"BarEnd"} hexpand halign={Gtk.Align.END}>
+        <box
+          className={"BarEnd"}
+          hexpand
+          halign={Gtk.Align.END}
+        >
           {end(getWidgets)}
         </box>
       </centerbox>

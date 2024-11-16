@@ -7,7 +7,7 @@ import { Astal, Gtk, Gdk, App } from "astal/gtk3";
 import PopupWindow from "@/widget/PopUp";
 import MediaPlayer from "@/widget/media-player/MediaPlayer";
 
-import PanelButton from "@/widget/bar/PannelButton";
+import PanelButton from "@/widget/PannelButton";
 function Media() {
   const mpris = Mpris.get_default();
 

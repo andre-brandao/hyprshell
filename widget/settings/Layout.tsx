@@ -38,19 +38,25 @@ export default function Layout() {
         name="Bar"
         icon="i"
         children={[
-          <Group
-            title="Style"
-            children={[
-              <Row title="Border Radius" opt={bar.border_radius} />,
-              <Row title="Margin" opt={bar.margin} />,
-              <Row title="Padding" opt={bar.padding} />,
-            ]}
-          />,
+          // <Group
+          //   title="Style"
+          //   children={[
+          //     <Row title="Border Radius" opt={bar.border_radius} />,
+          //     <Row title="Margin" opt={bar.margin} />,
+          //     <Row title="Padding" opt={bar.padding} />,
+          //   ]}
+          // />,
           <Group
             title="Background"
             children={[
-              <Row title="Color" opt={bar.flat_buttons} />,
-              <Row title="Opacity" opt={bar.idle_inhibitor.notify} />,
+              <Row
+                title="Color"
+                opt={bar.flat_buttons}
+              />,
+              <Row
+                title="Opacity"
+                opt={bar.idle_inhibitor.notify}
+              />,
             ]}
           />,
         ]}

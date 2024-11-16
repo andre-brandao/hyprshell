@@ -27,10 +27,18 @@ window.Bar {
   font-weight: bold;
 
   .BarContainer {
-    // background-color: $bg;
-    // color: $fg;
-    // border: $border;
-    // select box childs
+    // not .transparent
+
+    &.opaque {
+      background-color: $primary-bg;
+      color: $primary-fg;
+    }
+  }
+
+  .PannelBox {
+    background-color: $widget-bg;
+    border-radius: $radius;
+    margin-left: 3px;
   }
 
   .panel-button {
@@ -61,15 +69,15 @@ window.Bar {
     }
   }
   .Battery {
-    label {
-      padding-left: 0;
-      margin-left: 0;
-    }
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .KBLayout {
-    label {
-      color: $primary-bg;
-    }
+    padding-left: 8px;
+    padding-right: 8px;
+    // label {
+    //   // color: $primary-bg;
+    // }
   }
 }

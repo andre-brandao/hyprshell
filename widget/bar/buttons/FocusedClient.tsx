@@ -17,30 +17,30 @@ Title: ${title}
 Class: ${wm_class}
 Initial Class: ${client.initialClass}
 Initial Title: ${client.initialTitle}`;
-    }
+    },
   );
 export function FocusedClient() {
   const hypr = Hyprland.get_default();
   const focused = bind(hypr, "focusedClient");
 
   return (
-    <button
+    <box
       className="FocusedClient"
       visible={focused.as(Boolean)}
-      onClicked={() => App.get_window("Settings")?.show()}
+      // onClicked={() => App.get_window("Settings")?.show()}
     >
       {focused.as(
         (client) =>
           client && (
             <label
               label={bind(client, "title").as((v) =>
-                v.length < 20 ? v : v.slice(0, 20) + "..."
+                v.length < 20 ? v : v.slice(0, 20) + "...",
               )}
               tooltipText={formatTooltip(client)()}
             />
-          )
+          ),
       )}
-    </button>
+    </box>
   );
 }
 
