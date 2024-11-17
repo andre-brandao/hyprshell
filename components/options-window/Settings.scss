@@ -14,9 +14,9 @@ window#Settings {
       font-weight: bold;
       padding: $padding * 0.5 $padding;
 
-      box {
-        @include spacing($spacing: 0.3em);
-      }
+      // box {
+      //   @include spacing($spacing: 0.3em);
+      // }
     }
 
     button.close {

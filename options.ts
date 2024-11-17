@@ -48,7 +48,7 @@ export const options = mkOptions(OPTIONS, {
     },
     border: {
       color: opt("#51a4e7"),
-      width: opt("1px"),
+      width: opt("2px"),
       opacity: opt(50),
     },
     widget: {

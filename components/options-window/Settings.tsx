@@ -16,9 +16,11 @@ function Header() {
 		<centerbox
 			className="Header"
 			startWidget={
-				<button className="reset">
-					<Icon name={icons.ui.refresh} />
-				</button>
+				<box>
+					<button className="reset">
+						<Icon name={icons.ui.refresh} />
+					</button>
+				</box>
 			}
 			centerWidget={
 				<box>
@@ -26,14 +28,17 @@ function Header() {
 				</box>
 			}
 			endWidget={
-				<button
-					// halign={ALIGN.END}
-					// hexpand={false}
-					className="close"
-					onClicked={() => App.get_window("Settings")?.hide()}
+				<box
+					hexpand
+					halign={ALIGN.END}
 				>
-					<Icon name={icons.ui.close} />
-				</button>
+					<button
+						className="close"
+						onClicked={() => App.get_window("Settings")?.hide()}
+					>
+						<Icon name={icons.ui.close} />
+					</button>
+				</box>
 			}
 		/>
 	)
