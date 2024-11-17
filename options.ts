@@ -73,12 +73,7 @@ export const options = mkOptions(OPTIONS, {
     },
     PannelBox: {},
     layout: {
-      start: opt<BarWidget[]>([
-        "distro",
-        "vitals",
-        // "focused",
-        "media",
-      ]),
+      start: opt<BarWidget[]>(["distro", "vitals", "media", "focused"]),
       center: opt<BarWidget[]>(["workspaces"]),
       end: opt<BarWidget[]>([
         // "media"
@@ -87,8 +82,7 @@ export const options = mkOptions(OPTIONS, {
         "idle",
 
         "quick_settings",
-        // "wifi",
-        // "audio",
+
         "time",
         "battery",
       ]),

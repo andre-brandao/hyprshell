@@ -42,9 +42,9 @@ function IdleInhibitor() {
 				tooltipText={"Idle Inhibitor\nClick to toggle"}
 				className={idleVar()}
 			>
-				<box>
+				<box className={idleVar()}>
 					<Icon
-						name={idleVar().as((s) =>
+						name={idleVar((s) =>
 							s === "active" ? "mug-hot-symbolic" : "mug-symbolic",
 						)}
 					/>

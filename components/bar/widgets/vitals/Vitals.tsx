@@ -26,7 +26,7 @@ export function CPU() {
 }
 
 export function RAM() {
-	const { interval, round, icon, lblType } = ram
+	const { interval } = ram
 	const ramVar = Variable(computeRamUsage()).poll(
 		interval().get(),
 		computeRamUsage,
@@ -36,18 +36,16 @@ export function RAM() {
 		<box
 			name={"RAM"}
 			className={"RAM"}
+			tooltipText={ramVar(formatDataResourse.tooltip(ram))}
 		>
 			<Icon name="ram-symbolic" />
-			<label
-				label={ramVar(formatDataResourse.label(ram))}
-				tooltipText={ramVar(formatDataResourse.tooltip(ram))}
-			/>
+			<label label={ramVar(formatDataResourse.label(ram))} />
 		</box>
 	)
 }
 
 export function Storage() {
-	const { interval, round, lblType, icon } = storage
+	const { interval } = storage
 
 	const storageVar = Variable(computeStorage()).poll(
 		interval().get(),
@@ -58,12 +56,10 @@ export function Storage() {
 		<box
 			name={"STORAGE"}
 			className={"STORAGE"}
+			tooltipText={storageVar(formatDataResourse.tooltip(storage))}
 		>
 			<Icon name="drive-harddisk-symbolic" />
-			<label
-				label={storageVar(formatDataResourse.label(storage))}
-				tooltipText={storageVar(formatDataResourse.tooltip(storage))}
-			/>
+			<label label={storageVar(formatDataResourse.label(storage))} />
 		</box>
 	)
 }

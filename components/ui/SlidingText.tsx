@@ -1,12 +1,10 @@
-import Mpris from "gi://AstalMpris"
-
 import { Variable, GLib, bind, type Binding } from "astal"
 
 import { Astal, Gtk, Gdk, App } from "astal/gtk3"
 
 function SlidingText({
 	text,
-	speed = 4,
+	speed = 10,
 	max_length = 20,
 }: {
 	text: Binding<string>
@@ -15,23 +13,34 @@ function SlidingText({
 }) {
 	let index = 0
 
+	const fullText = text.as(
+		(t) => " ".repeat(4) + t,
+		// + " ".repeat(4)
+	)
+
+	const slidingText = Variable("")
+
+	const updateText = () => {
+		index = (index + 1) % fullText.get().length
+		const visibleText = fullText.get().substring(index, index + max_length)
+		slidingText.set(visibleText)
+		return true
+	}
+
+	const timeout = GLib.timeout_add(
+		GLib.PRIORITY_DEFAULT,
+		1000 / speed,
+		updateText,
+	)
 	return (
 		<box
 			expand={false}
 			orientation={Gtk.Orientation.HORIZONTAL}
+			onDestroy={() => GLib.source_remove(timeout)}
 		>
 			<label
-				label={text.as((t) => t.substring(0, max_length))}
+				label={slidingText()}
 				halign={ALIGN.START}
-				setup={(label) => {
-					const updateText = () => {
-						index = (index + 1) % text.get().length
-						const visibleText = text.get().substring(index, index + max_length)
-						label.label = visibleText
-						return true // Returning true keeps the timeout active.
-					}
-					GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000 / speed, updateText)
-				}}
 			/>
 		</box>
 	)

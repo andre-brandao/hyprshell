@@ -27,7 +27,6 @@ export function FocusedClient() {
 		<box
 			className="FocusedClient"
 			visible={focused.as(Boolean)}
-			// onClicked={() => App.get_window("Settings")?.show()}
 		>
 			{focused.as(
 				(client) =>

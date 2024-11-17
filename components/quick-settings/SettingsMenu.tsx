@@ -5,6 +5,7 @@ import MprisPlayers from "../../components/ui/media-player/MediaPlayer"
 import PopupWindow from "../../components/ui/popup/PopUp"
 import { App, Astal } from "astal/gtk3"
 import Avatar from "./widgets/Avatar"
+import { applyCss } from "@/lib/style/style"
 
 function SettingsMenu() {
 	return (
@@ -28,6 +29,14 @@ function SettingsMenu() {
 						hexpand
 						halign={ALIGN.END}
 					>
+						<button
+							onClicked={() => {
+								applyCss()
+							}}
+						>
+							Apply CSS
+						</button>
+
 						<button
 							onClicked={() => {
 								App.get_window("Settings")?.show()
