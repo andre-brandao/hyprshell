@@ -7,9 +7,8 @@ import { show as showLauncher } from "@/components/launcher/Launcher"
 function DistroIcon() {
 	return (
 		<PanelButton
-			// window={"launcher"}
 			onClicked={showLauncher}
-			className={""}
+			className={"LauncherButton"}
 		>
 			<Icon name={"nix-snowflake-symbolic"} />
 		</PanelButton>

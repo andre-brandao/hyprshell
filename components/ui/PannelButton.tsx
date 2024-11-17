@@ -28,7 +28,10 @@ function PanelButton({
 				options.bar
 					.flat_buttons()
 					.as((v) => (v ? "PanelButton flat" : "PanelButton"))
-					.as((v) => `${v} ${className}`)
+					.as(
+						(v) =>
+							`${v} ${className instanceof Variable ? className.get() : className}`,
+					)
 				// .as((v) => `${v} ${window}`)
 			}
 			{...rest}

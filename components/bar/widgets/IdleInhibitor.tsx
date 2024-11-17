@@ -40,7 +40,7 @@ function IdleInhibitor() {
 				}}
 				onClicked={toggle}
 				tooltipText={"Idle Inhibitor\nClick to toggle"}
-				className={idleVar((v) => (v === "active" ? "active" : ""))}
+				className={idleVar()}
 			>
 				<box>
 					<Icon

@@ -9,9 +9,9 @@ window.Bar {
   .BarContainer {
     // not .transparent
 
+    color: $fg;
     &.opaque {
       background-color: $bg;
-      // color: $primary-fg;
     }
   }
 }

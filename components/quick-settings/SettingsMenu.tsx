@@ -28,7 +28,12 @@ function SettingsMenu() {
 						hexpand
 						halign={ALIGN.END}
 					>
-						<button onClicked={() => App.get_window("Settings")?.show()}>
+						<button
+							onClicked={() => {
+								App.get_window("Settings")?.show()
+								App.get_window("win-settings")?.hide()
+							}}
+						>
 							Settings
 						</button>
 

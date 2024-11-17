@@ -2,8 +2,8 @@ import { Variable, GLib, bind } from "astal"
 import { Astal, Gtk, Gdk } from "astal/gtk3"
 import Hyprland from "gi://AstalHyprland"
 import { options } from "@/options"
-import PanelButton from "@/components/ui/PannelButton"
 import { range } from "@/lib/utils"
+import PannelBox from "@/components/ui/PannelBox"
 
 const { show, label, focused_label, mode, show_empty } = options.bar.workspaces
 
@@ -15,13 +15,13 @@ function Workspaces() {
 	)
 
 	return (
-		<box className="Workspaces">
+		<PannelBox className="Workspaces">
 			{wssBind.as((wss) => {
 				return range(!show_empty().get() ? wss.length : show().get(), 1).map(
 					(i) => <WsButton index={i} />,
 				)
 			})}
-		</box>
+		</PannelBox>
 	)
 }
 
@@ -50,37 +50,49 @@ function WsButton({ index, className }: { index: number; className?: string }) {
 	const hypr = Hyprland.get_default()
 
 	const ws = hypr.get_workspace(index)
-	const wss = hypr.get_workspaces()
-	// wss.
 
 	// print("ws", ws);
 
-	const format = bind(hypr, "focusedWorkspace").as((fw) => {
-		if (fw.id === index) {
-			return {
-				class: "focused",
-				label: focused_label.get() === "id" ? index : focused_label.get(),
+	const formatLabel = Variable.derive(
+		[bind(hypr, "focusedWorkspace"), focused_label, label],
+		(focusadeWorkspace, fl, l) => {
+			if (focusadeWorkspace.id === index) {
+				return fl === "id" ? index : fl
 			}
-		}
 
-		if (ws) {
-			return {
-				class: "occupied",
-				label: label.get() === "id" ? index : label.get(),
+			if (ws) {
+				return l === "id" ? index : fl
 			}
-		}
 
-		return {
-			class: "",
-			label: label.get() === "id" ? index : label.get(),
-		}
-	})
+			return l === "id" ? index : fl
+		},
+	)
+
+	const formatClassName = Variable.derive(
+		[bind(hypr, "focusedWorkspace")],
+		(fw) => {
+			const classes: string[] = []
+			const left = hypr.get_workspace(index - 1)
+			const right = hypr.get_workspace(index + 1)
+
+			if (left) classes.push("left")
+
+			if (right) classes.push("right")
+
+			if (fw.id === index) classes.push("focused")
+
+			if (ws) {
+				classes.push("occupied")
+			}
+			return classes.join(" ")
+		},
+	)
 	return (
 		<button
-			className={format.as((f) => f.class)}
+			className={formatClassName()}
 			onClicked={() => hypr.dispatch("workspace", index.toString())}
 		>
-			{format.as((f) => f.label)}
+			{formatLabel()}
 		</button>
 	)
 }
