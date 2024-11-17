@@ -8,6 +8,7 @@ import PopupWindow from "@/components/ui/popup/PopUp"
 import MediaPlayer from "@/components/ui/media-player/MediaPlayer"
 
 import PanelButton from "@/components/ui/PannelButton"
+import PannelBox from "@/components/ui/PannelBox"
 function Media() {
 	const mpris = Mpris.get_default()
 
@@ -21,7 +22,7 @@ function Media() {
 	// );
 
 	return (
-		<box className="Media">
+		<PannelBox className="Media">
 			{bind(mpris, "players").as((ps) =>
 				ps[0] ? (
 					<box>
@@ -44,7 +45,7 @@ function Media() {
 					"Nothing Playing"
 				),
 			)}
-		</box>
+		</PannelBox>
 	)
 }
 

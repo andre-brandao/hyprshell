@@ -2,7 +2,7 @@ import { App, Widget, type Gdk, Gtk } from "astal/gtk3";
 
 import "./globals";
 import "./options";
-import { css } from "./style/style";
+import { css } from "./lib/style/style";
 
 import Bar from "@/components/bar/Bar";
 import NotificationPopups from "./components/notification/NotificationPopups";

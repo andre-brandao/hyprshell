@@ -19,7 +19,6 @@ function SysTray() {
 
 					return (
 						<PanelButton
-							window={""}
 							tooltipMarkup={bind(item, "tooltipMarkup")}
 							onDestroy={() => menu?.destroy()}
 							onClickRelease={(self) => {

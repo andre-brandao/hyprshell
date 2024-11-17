@@ -1,18 +1,18 @@
 import { Astal, Gtk, type Gdk } from "astal/gtk3"
 
-import Workspaces from "./workspaces/Workspaces"
-import FocusedClient from "./buttons/FocusedClient"
-import Media from "./buttons/Media"
-import SysTray from "./sys-tray/SysTray"
+import Workspaces from "./widgets/workspaces/Workspaces"
+import FocusedClient from "./widgets/FocusedClient"
+import Media from "./widgets/Media"
+import SysTray from "./widgets/sys-tray/SysTray"
 // import Wifi from "./buttons/Wifi";
 // import AudioSlider from "./buttons/AudioSlider";
-import BatteryLevel from "./battery/Battery"
-import Time from "./time/Time"
-import IdleInibitor from "./buttons/IdleInhibitor"
+import BatteryLevel from "./widgets/Battery"
+import Time from "./widgets/time/Time"
+import IdleInibitor from "./widgets/IdleInhibitor"
 import { options } from "@/options"
-import Vitals, { CPU } from "./vitals/Vitals"
-import KBInput from "./buttons/KBLayout"
-import DistroIcon from "./buttons/DistroIcon"
+import Vitals, { CPU } from "./widgets/vitals/Vitals"
+import KBInput from "./widgets/KBLayout"
+import DistroIcon from "./widgets/DistroIcon"
 import QuickSettings from "@/components/quick-settings/QuickSettings"
 import { Variable } from "astal"
 

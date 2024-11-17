@@ -134,6 +134,7 @@ export class PopupWindow extends Widget.Window {
 			this.gdkmonitor ??
 			this.get_display().get_monitor_at_point(alloc.x, alloc.y)
 
+		// @ts-expect-error
 		const transform = get_hyprland_monitor(monitor)?.transform
 
 		let width: number

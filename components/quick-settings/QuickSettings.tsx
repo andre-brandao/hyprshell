@@ -21,7 +21,7 @@ export function QuickSettings() {
 	return (
 		<PannelBox>
 			<PanelButton
-				window={"QuickSettings"}
+				className="QuickSettings"
 				onClicked={() => (popup.visible ? popup.hide() : popup.show())}
 			>
 				<box>

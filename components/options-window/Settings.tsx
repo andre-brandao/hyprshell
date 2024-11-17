@@ -23,8 +23,6 @@ function Header() {
 			centerWidget={
 				<box>
 					<label label="Settings" />
-					-
-					<label label={current()} />
 				</box>
 			}
 			endWidget={

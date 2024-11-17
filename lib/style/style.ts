@@ -8,6 +8,7 @@ import { options } from "@/options";
 
 // @ts-expect-error
 import mixins from "inline:./mixins.scss";
+import GLib from "gi://GLib?version=2.0";
 
 // const themeCSS = options.theme.css;
 
@@ -112,7 +113,7 @@ const variables = () =>
   ].join("\n");
 
 const imports = () => {
-  const fd = exec(`fd ".scss" /home/andre/.config/ags/components`);
+  const fd = exec(`fd ".scss" ${GLib.getenv("HOME")}/.config/ags/components`);
   const files = fd.split(/\s+/);
   return files
     .map((f) => `@import '${f}';`)

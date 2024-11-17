@@ -1,0 +1,30 @@
+window.Bar {
+  .IdleInhibitor {
+    .active {
+      color: $primary-fg;
+    }
+  }
+
+  .FocusedClient {
+    color: $primary-bg;
+  }
+
+  .Media {
+    .Cover {
+      min-height: 1.2em;
+      min-width: 1.2em;
+      border-radius: $radius;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+  .Battery {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .KBLayout {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}

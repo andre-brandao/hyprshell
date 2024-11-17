@@ -35,22 +35,12 @@ function IdleInhibitor() {
 	return (
 		<PannelBox className="IdleInhibitor">
 			<PanelButton
-				window=""
 				onDestroy={() => {
 					idleVar.drop()
 				}}
 				onClicked={toggle}
 				tooltipText={"Idle Inhibitor\nClick to toggle"}
-				setup={(but) => {
-					bind(idleVar).subscribe((s) => {
-						if (s === "inactive") {
-							but.toggleClassName("active", false)
-						}
-						if (s === "active") {
-							but.toggleClassName("active", true)
-						}
-					})
-				}}
+				className={idleVar((v) => (v === "active" ? "active" : ""))}
 			>
 				<box>
 					<Icon

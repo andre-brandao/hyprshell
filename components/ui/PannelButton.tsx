@@ -8,27 +8,29 @@ import { App, type Widget } from "astal/gtk3"
 
 const { cpu, storage, ram } = options.bar.vitals
 
-type PanelButtonProps = Omit<Widget.ButtonProps, "window"> & {
-	window: string | Binding<string>
+type PanelButtonProps = Widget.ButtonProps & {
 	flat?: boolean
 }
 
 function PanelButton({
-	window = "",
 	flat = false,
+	className,
 	child,
 	...rest
 }: PanelButtonProps) {
-	if (window instanceof Binding) {
-		window = window.get()
-	}
+	// if (window instanceof Binding) {
+	// 	window = window.get()
+	// }
 
 	return (
 		<button
-			className={options.bar
-				.flat_buttons()
-				.as((v) => (v ? "panel-buton flat" : "panel-buton"))
-				.as((v) => `${v} ${window}`)}
+			className={
+				options.bar
+					.flat_buttons()
+					.as((v) => (v ? "PanelButton flat" : "PanelButton"))
+					.as((v) => `${v} ${className}`)
+				// .as((v) => `${v} ${window}`)
+			}
 			{...rest}
 		>
 			<box>{child}</box>
