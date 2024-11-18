@@ -15,6 +15,15 @@ function Icon({
 	fallback = "image-missing-symbolic",
 	...rest
 }: IconProps) {
+	if (name === null) {
+		return (
+			<icon
+				icon={fallback}
+				{...rest}
+			/>
+		)
+	}
+
 	if (Astal.Icon.lookup_icon(get(name)))
 		return (
 			<icon

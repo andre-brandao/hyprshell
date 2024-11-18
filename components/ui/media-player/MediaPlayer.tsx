@@ -1,6 +1,8 @@
 import { Astal, Gtk } from "astal/gtk3"
 import Mpris from "gi://AstalMpris"
 import { bind } from "astal"
+import Icon from "../Icon"
+import icons from "@/lib/icons"
 
 function lengthStr(length: number) {
 	const min = Math.floor(length / 60)
@@ -21,7 +23,7 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 	)
 
 	const playerIcon = bind(player, "entry").as((e) =>
-		Astal.Icon.lookup_icon(e) ? e : "audio-x-generic-symbolic",
+		e && Astal.Icon.lookup_icon(e) ? e : "audio-x-generic-symbolic",
 	)
 
 	const position = bind(player, "position").as((p) =>
@@ -48,7 +50,7 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 						halign={START}
 						label={title}
 					/>
-					<icon icon={playerIcon} />
+					<Icon name={playerIcon} />
 				</box>
 				<label
 					halign={START}
@@ -57,6 +59,22 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 					wrap
 					label={artist}
 				/>
+				{/* volume */}
+				<box>
+					<Icon
+						name={icons.audio.volume.high}
+						css={`
+						padding-right: 5px;
+						`}
+					/>
+					<slider
+						expand
+						onDragged={({ value }) => {
+							player.volume = value
+						}}
+						value={bind(player, "volume")}
+					/>
+				</box>
 				<slider
 					visible={bind(player, "length").as((l) => l > 0)}
 					onDragged={({ value }) => {
@@ -77,19 +95,19 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 							onClicked={() => player.previous()}
 							visible={bind(player, "canGoPrevious")}
 						>
-							<icon icon="media-skip-backward-symbolic" />
+							<Icon name="media-skip-backward-symbolic" />
 						</button>
 						<button
 							onClicked={() => player.play_pause()}
 							visible={bind(player, "canControl")}
 						>
-							<icon icon={playIcon} />
+							<Icon name={playIcon} />
 						</button>
 						<button
 							onClicked={() => player.next()}
 							visible={bind(player, "canGoNext")}
 						>
-							<icon icon="media-skip-forward-symbolic" />
+							<Icon name="media-skip-forward-symbolic" />
 						</button>
 					</box>
 					<label
@@ -109,6 +127,7 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 
 export default function MprisPlayers() {
 	const mpris = Mpris.get_default()
+
 	return (
 		<box vertical>
 			{bind(mpris, "players").as((arr) =>

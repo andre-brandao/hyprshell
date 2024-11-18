@@ -11,6 +11,9 @@ function SlidingText({
 	speed?: number
 	max_length?: number
 }) {
+	if (text.get().length < max_length) {
+		return <label label={text} />
+	}
 	let index = 0
 
 	const fullText = text.as(
