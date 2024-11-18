@@ -1,5 +1,5 @@
 .SysTray {
-  padding-left: 0.2em;
+  // padding-left: 0.2em;
   // padding-right: 0.2em;
 
   button {
@@ -8,8 +8,8 @@
     // border-radius: $radius;
 
     icon {
-      padding-left: 0.2em;
-      padding-right: 0.2em;
+      padding-left: 0.3em;
+      padding-right: 0.3em;
     }
     // margin: 0.1em;
     &:not(:first-child):not(:last-child) {

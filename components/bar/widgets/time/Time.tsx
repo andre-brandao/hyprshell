@@ -87,9 +87,9 @@ export default function ({ format = "%H:%M - %a %e %b" }) {
 	)
 
 	return (
-		<PannelBox className="">
+		<PannelBox className="TimeButton">
 			<PannelButton
-				className={"TimeButton"}
+				className={""}
 				onClicked={() => (popup.visible ? popup.hide() : popup.show())}
 			>
 				<label
