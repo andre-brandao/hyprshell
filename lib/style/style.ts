@@ -48,7 +48,7 @@ const variables = () =>
     $("error-bg", options.theme.error.bg),
     $("error-fg", options.theme.error.fg),
 
-    $("padding", options.theme.padding),
+    // $("padding", options.theme.padding),
     $("spacing", options.theme.spacing),
     $("radius", options.theme.radius),
     // $("transition", `${options.transition}ms`),
@@ -99,11 +99,11 @@ const variables = () =>
         0,
       )})`,
     ),
-    $("popover-padding", `$padding * ${popoverPaddingMultiplier}`),
-    $(
-      "popover-radius",
-      options.theme.radius.get() === "0" ? "0" : "$radius + $popover-padding",
-    ),
+    // $("popover-padding", `$padding * ${popoverPaddingMultiplier}`),
+    // $(
+    //   "popover-radius",
+    //   options.theme.radius.get() === "0" ? "0" : "$radius + $popover-padding",
+    // ),
 
     $("font-size", options.font.size),
     $("font-name", options.font.name),

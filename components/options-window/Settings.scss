@@ -1,3 +1,5 @@
+$padding: 10pt;
+
 window#Settings {
   background-color: $bg;
   color: $fg;
@@ -13,10 +15,6 @@ window#Settings {
       @include button;
       font-weight: bold;
       padding: $padding * 0.5 $padding;
-
-      // box {
-      //   @include spacing($spacing: 0.3em);
-      // }
     }
 
     button.close {

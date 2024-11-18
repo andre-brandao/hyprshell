@@ -1,33 +1,27 @@
-$bar-spacing: $spacing * 0.3;
-
 @mixin panel-button($flat: true, $reactive: true) {
-  @include accs-button($flat, $reactive);
+  @include button($flat, $reactive);
 
   > * {
     border-radius: $radius;
-    // margin: $bar-spacing;
   }
 
   label,
   image {
     font-weight: bold;
   }
-
-  // > * {
-  //   padding: $padding * 0.4 $padding * 0.8;
-  // }
 }
 
 .PannelBox {
   background-color: $widget-bg;
   border-radius: $radius;
-  margin: $bar-spacing;
+
+  margin: 1.5pt;
 }
 
 .PanelButton {
   @include panel-button;
 
   &:not(.flat) {
-    @include accs-button($flat: false);
+    @include panel-button($flat: false);
   }
 }

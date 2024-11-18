@@ -19,7 +19,7 @@ export function CPU() {
 			name={"CPU"}
 			className={"CPU"}
 		>
-			<label label={cpuVar((v) => `${v.toFixed(0).padStart(2, " ")}%`)} />
+			<label label={cpuVar().as((v) => `${v.toFixed(0).padStart(2, " ")}%`)} />
 			<Icon name="cpu-symbolic" />
 		</box>
 	)
