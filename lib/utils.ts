@@ -234,13 +234,12 @@ function formatDataResourseLabel(
 export const formatDataResourse = {
   label:
     (options: {
-      icon: Variable<string>;
       lblType: Variable<"used/total" | "used" | "free" | "percent">;
       round: Variable<boolean>;
     }) =>
     (data: GenericResourceData) => {
       const { used, total, percentage, free } = data;
-      const { icon, lblType, round } = options;
+      const { lblType, round } = options;
 
       const formatFunctions = {
         TiB: formatSizeInTiB,
@@ -263,23 +262,22 @@ export const formatDataResourse = {
         return `${usedSizeFormatted}/${totalSizeFormatted}${postfix}`;
       }
       if (lblType().get() === "used") {
-        return `${autoFormatSize(used, round().get())} ${getPostfix(used)}`;
+        return `${autoFormatSize(used, round().get())}${getPostfix(used)}`;
       }
       if (lblType().get() === "free") {
-        return `${autoFormatSize(free, round().get())} ${getPostfix(free)}`;
+        return `${autoFormatSize(free, round().get())}${getPostfix(free)}`;
       }
-      return `${percentage}%`;
+      return `${percentage.toFixed(0)}%`;
     },
 
   tooltip:
     (options: {
-      icon: Variable<string>;
       lblType: Variable<"used/total" | "used" | "free" | "percent">;
       round: Variable<boolean>;
     }) =>
     (data: GenericResourceData) => {
       const { used, total, percentage, free } = data;
-      const { icon, lblType, round } = options;
+      const { lblType, round } = options;
 
       const formatFunctions = {
         TiB: formatSizeInTiB,

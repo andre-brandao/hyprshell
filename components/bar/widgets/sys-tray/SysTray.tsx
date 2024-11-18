@@ -9,6 +9,8 @@ import PannelBox from "@/components/ui/PannelBox"
 function SysTray() {
 	const tray = Tray.get_default()
 
+	// tray.
+
 	return (
 		<PannelBox className="SysTray">
 			{bind(tray, "items").as((items) =>

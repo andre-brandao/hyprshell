@@ -89,17 +89,15 @@ export const options = mkOptions(OPTIONS, {
     },
     vitals: {
       cpu: {
-        icon: opt<string>(" "),
         interval: opt<number>(1500),
       },
       ram: {
         interval: opt<number>(1500),
         round: opt<boolean>(true),
-        icon: opt<string>(" "),
+
         lblType: opt<"used/total" | "used" | "free" | "percent">("used/total"),
       },
       storage: {
-        icon: opt<string>(" "),
         interval: opt<number>(15000),
         round: opt<boolean>(true),
         lblType: opt<"used/total" | "used" | "free" | "percent">("used"),

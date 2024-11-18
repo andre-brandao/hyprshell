@@ -58,7 +58,7 @@ const Time = () => {
 	)
 }
 
-export default function ({ format = "%H:%M - %A %e." }) {
+export default function ({ format = "%H:%M - %a %e %b" }) {
 	const time = Variable<string>("").poll(
 		1000,
 		// biome-ignore lint/style/noNonNullAssertion: <explanation>

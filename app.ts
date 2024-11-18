@@ -20,9 +20,6 @@ App.start({
   requestHandler(request, res) {
     try {
       print(request);
-      // const foo = Layout();
-      // print(foo);
-      // if (request.startsWith("popup")) popup_osd(request.replace("popup ", ""));
       res("ok");
     } catch (error) {
       printerr(error);

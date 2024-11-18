@@ -10,7 +10,7 @@ import PannelBox from "@/components/ui/PannelBox"
 const { cpu, storage, ram } = options.bar.vitals
 
 export function CPU() {
-	const { interval, icon } = cpu
+	const { interval } = cpu
 
 	const cpuVar = Variable<number>(0).poll(interval().get(), computeCPU)
 
@@ -19,8 +19,8 @@ export function CPU() {
 			name={"CPU"}
 			className={"CPU"}
 		>
+			<label label={cpuVar((v) => `${v.toFixed(0).padStart(2, " ")}%`)} />
 			<Icon name="cpu-symbolic" />
-			<label label={cpuVar((v) => `${v.toFixed(0)}%`)} />
 		</box>
 	)
 }
@@ -38,8 +38,8 @@ export function RAM() {
 			className={"RAM"}
 			tooltipText={ramVar(formatDataResourse.tooltip(ram))}
 		>
-			<Icon name="ram-symbolic" />
 			<label label={ramVar(formatDataResourse.label(ram))} />
+			<Icon name="ram-symbolic" />
 		</box>
 	)
 }
@@ -58,8 +58,8 @@ export function Storage() {
 			className={"STORAGE"}
 			tooltipText={storageVar(formatDataResourse.tooltip(storage))}
 		>
-			<Icon name="drive-harddisk-symbolic" />
 			<label label={storageVar(formatDataResourse.label(storage))} />
+			<Icon name="drive-harddisk-symbolic" />
 		</box>
 	)
 }

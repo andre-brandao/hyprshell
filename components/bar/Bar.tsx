@@ -16,6 +16,7 @@ import DistroIcon from "./widgets/DistroIcon"
 import QuickSettings from "@/components/quick-settings/QuickSettings"
 import { Variable } from "astal"
 
+const { position } = options.bar
 const { center, end, start } = options.bar.layout
 const { padding, margin, border_radius, tranparent } = options.bar.BarContainer
 export const barWidget = {
@@ -36,8 +37,28 @@ export const barWidget = {
 export type BarWidget = keyof typeof barWidget
 
 export default function Bar(monitor: Gdk.Monitor) {
-	const anchor =
-		Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT
+	const anchor = position((p) => {
+		switch (p) {
+			case "top":
+				return (
+					Astal.WindowAnchor.TOP |
+					Astal.WindowAnchor.LEFT |
+					Astal.WindowAnchor.RIGHT
+				)
+			case "bottom":
+				return (
+					Astal.WindowAnchor.BOTTOM |
+					Astal.WindowAnchor.LEFT |
+					Astal.WindowAnchor.RIGHT
+				)
+			default:
+				return (
+					Astal.WindowAnchor.TOP |
+					Astal.WindowAnchor.LEFT |
+					Astal.WindowAnchor.RIGHT
+				)
+		}
+	})
 
 	function getWidgets(ws: BarWidget[]) {
 		return ws.map((w) => barWidget[w]({}))

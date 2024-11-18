@@ -160,6 +160,11 @@ export const Layout = [
 				enums={["top", "bottom"]}
 			/>
 			<Row
+				title="Flat Buttons"
+				opt={bar.flat_buttons}
+				type="boolean"
+			/>
+			<Row
 				title="Padding"
 				opt={bar.BarContainer.padding}
 			/>
@@ -174,6 +179,90 @@ export const Layout = [
 			<Row
 				title="Transparent"
 				opt={bar.BarContainer.tranparent}
+			/>
+		</Group>
+	</Page>,
+
+	<Page
+		name="Widgets"
+		icon="i"
+	>
+		<Group title="Vitals">
+			<Row
+				title="CPU Interval"
+				opt={bar.vitals.cpu.interval}
+				type="number"
+			/>
+
+			<Row
+				title="RAM Interval"
+				opt={bar.vitals.ram.interval}
+				type="number"
+			/>
+
+			<Row
+				title="RAM Round"
+				opt={bar.vitals.ram.round}
+				type="boolean"
+			/>
+
+			<Row
+				title="RAM Label Type"
+				opt={bar.vitals.ram.lblType}
+				type="enum"
+				enums={["used/total", "used", "free", "percent"]}
+			/>
+
+			<Row
+				title="Storage Interval"
+				opt={bar.vitals.storage.interval}
+				type="number"
+			/>
+
+			<Row
+				title="Storage Round"
+				opt={bar.vitals.storage.round}
+				type="boolean"
+			/>
+
+			<Row
+				title="Storage Label Type"
+				opt={bar.vitals.storage.lblType}
+				type="enum"
+				enums={["used/total", "used", "free", "percent"]}
+			/>
+		</Group>
+
+		<Group title="Workspaces">
+			<Row
+				title="Show Empty"
+				opt={bar.workspaces.show_empty}
+				type="boolean"
+			/>
+
+			<Row
+				title="Mode"
+				opt={bar.workspaces.mode}
+				type="enum"
+				enums={["mini", "full"]}
+			/>
+
+			<Row
+				title="Show"
+				opt={bar.workspaces.show}
+				type="number"
+			/>
+
+			<Row
+				title="Label"
+				opt={bar.workspaces.label}
+				type="string"
+			/>
+
+			<Row
+				title="Focused Label"
+				opt={bar.workspaces.focused_label}
+				type="string"
 			/>
 		</Group>
 	</Page>,
