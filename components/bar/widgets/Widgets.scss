@@ -3,6 +3,10 @@ window.Bar {
     .active {
       color: $primary-fg;
     }
+    icon {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
   }
 
   .FocusedClient {
@@ -27,7 +31,27 @@ window.Bar {
   }
 
   .KBLayout {
-    padding-left: 8px;
-    padding-right: 8px;
+    label {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
   }
 }
+
+// .Shortcuts {
+//   scrollable {
+//     @include scrollable($top: true);
+//     background-color: $bg;
+//     color: $fg;
+
+//     padding: 5em;
+
+//     .key {
+//       padding: 0.5em;
+//       margin: 0.5em;
+//       background-color: $bg;
+//       color: $fg;
+//       border: 1px solid $border;
+//     }
+//   }
+// }

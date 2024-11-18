@@ -22,13 +22,25 @@
     padding: 1px;
     // margin: 2px;
     margin: 0; // Remove margin to avoid gaps
+
+    label {
+      border-radius: $radius * 2;
+    }
+
     &.focused {
       // background-image: $active-gradient;;
-      background-color: transparentize($fg, 0.5);
-      color: $bg;
+      background-color: transparentize($primary-fg, 0.5);
+      // color: $primary-fg;
       // border-color: $primary-bg;
+      // border-radius: $radius * 2;
       min-width: 30pt;
-      min-height: 12pt;
+      // min-height: 12pt;
+
+      label {
+        color: $primary-bg;
+        background-color: $primary-fg;
+        border: $border;
+      }
     }
 
     &.occupied {
@@ -39,6 +51,7 @@
       min-height: 7pt;
 
       // Adjust corners for adjacent occupied buttons
+      // &.occupied {
       &.left {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
@@ -47,6 +60,7 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
+      // }
     }
   }
 }

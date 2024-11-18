@@ -55,7 +55,7 @@ function Media() {
 							)}
 						</box>
 					) : (
-						"Nothing Playing"
+						<box> "Nothing Playing"</box>
 					),
 				)}
 			</eventbox>

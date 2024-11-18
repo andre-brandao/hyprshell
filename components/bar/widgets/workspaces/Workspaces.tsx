@@ -21,30 +21,23 @@ function Workspaces() {
 					(i) => <WsButton index={i} />,
 				)
 			})}
+
+			{/* {bind(hypr, "focusedWorkspace").as((fw) => {
+				if (!show_empty().get()) return <box />
+				if (fw.id < show().get()) {
+					return <box />
+				}
+
+				return (
+					<WsButton
+						index={fw.id}
+						className="focused"
+					/>
+				)
+			})} */}
 		</PannelBox>
 	)
 }
-
-// function MiniWorkspaces({ index }: { index: number }) {
-//   const hypr = Hyprland.get_default();
-
-//   const ws = hypr.get_workspace(index);
-//   return (
-//     <label
-//       valign={ALIGN.CENTER}
-//       label={`${index}`}
-//       setup={(self) => {
-//         self.toggleClassName(
-//           "acitve",
-//           bind(hypr, "focusedWorkspace")
-//             .as((fw) => fw.id === index)
-//             .get()
-//         );
-//         self.toggleClassName("occupied", ws !== null);
-//       }}
-//     ></label>
-//   );
-// }
 
 function WsButton({ index, className }: { index: number; className?: string }) {
 	const hypr = Hyprland.get_default()
@@ -69,15 +62,15 @@ function WsButton({ index, className }: { index: number; className?: string }) {
 	)
 
 	const formatClassName = Variable.derive(
-		[bind(hypr, "focusedWorkspace")],
-		(fw) => {
+		[bind(hypr, "focusedWorkspace"), show],
+		(fw, s) => {
 			const classes: string[] = []
 			const left = hypr.get_workspace(index - 1)
 			const right = hypr.get_workspace(index + 1)
 
 			if (left) classes.push("left")
 
-			if (right) classes.push("right")
+			if (index + 1 <= s && right) classes.push("right")
 
 			if (fw.id === index) classes.push("focused")
 
