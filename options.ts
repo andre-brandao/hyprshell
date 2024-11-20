@@ -29,6 +29,9 @@ export const options = mkOptions(OPTIONS, {
       base0E: opt("#ff73fd"),
       base0F: opt("#b18a3d"),
     },
+    // This is also validbg
+    // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+
     colors: {
       bg: {
         color: opt<Color>("$base00"),
@@ -43,7 +46,9 @@ export const options = mkOptions(OPTIONS, {
         opacity: opt(0),
       },
       widget: {
-        color: opt<Color>("$color01"),
+        // color: opt<Color>("$color01"),
+        fg: opt<Color>("$color06"),
+        bg: opt<Color>("$base00"),
         opacity: opt(40),
       },
       hover: {
@@ -56,7 +61,7 @@ export const options = mkOptions(OPTIONS, {
         fg: opt("#141414"),
       },
       border: {
-        color: opt("#51a4e7"),
+        color: opt("$color05"),
         width: opt("2px"),
         opacity: opt(50),
       },
@@ -77,39 +82,6 @@ export const options = mkOptions(OPTIONS, {
       },
     },
   },
-
-  // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-  // theme: {
-  //   fg: opt("#eeeeee"),
-  //   // bg: opt("#171717"),
-
-  //   bg: opt("#141414"),
-  //   primary: {
-  //     fg: opt("#51a4e7"),
-  //     bg: opt("#171717"),
-
-  //     // bg: opt("#141414"),
-  //   },
-  //   error: {
-  //     bg: opt("#e55f86"),
-  //     fg: opt("#141414"),
-  //   },
-  //   border: {
-  //     color: opt("#51a4e7"),
-  //     width: opt("2px"),
-  //     opacity: opt(50),
-  //   },
-  //   widget: {
-  //     color: opt("#080808"),
-  //     opacity: opt(40),
-  //   },
-  //   blur: opt(0),
-  //   shadows: opt(true),
-  //   padding: opt("7pt"),
-  //   spacing: opt("8pt"),
-  //   radius: opt("11px"),
-  //   transition: opt("300ms"),
-  // },
 
   components: {
     BarContainer: {

@@ -99,13 +99,9 @@ const variables = () =>
     ),
     $("border-width", colors.border.width),
     $("border", "$border-width solid $border-color"),
-
-    //  ---- DEPRECATED -----
-    $("primary-bg", "$base00"),
-    $("primary-fg", "$color06"),
-    //  -------------------------
     // WIDGET
-    $("widget-bg", transparantize(colors.widget.color, colors.widget.opacity)),
+    $("widget-bg", transparantize(colors.widget.bg, colors.widget.opacity)),
+    $("widget-fg", transparantize(colors.widget.fg, colors.widget.opacity)),
     // HOVER
     $("hover-bg", transparantize(colors.hover.bg, colors.hover.opacity)),
     $("hover-fg", transparantize(colors.hover.fg, colors.hover.opacity)),
@@ -117,16 +113,15 @@ const variables = () =>
     // SHADOWS
     $("shadows", colors.shadows.enabled),
     $("shadow-color", "rgba(0,0,0,.6)"),
-
     $("text-shadow", "2pt 2pt 2pt $shadow-color"),
     $(
       "box-shadow",
 
       "2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color",
     ),
-    // $("padding", options.theme.padding),
 
     // OTHERS
+    // $("padding", options.theme.padding),
     $("transition", colors.other.transition),
     $("spacing", colors.other.spacing),
     $("radius", colors.other.radius),

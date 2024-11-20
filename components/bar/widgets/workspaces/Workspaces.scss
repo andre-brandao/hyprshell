@@ -29,16 +29,14 @@
 
     &.focused {
       // background-image: $active-gradient;;
-      background-color: transparentize($primary-fg, 0.5);
-      // color: $primary-fg;
-      // border-color: $primary-bg;
-      // border-radius: $radius * 2;
+      background-color: transparentize($widget-fg, 0.5);
+
       min-width: 30pt;
       // min-height: 12pt;
 
       label {
-        color: $primary-bg;
-        background-color: $primary-fg;
+        color: $bg;
+        background-color: $color06;
         border: $border;
       }
     }

@@ -11,12 +11,12 @@
 
   trough {
     // TODO: add bg
-    // background-color: gtkalpha($primary-bg, 0.5);
+    background-color: gtkalpha($color01, 0.5);
     border-radius: $radius;
   }
 
   highlight {
-    background-color: $primary-fg;
+    background-color: $color02;
     min-height: 0.8em;
     border-radius: $radius;
   }
