@@ -2,13 +2,13 @@ import { App, Astal, Gdk, Gtk } from "astal/gtk3"
 import { RegularWindow } from "../../components/ui/RegularWindow"
 import { options } from "@/options"
 
-import { Layout } from "./Layout"
+// import { Layout } from "./Layout"
 
 import { Variable, GLib, bind, Binding } from "astal"
 import icons from "@/lib/icons"
 import Icon from "../../components/ui/Icon"
 
-const current = Variable(Layout[0].name)
+// const current = Variable(Layout[0].name)
 
 function Header() {
 	// { title }: { title: string | Binding<string> }
@@ -50,7 +50,7 @@ function Pager() {
 			className="Pager"
 			vertical
 		>
-			{Layout.map(({ name }) => (
+			{/* {Layout.map(({ name }) => (
 				<button
 					// xalign={0}
 
@@ -58,11 +58,10 @@ function Pager() {
 					onClick={() => current.set(name)}
 				>
 					<box>
-						{/* <Icon name={icon} /> */}
 						<label label={name} />
 					</box>
 				</button>
-			))}
+			))} */}
 		</box>
 	)
 }
@@ -81,14 +80,14 @@ export default function SettingsWindow() {
 			<box>
 				<Pager />
 				<box vertical>
-					<Header title={bind(Layout[0], "name").as((n) => `${n}`)} />
+					{/* <Header title={bind(Layout[0], "name").as((n) => `${n}`)} />
 					<stack
 						// vertical
 						shown={current()}
 						// children={Layout}
 					>
 						{Layout}
-					</stack>
+					</stack> */}
 				</box>
 			</box>
 		</RegularWindow>

@@ -78,6 +78,7 @@ function Shortcuts() {
 					<box
 						css={`
 							padding: 0.5em;
+							border-bottom: 1px solid #333;
 					`}
 					>
 						<box className="key">
@@ -89,7 +90,7 @@ function Shortcuts() {
 							halign={ALIGN.END}
 						>
 							<label
-								label={`${formatKeybindPath(bind.arg)} ${bind.dispatcher}`}
+								label={`${bind.dispatcher} ${formatKeybindPath(bind.arg)}`}
 							/>
 						</box>
 					</box>

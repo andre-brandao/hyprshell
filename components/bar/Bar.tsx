@@ -18,7 +18,8 @@ import { Variable } from "astal"
 
 const { position } = options.bar
 const { center, end, start } = options.bar.layout
-const { padding, margin, border_radius, tranparent } = options.bar.BarContainer
+const { padding, margin, border_radius, tranparent } =
+	options.components.BarContainer
 export const barWidget = {
 	distro: DistroIcon,
 	battery: BatteryLevel,

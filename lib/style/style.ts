@@ -6,6 +6,8 @@ import { App } from "astal/gtk3";
 import { Opt } from "@/lib/option";
 import { options } from "@/options";
 
+const { base16, colors } = options.themev2;
+
 // @ts-expect-error
 import mixins from "inline:./mixins.scss";
 import GLib from "gi://GLib?version=2.0";
@@ -23,93 +25,111 @@ const $ = (name: string, value: string | Opt<any>) => {
   return `$${name}: ${value};`;
 };
 
-// const variables = () =>
-//   Object.entries(themeCSS)
-//     .map(([key, value]) => $(key, value.get().toString()))
-//     .join("\n");
-const popoverPaddingMultiplier = 1.6;
+// base00 - Default Background
+// base01 - Lighter Background (Used for status bars, line number and folding marks)
+// base02 - Selection Background
+// base03 - Comments, Invisibles, Line Highlighting
+// base04 - Dark Foreground (Used for status bars)
+// base05 - Default Foreground, Caret, Delimiters, Operators
+// base06 - Light Foreground (Not often used)
+// base07 - Light Background (Not often used)
+// base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+// base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
+// base0A - Classes, Markup Bold, Search Text Background
+// base0B - Strings, Inherited Class, Markup Code, Diff Inserted
+// base0C - Support, Regular Expressions, Escape Characters, Markup Quotes
+// base0D - Functions, Methods, Attribute IDs, Headings
+// base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
+// base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
 
+function mkBaseClass(variable: string) {
+  return `
+  .${variable}-bg{
+    background-color: $${variable};
+  }
+  .${variable}-fg{
+    color: $${variable};
+  }
+  .${variable}-border{
+    border-color: $${variable};
+  }
+  .${variable}-hover{
+    &:hover{
+      background-color: $${variable};
+    }
+  }`;
+}
+
+const baseVars = () =>
+  Object.entries(options.themev2.base16)
+    .map(([key, value]) => $(key, value))
+    .join("\n");
+
+const baseClasses = () =>
+  Object.keys(options.themev2.base16).map(mkBaseClass).join("\n");
+
+function transparantize(color: Opt<string>, opacity: Opt<number>) {
+  return `transparentize(${color.get()}, ${opacity.get() / 100})`;
+}
 const variables = () =>
   [
-    $(
-      "bg",
-      options.theme.blur.get()
-        ? `transparentize(${options.theme.bg}, ${
-            options.theme.blur.get() / 100
-          })`
-        : options.theme.bg,
-    ),
-    $("fg", options.theme.fg),
+    $("font-size", options.font.size),
+    $("font-name", options.font.name),
 
-    $("primary-bg", options.theme.primary.bg),
-    $("primary-fg", options.theme.primary.fg),
-
-    $("error", options.theme.error.bg),
-    $("error-bg", options.theme.error.bg),
-    $("error-fg", options.theme.error.fg),
-
-    // $("padding", options.theme.padding),
-    $("spacing", options.theme.spacing),
-    $("radius", options.theme.radius),
-    // $("transition", `${options.transition}ms`),
-    $("transition", options.theme.transition),
-
-    $("shadows", options.theme.shadows),
-
-    $(
-      "widget-bg",
-      `transparentize(${options.theme.widget.color.get()}, ${
-        options.theme.widget.opacity.get() / 100
-      })`,
-    ),
-
-    $(
-      "hover-bg",
-      `transparentize(${options.theme.widget.color.get()}, ${
-        options.theme.widget.opacity.get() / 100
-      })`,
-    ),
-    $("hover-fg", `lighten(${options.theme.fg.get()}, 8%)`),
-
-    $("border-width", options.theme.border.width),
+    $("color01", base16.base08),
+    $("color02", base16.base09),
+    $("color03", base16.base0A),
+    $("color04", base16.base0B),
+    $("color05", base16.base0C),
+    $("color06", base16.base0D),
+    $("color07", base16.base0E),
+    $("color08", base16.base0F),
+    // BG
+    $("bg", transparantize(colors.bg.color, colors.bg.opacity)),
+    $("bg-alt", transparantize(colors.bg.alt, colors.bg.opacity)),
+    $("bg-selected", transparantize(colors.bg.selected, colors.bg.opacity)),
+    // FG
+    $("fg", transparantize(colors.fg.color, colors.fg.opacity)),
+    $("fg-alt", transparantize(colors.fg.alt, colors.fg.opacity)),
+    $("fg-light", transparantize(colors.fg.light, colors.fg.opacity)),
+    // BORDER
     $(
       "border-color",
-      `transparentize(${options.theme.border.color.get()}, ${
-        options.theme.border.opacity.get() / 100
-      })`,
+      transparantize(colors.border.color, colors.border.opacity),
     ),
+    $("border-width", colors.border.width),
     $("border", "$border-width solid $border-color"),
 
-    $(
-      "active-gradient",
-      `linear-gradient(to right, ${options.theme.primary.bg.get()}, darken(${options.theme.primary.bg.get()}, 4%))`,
-    ),
+    //  ---- DEPRECATED -----
+    $("primary-bg", "$base00"),
+    $("primary-fg", "$color06"),
+    //  -------------------------
+    // WIDGET
+    $("widget-bg", transparantize(colors.widget.color, colors.widget.opacity)),
+    // HOVER
+    $("hover-bg", transparantize(colors.hover.bg, colors.hover.opacity)),
+    $("hover-fg", transparantize(colors.hover.fg, colors.hover.opacity)),
+
+    // ERROR
+    $("error-bg", colors.error.bg),
+    $("error-fg", colors.error.fg),
+
+    // SHADOWS
+    $("shadows", colors.shadows.enabled),
     $("shadow-color", "rgba(0,0,0,.6)"),
+
     $("text-shadow", "2pt 2pt 2pt $shadow-color"),
     $(
       "box-shadow",
 
       "2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color",
     ),
+    // $("padding", options.theme.padding),
 
-    $(
-      "popover-border-color",
-      `transparentize(${options.theme.border.color.get()}, ${Math.max(
-        (options.theme.border.opacity.get() - 1) / 100,
-        0,
-      )})`,
-    ),
-    // $("popover-padding", `$padding * ${popoverPaddingMultiplier}`),
-    // $(
-    //   "popover-radius",
-    //   options.theme.radius.get() === "0" ? "0" : "$radius + $popover-padding",
-    // ),
-
-    $("font-size", options.font.size),
-    $("font-name", options.font.name),
-
-    // etc
-    $("charging-bg", options.bar.battery.charging),
+    // OTHERS
+    $("transition", colors.other.transition),
+    $("spacing", colors.other.spacing),
+    $("radius", colors.other.radius),
   ].join("\n");
 
 const imports = () => {
@@ -121,11 +141,10 @@ const imports = () => {
     .join("\n");
 };
 
-const functions = () => `
-  @function gtkalpha($c, $a) {
-    @return string.unquote("alpha(#{$c},#{$a})");
-  }
-  `;
+const functions = () =>
+  `@function gtkalpha($c, $a) {
+  @return string.unquote("alpha(#{$c},#{$a})");
+}`;
 function resetCss() {
   ensureDirectory(tmpCSS);
   ensureFile(tmpCSS);
@@ -134,12 +153,14 @@ function resetCss() {
   writeFile(
     tmpCSS,
     `
-            @use "sass:string";
-            ${functions()}
-            ${variables()}
-            ${mixins}
-            ${imports()}
-            `,
+@use "sass:string";
+${functions()}
+${baseVars()}
+${baseClasses()}
+${variables()}
+${mixins}
+${imports()}
+`,
   );
   exec(`sass ${tmpCSS} ${css}`);
 

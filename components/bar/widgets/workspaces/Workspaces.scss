@@ -62,5 +62,16 @@
       }
       // }
     }
+    // apply  margin to not occupied buttons
+    &:not(.occupied) {
+      margin-left: 0.2em;
+      margin-right: 0.2em;
+      &.left {
+        margin-left: 0.2em * 2;
+      }
+      &.right {
+        margin-right: 0.2em * 2;
+      }
+    }
   }
 }

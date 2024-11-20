@@ -22,7 +22,7 @@
 
 @mixin button-active() {
   box-shadow: inset 0 0 0 $border-width $border-color;
-  background-image: $active-gradient;
+  //background-image: $active-gradient;
   background-color: $primary-bg;
   color: $primary-fg;
 }
@@ -100,7 +100,7 @@
 @mixin slider(
   $width: 0.7em,
   $slider-width: 0.5em,
-  $gradient: $active-gradient,
+  //$gradient: $active-gradient,
   $slider: true,
   $focusable: true,
   $radius: $radius

@@ -4,74 +4,132 @@ import { mkOptions, opt } from "./lib/option";
 
 import { barWidget, type BarWidget } from "@/components/bar/Bar";
 
-// export const options = {
-//   bar: {
-//     start: opt<BarWidget[]>(["workspaces", "focused"]),
-//     center: opt<BarWidget[]>(["media"]),
-//     end: opt<BarWidget[]>(["idle", "tray", "wifi", "audio", "battery", "time"]),
-//   },
-// };
-// dark: {
-//   primary: {
-//       bg: opt("#51a4e7"),
-//       fg: opt("#141414"),
-//   },
-//   error: {
-//       bg: opt("#e55f86"),
-//       fg: opt("#141414"),
-//   },
-//   bg: opt("#171717"),
-//   fg: opt("#eeeeee"),
-//   widget: opt("#eeeeee"),
-//   border: opt("#eeeeee"),
-// },
 export const options = mkOptions(OPTIONS, {
   font: {
     size: opt("1.2em"),
     name: opt("Ubuntu"),
   },
-  // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-  theme: {
-    fg: opt("#eeeeee"),
-    // bg: opt("#171717"),
 
-    bg: opt("#141414"),
-    primary: {
-      fg: opt("#51a4e7"),
-      bg: opt("#171717"),
+  themev2: {
+    base16: {
+      base00: opt("#000000"),
+      base01: opt("#242422"),
+      base02: opt("#484844"),
+      base03: opt("#6c6c66"),
+      base04: opt("#918f88"),
+      base05: opt("#b5b3aa"),
+      base06: opt("#d9d7cc"),
+      base07: opt("#fdfbee"),
+      base08: opt("#ff6c60"),
+      base09: opt("#e9c062"),
+      base0A: opt("#ffffb6"),
+      base0B: opt("#a8ff60"),
+      base0C: opt("#c6c5fe"),
+      base0D: opt("#96cbfe"),
+      base0E: opt("#ff73fd"),
+      base0F: opt("#b18a3d"),
+    },
+    colors: {
+      bg: {
+        color: opt<Color>("$base00"),
+        alt: opt<Color>("$base01"),
+        selected: opt<Color>("$base02"),
+        opacity: opt(0),
+      },
+      fg: {
+        color: opt<Color>("$base05"),
+        alt: opt<Color>("$base04"),
+        light: opt<Color>("$base06"),
+        opacity: opt(0),
+      },
+      widget: {
+        color: opt<Color>("$color01"),
+        opacity: opt(40),
+      },
+      hover: {
+        bg: opt<Color>("$color02"),
+        fg: opt<Color>("$color01"),
+        opacity: opt(60),
+      },
+      error: {
+        bg: opt("#e55f86"),
+        fg: opt("#141414"),
+      },
+      border: {
+        color: opt("#51a4e7"),
+        width: opt("2px"),
+        opacity: opt(50),
+      },
+      shadows: {
+        enabled: opt(true),
+        color: opt("rgba(0,0,0,.6)"),
+        "text-shadow": opt("2pt 2pt 2pt $shadow-color"),
+        "box-shadow": opt(
+          "2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color",
+        ),
+      },
 
-      // bg: opt("#141414"),
+      other: {
+        transition: opt("300ms"),
+        spacing: opt("8pt"),
+        radius: opt("11px"),
+        // padding: opt("7pt"),
+      },
     },
-    error: {
-      bg: opt("#e55f86"),
-      fg: opt("#141414"),
-    },
-    border: {
-      color: opt("#51a4e7"),
-      width: opt("2px"),
-      opacity: opt(50),
-    },
-    widget: {
-      color: opt("#080808"),
-      opacity: opt(40),
-    },
-    blur: opt(0),
-    shadows: opt(true),
-    padding: opt("7pt"),
-    spacing: opt("8pt"),
-    radius: opt("11px"),
-    transition: opt("300ms"),
   },
-  bar: {
-    position: opt<"top" | "bottom">("top"),
-    flat_buttons: opt<boolean>(true),
+
+  // https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
+  // theme: {
+  //   fg: opt("#eeeeee"),
+  //   // bg: opt("#171717"),
+
+  //   bg: opt("#141414"),
+  //   primary: {
+  //     fg: opt("#51a4e7"),
+  //     bg: opt("#171717"),
+
+  //     // bg: opt("#141414"),
+  //   },
+  //   error: {
+  //     bg: opt("#e55f86"),
+  //     fg: opt("#141414"),
+  //   },
+  //   border: {
+  //     color: opt("#51a4e7"),
+  //     width: opt("2px"),
+  //     opacity: opt(50),
+  //   },
+  //   widget: {
+  //     color: opt("#080808"),
+  //     opacity: opt(40),
+  //   },
+  //   blur: opt(0),
+  //   shadows: opt(true),
+  //   padding: opt("7pt"),
+  //   spacing: opt("8pt"),
+  //   radius: opt("11px"),
+  //   transition: opt("300ms"),
+  // },
+
+  components: {
     BarContainer: {
       padding: opt<string>("0.5em"),
       margin: opt<string>("0.5em"),
       border_radius: opt<string>("0.5em"),
       tranparent: opt<boolean>(false),
     },
-    PannelBox: {},
+    PannelBox: {
+      margin: opt("1.5pt"),
+      // TODO: add a way to change alpha channel
+      classes: opt<string[]>(["base00-bg", "base0A-fg"]),
+      css: opt<string>(""),
+      // background: opt("#")
+    },
+  },
+  bar: {
+    position: opt<"top" | "bottom">("top"),
+    flat_buttons: opt<boolean>(true),
+
     layout: {
       start: opt<BarWidget[]>(["distro", "vitals", "media", "focused"]),
       center: opt<BarWidget[]>(["workspaces"]),

@@ -88,6 +88,7 @@ export class PopupWindow extends Widget.Window {
 			visible: false,
 			layer,
 			// css: "all: unset;",
+
 			setup: (self) => {
 				idle(() => {
 					// Add way to make window open on startup
