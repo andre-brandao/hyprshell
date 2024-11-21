@@ -6,4 +6,9 @@ node_modules/
 result/
 result
 
+# editors
+.vscode
+.helix
+.idea
+
 .env

@@ -1,0 +1,39 @@
+// BG
+.bg {
+  background-color: $bg;
+}
+.bg-alt {
+  background-color: $bg-alt;
+}
+.bg-selected {
+  background-color: $bg-selected;
+}
+// FG
+.fg {
+  color: $fg;
+}
+.fg-alt {
+  color: $fg-alt;
+}
+.fg-selected {
+  color: $fg-selected;
+}
+// WIDGET
+.bg-widget {
+  background-color: $widget-bg;
+}
+.fg-widget {
+  color: $widget-fg;
+}
+
+.bg-hover {
+  background-color: $hover-bg;
+}
+.fg-hover {
+  color: $hover-fg;
+}
+// BORDER
+
+.bordered {
+  border: $border;
+}
