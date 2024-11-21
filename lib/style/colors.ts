@@ -1,6 +1,44 @@
+export type Base16ColorScheme = {
+  scheme: string;
+  author: string;
+  base00: string;
+  base01: string;
+  base02: string;
+  base03: string;
+  base04: string;
+  base05: string;
+  base06: string;
+  base07: string;
+  base08: string;
+  base09: string;
+  base0A: string;
+  base0B: string;
+  base0C: string;
+  base0D: string;
+  base0E: string;
+  base0F: string;
+};
+
+export type Base16Key = keyof Base16ColorScheme;
+
+export type Base16Color = `$${Base16Key}`;
+
+export type Color = Base16Color | string;
+
+export type ClassVariants<T extends string> = {
+  [K in T as `${K}-bg`]: string;
+} & {
+  [K in T as `${K}-fg`]: string;
+} & {
+  [K in T as `${K}-border`]: string;
+} & {
+  [K in T as `${K}-hover`]: string;
+};
+
 import { readFile } from "astal/file";
 import { exec, GLib } from "astal";
 import { Notify } from "../utils";
+import { options } from "@/options";
 
 const stylixPath = `${GLib.getenv("HOME")}/.config/stylix/pallete.json`;
 
@@ -79,7 +117,9 @@ export function parseThemeFile(
  * @param colors Partial StylixColors object.
  * @returns True if valid, otherwise false.
  */
-function validateStylixColors(colors: Partial<Base16ColorScheme>): boolean {
+export function validateStylixColors(
+  colors: Partial<Base16ColorScheme>,
+): boolean {
   const expectedKeys = [
     "scheme",
     "author",
@@ -122,4 +162,24 @@ export function listBase16Themes() {
     name: f.split("/").pop(),
     path: f,
   }));
+}
+
+export function applyTheme(theme: Base16ColorScheme) {
+  const base16 = options.theme.base16;
+  base16.base00.set(`${theme.base00}`);
+  base16.base01.set(`${theme.base01}`);
+  base16.base02.set(`${theme.base02}`);
+  base16.base03.set(`${theme.base03}`);
+  base16.base04.set(`${theme.base04}`);
+  base16.base05.set(`${theme.base05}`);
+  base16.base06.set(`${theme.base06}`);
+  base16.base07.set(`${theme.base07}`);
+  base16.base08.set(`${theme.base08}`);
+  base16.base09.set(`${theme.base09}`);
+  base16.base0A.set(`${theme.base0A}`);
+  base16.base0B.set(`${theme.base0B}`);
+  base16.base0C.set(`${theme.base0C}`);
+  base16.base0D.set(`${theme.base0D}`);
+  base16.base0E.set(`${theme.base0E}`);
+  base16.base0F.set(`${theme.base0F}`);
 }

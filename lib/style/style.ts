@@ -6,7 +6,7 @@ import { App } from "astal/gtk3";
 import { Opt } from "@/lib/option";
 import { options } from "@/options";
 
-const { base16, colors } = options.themev2;
+const { base16, colors } = options.theme;
 
 // @ts-expect-error
 import mixins from "inline:./mixins.scss";
@@ -25,49 +25,89 @@ const $ = (name: string, value: string | Opt<any>) => {
   return `$${name}: ${value};`;
 };
 
-// base00 - Default Background
-// base01 - Lighter Background (Used for status bars, line number and folding marks)
-// base02 - Selection Background
-// base03 - Comments, Invisibles, Line Highlighting
-// base04 - Dark Foreground (Used for status bars)
-// base05 - Default Foreground, Caret, Delimiters, Operators
-// base06 - Light Foreground (Not often used)
-// base07 - Light Background (Not often used)
-// base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-// base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url
-// base0A - Classes, Markup Bold, Search Text Background
-// base0B - Strings, Inherited Class, Markup Code, Diff Inserted
-// base0C - Support, Regular Expressions, Escape Characters, Markup Quotes
-// base0D - Functions, Methods, Attribute IDs, Headings
-// base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed
-// base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-
-function mkBaseClass(variable: string) {
+function mkCSSClass(variable: string) {
   return `
-  .${variable}-bg{
+  .bg-${variable} {
     background-color: $${variable};
   }
-  .${variable}-fg{
+  .fg-${variable} {
     color: $${variable};
   }
-  .${variable}-border{
+  .border-${variable} {
     border-color: $${variable};
   }
-  .${variable}-hover{
-    &:hover{
-      background-color: $${variable};
-    }
-  }`;
+`;
 }
 
 const baseVars = () =>
-  Object.entries(options.themev2.base16)
+  Object.entries(options.theme.base16)
     .map(([key, value]) => $(key, value))
     .join("\n");
 
 const baseClasses = () =>
-  Object.keys(options.themev2.base16).map(mkBaseClass).join("\n");
+  Object.keys(options.theme.base16).map(mkCSSClass).join("\n");
 
+const aliasClasses = () => {
+  const colorAliases = [
+    "color01",
+    "color02",
+    "color03",
+    "color04",
+    "color05",
+    "color06",
+    "color07",
+    "color08",
+  ]
+    .map(mkCSSClass)
+    .join("\n");
+
+  return `
+// BG
+.bg {
+  background-color: $bg;
+}
+.bg-alt {
+  background-color: $bg-alt;
+}
+.bg-selected {
+  background-color: $bg-selected;
+}
+// FG
+.fg {
+  color: $fg;
+}
+.fg-alt {
+  color: $fg-alt;
+}
+.fg-selected {
+  color: $fg-selected;
+}
+// WIDGET
+.bg-widget {
+  background-color: $widget-bg;
+}
+.fg-widget {
+  color: $widget-fg;
+}
+
+.bg-hover {
+  background-color: $hover-bg;
+}
+.fg-hover {
+  color: $hover-fg;
+}
+// BORDER
+
+.bordered {
+  border: $border;
+}
+.rounded {
+  border-radius: $radius;
+}
+
+${colorAliases}    
+`;
+};
 function transparantize(color: Opt<string>, opacity: Opt<number>) {
   return `transparentize(${color.get()}, ${opacity.get() / 100})`;
 }
@@ -91,7 +131,7 @@ const variables = () =>
     // FG
     $("fg", transparantize(colors.fg.color, colors.fg.opacity)),
     $("fg-alt", transparantize(colors.fg.alt, colors.fg.opacity)),
-    $("fg-light", transparantize(colors.fg.light, colors.fg.opacity)),
+    $("fg-selected", transparantize(colors.fg.light, colors.fg.opacity)),
     // BORDER
     $(
       "border-color",
@@ -153,6 +193,7 @@ ${functions()}
 ${baseVars()}
 ${baseClasses()}
 ${variables()}
+${aliasClasses()}
 ${mixins}
 ${imports()}
 `,

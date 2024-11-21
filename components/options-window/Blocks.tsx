@@ -123,10 +123,12 @@ export function Page<T>({
 	name,
 	icon,
 	children,
+	child,
 }: {
 	name: string | Binding<string>
 	icon: string
-	children?: ReturnType<typeof Group>[]
+	children?: JSX.Element[]
+	child?: JSX.Element
 }) {
 	return (
 		<box
@@ -138,7 +140,7 @@ export function Page<T>({
 					vexpand
 					vertical
 					className={"page-content"}
-					// children={children}
+					child={child}
 				>
 					{children}
 				</box>
