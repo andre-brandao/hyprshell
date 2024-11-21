@@ -21,20 +21,6 @@ function Workspaces() {
 					(i) => <WsButton index={i} />,
 				)
 			})}
-
-			{/* {bind(hypr, "focusedWorkspace").as((fw) => {
-				if (!show_empty().get()) return <box />
-				if (fw.id < show().get()) {
-					return <box />
-				}
-
-				return (
-					<WsButton
-						index={fw.id}
-						className="focused"
-					/>
-				)
-			})} */}
 		</PannelBox>
 	)
 }

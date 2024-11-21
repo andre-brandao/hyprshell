@@ -13,5 +13,11 @@ window.Bar {
     &.opaque {
       background-color: $bg;
     }
+
+    .PannelBox {
+      // mr and ml
+      margin-right: 0.1em;
+      margin-left: 0.1em;
+    }
   }
 }

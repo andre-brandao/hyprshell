@@ -71,5 +71,14 @@
         margin-right: 0.2em * 2;
       }
     }
+
+    &:hover {
+      // background-color: $color06;
+      label {
+        color: $bg;
+        background-color: $color07;
+        // border: $border;
+      }
+    }
   }
 }

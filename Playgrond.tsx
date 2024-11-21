@@ -98,18 +98,22 @@ export default function PlayGround() {
 function BASE16({ base16 }: { base16: Base16ColorScheme }) {
 	return (
 		<box vertical>
-			{Object.entries(base16).map(([key, value]) => (
-				<box
-					css={`
+			{Object.entries(base16).map(([key, value]) =>
+				value.startsWith("#") ? (
+					<box
+						css={`
 					background-color: ${value};
 					min-width: 250px;
 					`}
-				>
-					<label label={key} />
-					-
+					>
+						<label label={key} />
+						-
+						<label label={value} />
+					</box>
+				) : (
 					<label label={value} />
-				</box>
-			))}
+				),
+			)}
 		</box>
 	)
 }

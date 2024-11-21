@@ -53,8 +53,8 @@ export const options = mkOptions(OPTIONS, {
 				opacity: opt(40),
 			},
 			hover: {
-				bg: opt<Color>("$color02"),
-				fg: opt<Color>("$color01"),
+				bg: opt<Color>("$color07"),
+				fg: opt<Color>("$fg"),
 				opacity: opt(60),
 			},
 			error: {
@@ -93,13 +93,12 @@ export const options = mkOptions(OPTIONS, {
 		},
 		PannelBox: {
 			margin: opt("1.5pt"),
-			// TODO: add a way to change alpha channel
-			classes: opt<string[]>(["bg-widget", "rounded"]),
+			// classes: opt<string[]>(["bg-widget", "rounded"]),
 			css: opt<string>(""),
 			// background: opt("#")
 		},
 		PannelButton: {
-			classes: opt<string[]>(["bg-widget", "rounded"]),
+			// classes: opt<string[]>(["bg-widget", "rounded"]),
 		},
 	},
 	bar: {

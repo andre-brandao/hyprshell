@@ -91,7 +91,7 @@ export function Setter<T>({
 						self.value = opt.get() as number
 					}}
 					onValueChanged={(self) => {
-						print("set num", self.value)
+						// print("set num", self.value)
 						opt.set(self.value as T)
 					}}
 				/>
@@ -107,7 +107,7 @@ export function Setter<T>({
 						})
 					}}
 					onActivate={(self) => {
-						print("set obj", self.text)
+						// print("set obj", self.text)
 						opt.set(JSON.parse(self.text || ""))
 					}}
 				/>
@@ -123,7 +123,7 @@ export function Setter<T>({
 						})
 					}}
 					onActivate={(self) => {
-						print("set text", self.text)
+						// print("set text", self.text)
 						opt.set(self.text as T)
 					}}
 				/>
@@ -140,7 +140,7 @@ export function Setter<T>({
 			return (
 				<switch
 					onButtonReleaseEvent={(self) => {
-						print("pressed bool", self.active)
+						// print("pressed bool", self.active)
 						// self.active = !self.active
 						opt.set(self.active as T)
 					}}
@@ -159,7 +159,7 @@ export function Setter<T>({
 						self.hook(opt, (self) => {
 							const rgba = new Gdk.RGBA()
 							rgba.parse(opt.get() as string)
-							print(`rgba${opt.get()}`, rgba)
+							// print(`rgba${opt.get()}`, rgba)
 							self.rgba = rgba
 						})
 					}

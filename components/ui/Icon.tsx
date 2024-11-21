@@ -15,7 +15,7 @@ function Icon({
 	fallback = "image-missing-symbolic",
 	...rest
 }: IconProps) {
-	if (name === null) {
+	if (!name) {
 		return (
 			<icon
 				icon={fallback}
