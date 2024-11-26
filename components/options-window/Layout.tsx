@@ -3,6 +3,8 @@ import { RegularWindow } from "../../components/ui/RegularWindow"
 import { Group, Page, Row } from "./Blocks"
 import { options } from "@/options"
 
+import { ColorGroup } from "./Base16"
+
 const { bar, notification, theme, font, components } = options
 
 export const Layout = [
@@ -10,6 +12,9 @@ export const Layout = [
 		name="Theme"
 		icon="i"
 	>
+		<Group title="Theme Selector">
+			<ColorGroup />
+		</Group>
 		<Group title="Base16 ColorScheme">
 			<Row
 				title="Base00"

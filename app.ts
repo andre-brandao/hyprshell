@@ -11,7 +11,7 @@ import { forEachMonitor } from "./lib/utils"
 import { RegularWindow } from "./components/ui/RegularWindow"
 import SettingsWindow from "@/components/options-window/Settings"
 import OSD from "@/components/osd/OSD"
-import PlayGround from "./Playgrond"
+// import PlayGround from "./Playgrond"
 
 App.start({
 	css: css,
@@ -32,6 +32,6 @@ App.start({
 		Launcher()
 		SettingsWindow()
 		OSD()
-		PlayGround()
+		// PlayGround()
 	},
 })

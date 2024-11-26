@@ -48,7 +48,7 @@ export function Row<T>(props: RowProps<T>) {
 					label={props.opt.id}
 				/>
 			</box>
-			<box hexpand={true} />
+			<box hexpand />
 			<box valign={ALIGN.CENTER}>
 				<Setter
 					opt={props.opt}
@@ -73,10 +73,12 @@ export function Row<T>(props: RowProps<T>) {
 export function Group({
 	title,
 	children,
+	child,
 }: {
 	title: string
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	children?: ReturnType<typeof Row<any>>[]
+	child?: JSX.Element
 }) {
 	return (
 		<box
@@ -88,7 +90,7 @@ export function Group({
 					className={"group-title"}
 					label={title}
 				/>
-				{title ? (
+				{/* {title && children ? (
 					<button
 						hexpand={true}
 						halign={ALIGN.END}
@@ -98,22 +100,23 @@ export function Group({
 					>
 						<Icon
 							name={icons.ui.refresh}
-							// sensitive={Variable.derive(
-							//   children.map(({ attribute: { opt } }) =>
-							//     opt.bind().as((v) => v !== opt.initial),
-							//   ),
-							// )()}
+							sensitive={Variable.derive(
+								children.map(({ attribute: { opt } }) =>
+									opt.bind().as((v) => v !== opt.initial),
+								),
+							)()}
 						/>
 					</button>
-				) : (
-					<box />
-				)}
+				) : ( */}
+				<box />
+				{/* )} */}
 			</box>
 			<box
 				vertical
 				// children={}
 			>
 				{children}
+				{child}
 			</box>
 		</box>
 	)
