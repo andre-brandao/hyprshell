@@ -7,6 +7,8 @@ import Icon from "@/components/ui/Icon"
 import PannelBox from "@/components/ui/PannelBox"
 import PopupWindow from "@/components/ui/popup/PopUp"
 import PanelButton from "@/components/ui/PannelButton"
+import icons from "@/lib/icons"
+
 function BatteryLevel() {
 	const bat = Battery.get_default()
 	const powerprofiles = PowerProfiles.get_default()
@@ -19,11 +21,17 @@ function BatteryLevel() {
 			name="PowerProfiles"
 			anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
 		>
-			<box vertical>
+			<box
+				vertical
+				css={`
+				padding: 0.5em;
+				margin: 0.5em;
+				`}
+			>
 				{bind(powerprofiles, "activeProfile").as((activeProfile) =>
 					profiles.map((p) => {
 						if (p.profile === activeProfile) {
-							return <label label={p.profile} />
+							return <ProfileLabel profile={p.profile} />
 						}
 
 						return (
@@ -32,7 +40,7 @@ function BatteryLevel() {
 									powerprofiles.set_active_profile(p.profile)
 								}}
 							>
-								{p.profile}
+								<ProfileLabel profile={p.profile} />
 							</button>
 						)
 					}),
@@ -68,3 +76,16 @@ function BatteryLevel() {
 }
 
 export default BatteryLevel
+
+function ProfileLabel({ profile = "" }) {
+	const key = profile as keyof typeof icons.powerprofile
+	if (!Object.keys(icons.powerprofile).includes(key)) {
+		return <box>{profile}</box>
+	}
+	return (
+		<box>
+			<Icon name={icons.powerprofile[key]} />
+			<box>{profile}</box>
+		</box>
+	)
+}
