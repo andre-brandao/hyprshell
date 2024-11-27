@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
+    matcha.url = "git+https://codeberg.org/QuincePie/matcha";
+    matugen.url = "github:InioX/matugen?ref=v2.2.0";
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,6 +50,10 @@
           cava
           greet
         ])
+        ++ ([
+          inputs.matugen.packages.${system}.default
+          inputs.matcha.packages.${system}.default
+        ])
       );
 
       hyprshell = ags.lib.bundle {
@@ -61,8 +67,9 @@
 
     in
     {
-      packages.${system}.default = hyprshell;
-
+      packages.${system} = {
+        default = hyprshell;
+      };
       devShells.${system} = {
         default = pkgs.mkShell {
           buildInputs = [
@@ -73,6 +80,9 @@
             pkgs.glib
             pkgs.libgtop
             pkgs.gnome-bluetooth
+
+            inputs.matugen.packages.${system}.default
+            inputs.matcha.packages.${system}.default
 
           ];
         };
