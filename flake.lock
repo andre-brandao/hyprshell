@@ -42,7 +42,76 @@
         "type": "github"
       }
     },
+    "matcha": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1704517827,
+        "narHash": "sha256-WhpLwINCuXYxa9y8o4bcFsryvD/VcGi/9VimwJmbobw=",
+        "ref": "refs/heads/main",
+        "rev": "438da25cacd014b99460de76a59a9fecec04f48a",
+        "revCount": 18,
+        "type": "git",
+        "url": "https://codeberg.org/QuincePie/matcha"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/QuincePie/matcha"
+      }
+    },
+    "matugen": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1711657889,
+        "narHash": "sha256-4VX7Rt+ftEH8nwg59eT7TsvHYUf8/euUmwh/JLc4rLc=",
+        "owner": "InioX",
+        "repo": "matugen",
+        "rev": "566277529dadc2b149a8bd8b9859ea791ecdef26",
+        "type": "github"
+      },
+      "original": {
+        "owner": "InioX",
+        "ref": "v2.2.0",
+        "repo": "matugen",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1689679375,
+        "narHash": "sha256-LHUC52WvyVDi9PwyL1QCpaxYWBqp4ir4iL6zgOkmcb8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "684c17c429c42515bafb3ad775d2a710947f3d67",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1691186842,
+        "narHash": "sha256-wxBVCvZUwq+XS4N4t9NqsHV4E64cPVqQ2fdDISpjcw0=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "18036c0be90f4e308ae3ebcab0e14aae0336fe42",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1731319897,
         "narHash": "sha256-PbABj4tnbWFMfBp6OcUK5iGy1QY+/Z96ZcLpooIbuEI=",
@@ -61,7 +130,9 @@
     "root": {
       "inputs": {
         "ags": "ags",
-        "nixpkgs": "nixpkgs"
+        "matcha": "matcha",
+        "matugen": "matugen",
+        "nixpkgs": "nixpkgs_3"
       }
     }
   },
