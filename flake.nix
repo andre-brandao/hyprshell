@@ -1,5 +1,5 @@
 {
-  description = "My Awesome Desktop Shell";
+  description = "Shell Land";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -50,7 +50,7 @@
         ])
       );
 
-      myShell = ags.lib.bundle {
+      shellland = ags.lib.bundle {
         inherit pkgs;
         inherit extraPackages;
         src = ./.;
@@ -61,12 +61,7 @@
 
     in
     {
-      packages.${system}.default = myShell;
-
-
-      overlays.default = final: prev: {
-        myShell = myShell;
-      };
+      packages.${system}.default = shellland;
 
       devShells.${system} = {
         default = pkgs.mkShell {
