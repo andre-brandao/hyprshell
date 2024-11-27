@@ -39,6 +39,29 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 	return (
 		<box className="MediaPlayer">
 			<box
+				vertical
+				css={`
+				margin-right: 5px;
+				`}
+			>
+				<slider
+					vertical
+					expand
+					inverted
+					onDragged={({ value }) => {
+						player.volume = value
+					}}
+					value={bind(player, "volume")}
+				/>
+
+				<Icon
+					name={icons.audio.volume.high}
+					// css={`
+					// 	padding-right: 5px;
+					// 	`}
+				/>
+			</box>
+			<box
 				className="cover-art"
 				css={coverArt}
 			/>
@@ -60,21 +83,7 @@ function MediaPlayer({ player }: { player: Mpris.Player }) {
 					label={artist}
 				/>
 				{/* volume */}
-				<box>
-					<Icon
-						name={icons.audio.volume.high}
-						css={`
-						padding-right: 5px;
-						`}
-					/>
-					<slider
-						expand
-						onDragged={({ value }) => {
-							player.volume = value
-						}}
-						value={bind(player, "volume")}
-					/>
-				</box>
+
 				<slider
 					visible={bind(player, "length").as((l) => l > 0)}
 					onDragged={({ value }) => {

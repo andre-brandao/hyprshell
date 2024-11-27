@@ -6,6 +6,9 @@ import PopupWindow from "../ui/popup/PopUp"
 import { App, Astal } from "astal/gtk3"
 import Avatar from "./widgets/Avatar"
 import { applyCss } from "@/lib/style/style"
+import PannelButton from "../ui/PannelButton"
+import Icon from "../ui/Icon"
+import icons from "@/lib/icons"
 
 function SettingsMenu() {
 	return (
@@ -27,25 +30,8 @@ function SettingsMenu() {
 					<box
 						hexpand
 						halign={ALIGN.END}
+						className="quick-actions"
 					>
-						<box vertical>
-							<button
-								onClicked={() => {
-									applyCss()
-								}}
-							>
-								Apply CSS
-							</button>
-
-							<button
-								onClicked={() => {
-									App.get_window("Playground")?.show()
-									App.get_window("win-playground")?.hide()
-								}}
-							>
-								Open PlayGround
-							</button>
-						</box>
 						<box vertical>
 							<button
 								onClicked={() => {
@@ -53,10 +39,12 @@ function SettingsMenu() {
 									App.get_window("win-settings")?.hide()
 								}}
 							>
-								Settings
+								<Icon name={icons.ui.settings} />
 							</button>
 
-							<button onClicked={() => print("Not Implemented")}>Power</button>
+							<button onClicked={() => print("Not Implemented")}>
+								<Icon name={icons.powermenu.shutdown} />
+							</button>
 						</box>
 					</box>
 				</box>

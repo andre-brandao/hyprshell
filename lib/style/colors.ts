@@ -19,6 +19,9 @@ export type Base16ColorScheme = {
 	base0F: string
 }
 
+export type Base16Color = keyof Base16ColorScheme
+export type Color = Base16Color | string
+
 import { readFile } from "astal/file"
 import { exec, GLib } from "astal"
 import { Notify } from "../utils"

@@ -13,28 +13,22 @@ const { base16 } = options.theme
 
 function Preview({ base16 }: { base16: Base16ColorScheme }) {
 	return (
-		<box
-			vertical
-			widthRequest={50}
-		>
+		<box vertical>
 			{Object.entries(base16).map(([key, value]) =>
 				value.startsWith("#") ? (
 					<box>
-						<label label={key} />
-						<label label={value} />
-						{/* <box hexpand /> */}
 						<box
 							css={`
 					background-color: ${value};
 					min-height: 50px;
 					min-width: 50px;`}
 						/>
+						<label label={key} />
+						<label label={value} />
+						{/* <box hexpand /> */}
 					</box>
 				) : (
-					<label
-						maxWidthChars={15}
-						label={value}
-					/>
+					<box />
 				),
 			)}
 

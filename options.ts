@@ -58,7 +58,7 @@ export const options = mkOptions(OPTIONS, {
 				opacity: opt(60),
 			},
 			error: {
-				bg: opt("#e55f86"),
+				bg: opt("#color08"),
 				fg: opt("#141414"),
 			},
 			border: {
