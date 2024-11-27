@@ -71,22 +71,15 @@
       packages.${system} = {
         default = hyprshell;
       };
-      devShells.${system} = {
-        default = pkgs.mkShell {
-          buildInputs = [
-            # includes all Astal libraries
-            ags.packages.${system}.agsFull
-            pkgs.accountsservice
-            pkgs.fzf
-            pkgs.glib
-            pkgs.libgtop
-            pkgs.gnome-bluetooth
-
-            inputs.matugen.packages.${system}.default
-            inputs.matcha.packages.${system}.default
-
-          ];
-        };
+      devShells.${system}.default = pkgs.mkShell {
+        buildInputs = [
+          # includes astal3 astal4 astal-io by default
+          (ags.packages.${system}.default.override {
+            extraPackages = extraPackages ++ [
+              # cherry pick packages
+            ];
+          })
+        ];
       };
     };
 }

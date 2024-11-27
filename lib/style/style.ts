@@ -181,7 +181,7 @@ const functions = () =>
   @return string.unquote("alpha(#{$c},#{$a})");
 }`
 function resetCss() {
-	ensureDirectory(tmpCSS)
+	// ensureDirectory(tmpCSS)
 	ensureFile(tmpCSS)
 	ensureFile(css)
 
