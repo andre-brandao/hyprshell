@@ -1,5 +1,5 @@
 {
-  description = "Shell Land";
+  description = "HyprShell";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -50,18 +50,18 @@
         ])
       );
 
-      shellland = ags.lib.bundle {
+      hyprshell = ags.lib.bundle {
         inherit pkgs;
         inherit extraPackages;
         src = ./.;
-        name = "my-shell";
+        name = "hyprshell";
         entry = "app.ts";
       };
 
 
     in
     {
-      packages.${system}.default = shellland;
+      packages.${system}.default = hyprshell;
 
       devShells.${system} = {
         default = pkgs.mkShell {
