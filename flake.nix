@@ -33,6 +33,9 @@
           libgtop
           gnome-bluetooth
 
+          libsoup_3
+
+
         ])
         ++
         # includes all Astal libraries
