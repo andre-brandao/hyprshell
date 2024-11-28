@@ -7,7 +7,7 @@ import { Layout } from "./Layout"
 import { Variable, GLib, bind, Binding } from "astal"
 import icons from "@/lib/icons"
 import Icon from "../ui/Icon"
-import { applyCss } from "@/lib/style/style"
+import { applyCss } from "@/lib/style"
 
 const current = Variable(Layout[0].name)
 

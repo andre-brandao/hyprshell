@@ -21,11 +21,11 @@ GenericResourceData => {
 			throw new Error("Failed to parse /proc/meminfo for memory values.")
 		}
 
-		const totalRamInBytes = parseInt(totalMatch[1], 10) * 1024
-		const availableRamInBytes = parseInt(availableMatch[1], 10) * 1024
+		const totalRamInBytes = Number.parseInt(totalMatch[1], 10) * 1024
+		const availableRamInBytes = Number.parseInt(availableMatch[1], 10) * 1024
 
 		let usedRam = totalRamInBytes - availableRamInBytes
-		usedRam = isNaN(usedRam) || usedRam < 0 ? 0 : usedRam
+		usedRam = Number.isNaN(usedRam) || usedRam < 0 ? 0 : usedRam
 
 		return {
 			percentage: divide([totalRamInBytes, usedRam], false),

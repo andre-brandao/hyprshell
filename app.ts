@@ -1,21 +1,21 @@
 import { App, Widget, type Gdk, Gtk } from "astal/gtk3"
 
 import "./globals"
-import "./options"
-import { css } from "./lib/style/style"
+import "./src/options"
+import { css } from "./src/lib/style"
 
 import Bar from "@/components/Bar"
-import NotificationPopups from "./components/Notification/NotificationPopups"
-import Launcher from "./components/Launcher"
-import { forEachMonitor } from "./lib/utils"
-import { RegularWindow } from "./components/ui/RegularWindow"
+import NotificationPopups from "./src/components/Notification/NotificationPopups"
+import Launcher from "./src/components/Launcher"
+import { forEachMonitor } from "./src/lib/utils"
+import { RegularWindow } from "./src/components/ui/RegularWindow"
 import Settings from "@/components/Settings"
 import OSD from "@/components/osd/OSD"
 // import PlayGround from "./Playgrond"
 
 App.start({
 	css: css,
-	icons: "/home/andre/.config/ags/assets/icons",
+	icons: "/home/andre/.config/ags/src/assets/icons",
 	// gtkTheme: "adw-gtk3-dark",
 	// instanceName: 'js',
 	requestHandler(request, res) {

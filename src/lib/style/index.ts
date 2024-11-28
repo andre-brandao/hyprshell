@@ -168,7 +168,9 @@ const variables = () =>
 	].join("\n")
 
 const imports = () => {
-	const fd = exec(`fd ".scss" ${GLib.getenv("HOME")}/.config/ags/components`)
+	const fd = exec(
+		`fd ".scss" ${GLib.getenv("HOME")}/.config/ags/src/components`,
+	)
 	const files = fd.split(/\s+/)
 	return files
 		.map((f) => `@import '${f}';`)

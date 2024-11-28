@@ -1,5 +1,5 @@
 import { App, Astal, Gdk, Gtk } from "astal/gtk3"
-import { RegularWindow } from "../../components/ui/RegularWindow"
+import { RegularWindow } from "../ui/RegularWindow"
 import { Group, Page, Row } from "./blocks/Blocks"
 import { options } from "@/options"
 
