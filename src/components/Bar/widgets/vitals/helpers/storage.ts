@@ -1,7 +1,8 @@
 import GTop from "gi://GTop"
 
-import { divide, type GenericResourceData } from "@/lib/utils"
+import { divide } from "@/lib/utils"
 import { Variable as VariableType } from "astal"
+import type { GenericResourceData } from "."
 
 export const computeStorage = (): GenericResourceData => {
 	try {

@@ -1,11 +1,12 @@
-import { computeCPU } from "@/lib/modules/cpu"
-import { computeStorage } from "@/lib/modules/storage"
-import { computeRamUsage } from "@/lib/modules/ram"
+import { computeCPU } from "@/components/Bar/widgets/vitals/helpers/cpu"
+import { computeStorage } from "@/components/Bar/widgets/vitals/helpers/storage"
+import { computeRamUsage } from "@/components/Bar/widgets/vitals/helpers/ram"
 import { Variable } from "astal"
-import { formatDataResourse } from "@/lib/utils"
+
 import { options } from "@/options"
 import Icon from "@/components/ui/Icon"
 import PannelBox from "@/components/ui/PannelBox"
+import { formatDataResourse } from "./helpers"
 
 const { cpu, storage, ram } = options.bar.vitals
 

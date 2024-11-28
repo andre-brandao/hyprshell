@@ -47,7 +47,6 @@ export const options = mkOptions(OPTIONS, {
 				opacity: opt(0),
 			},
 			widget: {
-				// color: opt<Color>("$color01"),
 				fg: opt<Color>("$base0D"),
 				bg: opt<Color>("$base00"),
 				opacity: opt(40),
