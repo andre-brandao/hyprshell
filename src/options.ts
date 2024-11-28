@@ -48,12 +48,12 @@ export const options = mkOptions(OPTIONS, {
 			},
 			widget: {
 				// color: opt<Color>("$color01"),
-				fg: opt<Color>("$color06"),
+				fg: opt<Color>("$base0D"),
 				bg: opt<Color>("$base00"),
 				opacity: opt(40),
 			},
 			hover: {
-				bg: opt<Color>("$color07"),
+				bg: opt<Color>("$base0E"),
 				fg: opt<Color>("$fg"),
 				opacity: opt(60),
 			},
@@ -62,7 +62,7 @@ export const options = mkOptions(OPTIONS, {
 				fg: opt("#141414"),
 			},
 			border: {
-				color: opt("$color05"),
+				color: opt("$base0C"),
 				width: opt("2px"),
 				opacity: opt(50),
 			},

@@ -10,7 +10,7 @@ import Launcher from "./src/components/Launcher"
 import { forEachMonitor } from "./src/lib/utils"
 import { RegularWindow } from "./src/components/ui/RegularWindow"
 import Settings from "@/components/Settings"
-import OSD from "@/components/osd/OSD"
+import OSD from "@/components/OSD/OSD"
 // import PlayGround from "./Playgrond"
 
 App.start({
