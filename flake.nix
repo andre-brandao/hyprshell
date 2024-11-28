@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    matcha.url = "git+https://codeberg.org/QuincePie/matcha";
-    matugen.url = "github:InioX/matugen?ref=v2.2.0";
+    matcha.url = "git+https://codeberg.org/QuincePie/matcha"; # idle inhibitor
+    matugen.url = "github:InioX/matugen?ref=v2.2.0"; # material theme generator
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +23,6 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
 
-
       extraPackages = (
         # extra packages
         (with pkgs; [
@@ -34,9 +33,10 @@
           libgtop
           gnome-bluetooth
 
-        ]) ++
+        ])
+        ++
         # includes all Astal libraries
-        (with ags.packages.${system};[
+        (with ags.packages.${system}; [
           battery
           hyprland
           notifd
@@ -65,7 +65,6 @@
         entry = "app.ts";
       };
 
-
     in
     {
       packages.${system} = {
@@ -73,13 +72,19 @@
       };
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = [
-          # includes astal3 astal4 astal-io by default
+          (pkgs.writeShellScriptBin "types" ''
+            ags types --tsconfig
+          '')
           (ags.packages.${system}.default.override {
             extraPackages = extraPackages ++ [
-              # cherry pick packages
+              # extra dev packages for development or testing (will be passed to ags)
             ];
           })
         ];
+        shellHook = ''
+          echo "Welcome to HyprShell dev environment!"
+          echo "Use 'types' to generate local types for your project."
+        '';
       };
     };
 }
