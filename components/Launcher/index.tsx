@@ -12,42 +12,7 @@ export function show() {
 	App.get_window("launcher")?.show()
 }
 
-function AppButton({ app }: { app: Apps.Application }) {
-	return (
-		<button
-			className="AppButton"
-			onClicked={() => {
-				hide()
-				app.launch()
-			}}
-		>
-			<box>
-				<icon icon={app.iconName} />
-				<box
-					valign={Gtk.Align.CENTER}
-					vertical
-				>
-					<label
-						className="name"
-						truncate
-						xalign={0}
-						label={app.name}
-					/>
-					{app.description && (
-						<label
-							className="description"
-							wrap
-							xalign={0}
-							label={app.description}
-						/>
-					)}
-				</box>
-			</box>
-		</button>
-	)
-}
-
-export default function Applauncher() {
+export default function Launcher() {
 	const { CENTER } = Gtk.Align
 	const apps = new Apps.Apps()
 
@@ -124,5 +89,40 @@ export default function Applauncher() {
 				/>
 			</box>
 		</window>
+	)
+}
+
+function AppButton({ app }: { app: Apps.Application }) {
+	return (
+		<button
+			className="AppButton"
+			onClicked={() => {
+				hide()
+				app.launch()
+			}}
+		>
+			<box>
+				<icon icon={app.iconName} />
+				<box
+					valign={Gtk.Align.CENTER}
+					vertical
+				>
+					<label
+						className="name"
+						truncate
+						xalign={0}
+						label={app.name}
+					/>
+					{app.description && (
+						<label
+							className="description"
+							wrap
+							xalign={0}
+							label={app.description}
+						/>
+					)}
+				</box>
+			</box>
+		</button>
 	)
 }

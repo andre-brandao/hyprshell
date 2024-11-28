@@ -6,8 +6,8 @@ import PanelButton from "@/components/ui/PannelButton"
 import Icon from "@/components/ui/Icon"
 import Wp from "gi://AstalWp"
 
-import SettingsMenu from "./SettingsMenu"
-import PannelBox from "../../components/ui/PannelBox"
+import SettingsMenu from "./window"
+import PannelBox from "../ui/PannelBox"
 
 export function QuickSettings() {
 	const { wifi } = Network.get_default()

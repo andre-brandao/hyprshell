@@ -7,7 +7,7 @@ import {
 import { options } from "@/options"
 
 import { Variable, GLib, bind, Binding } from "astal"
-import Icon from "../ui/Icon"
+import Icon from "../../ui/Icon"
 import icons from "@/lib/icons"
 const { base16 } = options.theme
 

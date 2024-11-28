@@ -1,7 +1,7 @@
 import type { Opt } from "@/lib/option"
 // import Gtk from "gi://Gtk?version=3.0";
 import { Variable, GLib, bind, Binding } from "astal"
-import Icon from "../../components/ui/Icon"
+import Icon from "../../ui/Icon"
 import icons from "@/lib/icons"
 import GObject from "gi://GObject"
 import { Gtk, Gdk, Widget, astalify, type ConstructProps } from "astal/gtk3"

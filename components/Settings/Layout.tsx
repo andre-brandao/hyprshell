@@ -1,9 +1,9 @@
 import { App, Astal, Gdk, Gtk } from "astal/gtk3"
 import { RegularWindow } from "../../components/ui/RegularWindow"
-import { Group, Page, Row } from "./Blocks"
+import { Group, Page, Row } from "./blocks/Blocks"
 import { options } from "@/options"
 
-import { ColorGroup } from "./Base16"
+import { ColorGroup } from "./blocks/Base16"
 
 const { bar, notification, theme, font, components } = options
 

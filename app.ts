@@ -4,12 +4,12 @@ import "./globals"
 import "./options"
 import { css } from "./lib/style/style"
 
-import Bar from "@/components/Bar/Bar"
-import NotificationPopups from "./components/notification/NotificationPopups"
-import Launcher from "./components/launcher/Launcher"
+import Bar from "@/components/Bar"
+import NotificationPopups from "./components/Notification/NotificationPopups"
+import Launcher from "./components/Launcher"
 import { forEachMonitor } from "./lib/utils"
 import { RegularWindow } from "./components/ui/RegularWindow"
-import SettingsWindow from "@/components/options-window/Settings"
+import Settings from "@/components/Settings"
 import OSD from "@/components/osd/OSD"
 // import PlayGround from "./Playgrond"
 
@@ -30,7 +30,7 @@ App.start({
 	main() {
 		forEachMonitor((m: Gdk.Monitor) => [Bar(m), NotificationPopups(m)])
 		Launcher()
-		SettingsWindow()
+		Settings()
 		OSD()
 		// PlayGround()
 	},

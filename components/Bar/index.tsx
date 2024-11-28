@@ -13,7 +13,7 @@ import { options } from "@/options"
 import Vitals, { CPU } from "./widgets/vitals/Vitals"
 import KBInput from "./widgets/KBLayout"
 import DistroIcon from "./widgets/DistroIcon"
-import QuickSettings from "@/components/quick-settings/QuickSettings"
+import QuickSettings from "@/components/ControlCenter/btn"
 import { Variable } from "astal"
 
 const { position } = options.bar

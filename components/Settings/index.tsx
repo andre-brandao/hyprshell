@@ -1,12 +1,12 @@
 import { App, Astal, Gdk, Gtk } from "astal/gtk3"
-import { RegularWindow } from "../../components/ui/RegularWindow"
+import { RegularWindow } from "../ui/RegularWindow"
 import { options } from "@/options"
 
 import { Layout } from "./Layout"
 
 import { Variable, GLib, bind, Binding } from "astal"
 import icons from "@/lib/icons"
-import Icon from "../../components/ui/Icon"
+import Icon from "../ui/Icon"
 import { applyCss } from "@/lib/style/style"
 
 const current = Variable(Layout[0].name)
