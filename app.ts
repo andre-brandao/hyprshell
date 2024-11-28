@@ -4,7 +4,7 @@ import "./globals"
 import "./options"
 import { css } from "./lib/style/style"
 
-import Bar from "@/components/bar/Bar"
+import Bar from "@/components/Bar/Bar"
 import NotificationPopups from "./components/notification/NotificationPopups"
 import Launcher from "./components/launcher/Launcher"
 import { forEachMonitor } from "./lib/utils"
