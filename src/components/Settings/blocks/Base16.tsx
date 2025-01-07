@@ -1,9 +1,9 @@
 import {
 	type Base16ColorScheme,
 	listBase16Themes,
-	parseThemeFile,
+	getThemeColors,
 	applyTheme,
-} from "@/lib/style/colors"
+} from "@/lib/style/colors2"
 import { options } from "@/options"
 
 import { Variable, GLib, bind, Binding } from "astal"
@@ -47,12 +47,35 @@ function Preview({ base16 }: { base16: Base16ColorScheme }) {
 }
 
 export function ColorGroup() {
-	const themes = listBase16Themes()
+	const isLoading = Variable(false)
+	const themes = Variable<
+		{
+			name: string
+			download_url: string
+		}[]>([])
+
+	// listBase16Themes().then((t) => {
+	// 	// print("themes", t)
+	// 	isLoading.set(false)
+	// 	themes.set(t)
+	// })
+
+	function loadThemes() {
+		isLoading.set(true)
+		listBase16Themes().then((t) => {
+			// print("themes", t)
+			isLoading.set(false)
+			themes.set(t)
+		}).catch((e) => {
+			print("error", e)
+			isLoading.set(false)
+		})
+	}
 
 	const previewTheme = Variable<Base16ColorScheme>(
 		{
 			author: "André Brandão",
-			scheme: "dark",
+			name: "Default",
 			base00: `${base16.base00.get()}`,
 			base01: `${base16.base01.get()}`,
 			base02: `${base16.base02.get()}`,
@@ -74,13 +97,12 @@ export function ColorGroup() {
 	)
 
 	function selectTheme(theme: string) {
-		const parsed = parseThemeFile(theme)
-
-		if (!parsed) {
-			return
-		}
-
-		previewTheme.set(parsed)
+		getThemeColors(theme).then((theme) => {
+			if (theme) {
+				previewTheme.set(theme)
+				print("theme", JSON.stringify(theme))
+			}
+		})
 	}
 	return (
 		<box
@@ -110,11 +132,37 @@ export function ColorGroup() {
 							vertical
 							expand
 						>
-							{themes.map((theme) => (
-								<button onClick={() => selectTheme(theme.path)}>
-									<label label={`${theme.name} `} />
-								</button>
-							))}
+
+							{themes().as((t) => <>
+								{
+
+									t.length > 0 ?
+
+
+
+
+										t.filter(theme => theme !== undefined && theme.name !== undefined)
+											.map((theme) => (
+												<button onClick={() => selectTheme(theme.download_url)}>
+													<label label={`${theme.name} `} />
+												</button>
+											)) : (
+											<button onClick={loadThemes}>
+												<label label={"Load Themes"} />
+											</button>
+										)
+
+
+
+								}
+
+
+
+
+							</>
+							)}
+
+
 						</box>
 					</scrollable>
 				</box>

@@ -8,9 +8,11 @@ import Icon from "@/components/ui/Icon"
 import PannelBox from "@/components/ui/PannelBox"
 
 type IdleState = "active" | "inactive" | "unknown"
+
+const proc = subprocess(["matcha", "-d", "-b", "yambar"])
+
 function IdleInhibitor() {
 	if (!dependencies("matcha")) return <></>
-	const proc = subprocess(["matcha", "-d", "-b", "yambar"])
 
 	const idleVar = Variable<IdleState>("unknown")
 
