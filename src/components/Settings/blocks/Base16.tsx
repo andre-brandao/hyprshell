@@ -3,7 +3,7 @@ import {
 	listBase16Themes,
 	getThemeColors,
 	applyTheme,
-} from "@/lib/style/colors2"
+} from "@/lib/style/colors"
 import { options } from "@/options"
 
 import { Variable, GLib, bind, Binding } from "astal"

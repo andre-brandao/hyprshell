@@ -13,7 +13,7 @@ import {
 	listBase16Themes,
 	getThemeColors,
 	applyTheme,
-} from "@/lib/style/colors2"
+} from "@/lib/style/colors"
 
 export default function PlayGround() {
 	const themes = Variable<

@@ -1,6 +1,12 @@
+import { fetch } from "@/lib/modules/fetch"
+import { Notify } from "../utils"
+import { options } from "@/options"
+
+import { exec, GLib, execAsync } from "astal"
+
 export type Base16ColorScheme = {
-	scheme: string
-	author: string
+	name?: string
+	author?: string
 	base00: string
 	base01: string
 	base02: string
@@ -22,94 +28,102 @@ export type Base16ColorScheme = {
 export type Base16Color = keyof Base16ColorScheme
 export type Color = Base16Color | string
 
-import { readFile } from "astal/file"
-import { exec, GLib } from "astal"
-import { Notify } from "../utils"
-import { options } from "@/options"
+function parseBase16Colors(yamlText: string): Base16ColorScheme | null {
+	// Split the YAML text into lines
+	const lines = yamlText.split("\n")
 
-const stylixPath = `${GLib.getenv("HOME")}/.config/stylix/pallete.json`
+	// Initialize an object to hold the parsed values
+	const colors: Partial<Base16ColorScheme> = {}
 
-const currentThemePath = `${GLib.getenv(
-	"HOME",
-)}/.config/stylix/current-theme.json`
+	// Loop through each line to extract the color codes and other properties
+	for (const line of lines) {
+		const trimmedLine = line.trim()
 
-const themeListDirectory = `${GLib.getenv("HOME")}/dotfiles/nixos/themes`
+		// Ignore lines that don't have a color palette (not starting with "base")
+		if (trimmedLine.startsWith("base")) {
+			const [key, value] = trimmedLine.split(":").map((part) => part.trim())
 
+			// Clean up the value by removing the extra quotes and escape characters
+			const cleanValue = value
+				.replace(/\\["\n\r]/g, "")
+				.replace(/"/g, "")
+				.trim()
+
+			// Assign to the corresponding property in the colors object
+			colors[key as keyof Base16ColorScheme] = cleanValue
+		}
+
+		// Capture name and author if they exist, cleaning any unnecessary escape characters
+		if (trimmedLine.startsWith("name:") || trimmedLine.startsWith("author:")) {
+			const [key, value] = trimmedLine.split(":").map((part) => part.trim())
+			if (key === "name" || key === "author") {
+				// Clean the string by removing any escape characters
+				const cleanValue = value
+					.replace(/\\["\n\r]/g, "")
+					.replace(/"/g, "")
+					.trim()
+				colors[key as keyof Base16ColorScheme] = cleanValue
+			}
+		}
+	}
+
+	// Return the colors object if we have all base colors, else return null
+	if (Object.keys(colors).length < 16) {
+		return null // Not all colors were found
+	}
+
+	return colors as Base16ColorScheme
+}
+
+const THEMES_LIST_URL =
+	"https://api.github.com/repos/tinted-theming/schemes/contents/base16"
 /**
- * Parses a theme file and returns a StylixColors object.
- * @param filePath Path to the theme file.
- * @returns A StylixColors object or undefined if parsing fails.
+ * Parses and downloads a theme file from a URL, returning a Base16ColorScheme object.
+ * @param fileUrl The URL to the theme file.
+ * @returns A Base16ColorScheme object or undefined if parsing fails.
  */
-export function parseThemeFile(
+export async function getThemeColors(
 	filePath: string,
-): Base16ColorScheme | undefined {
-	if (!GLib.file_test(filePath, GLib.FileTest.EXISTS)) {
+): Promise<Base16ColorScheme | undefined> {
+	// Fetch the file content using curl
+	let content: string
+
+	try {
+		content = await execAsync(`curl -s ${filePath}`)
+	} catch (error) {
 		Notify({
 			appName: "Stylix",
-			summary: "Theme File Not Found",
-			body: `File does not exist: ${filePath}`,
+			summary: "Failed to Fetch Theme",
+			body: `Unable to fetch theme file: ${error}`,
 		})
 		return
 	}
-
-	const content = readFile(filePath)
-	const lines = content.split("\n")
-
-	const theme: Partial<Base16ColorScheme> = {}
-
-	for (const line of lines) {
-		const cleanedLine = line.split("#")[0].trim() // Remove comments and trim whitespace
-		if (!cleanedLine) continue // Skip empty lines
-
-		const [key, value] = cleanedLine.split(":").map((part) => part.trim())
-		if (!key || !value) {
-			Notify({
-				appName: "Stylix",
-				summary: "Invalid Line in Theme File",
-				body: `Could not parse line: ${line}`,
-			})
-			return
-		}
-
-		// Normalize and assign the value
-		if (
-			key.startsWith("base") &&
-			value.startsWith('"') &&
-			value.endsWith('"')
-		) {
-			theme[key as keyof Base16ColorScheme] = `#${value.slice(1, -1)}` // Remove quotes
-		} else if (key === "scheme" || key === "author") {
-			theme[key as keyof Base16ColorScheme] = value
-		} else {
-			Notify({
-				appName: "Stylix",
-				summary: "Unexpected Key in Theme File",
-				body: `Unexpected key: ${key}`,
-			})
-			return
-		}
+	const theme = parseBase16Colors(content)
+	if (!theme) {
+		Notify({
+			appName: "Stylix",
+			summary: "Invalid Theme File",
+			body: "The theme file is invalid or incomplete.",
+		})
+		return
 	}
-
-	// Validate all required keys
+	print(JSON.stringify(theme))
 	const isValid = validateStylixColors(theme)
 	if (!isValid) {
 		return
 	}
-
-	return theme as Base16ColorScheme
+	return theme
 }
 
 /**
- * Validates the parsed StylixColors object.
- * @param colors Partial StylixColors object.
+ * Validates the parsed Base16ColorScheme object.
+ * @param colors Partial Base16ColorScheme object.
  * @returns True if valid, otherwise false.
  */
 export function validateStylixColors(
 	colors: Partial<Base16ColorScheme>,
 ): boolean {
 	const expectedKeys = [
-		"scheme",
-		"author",
 		"base00",
 		"base01",
 		"base02",
@@ -142,15 +156,46 @@ export function validateStylixColors(
 	return true
 }
 
-export function listBase16Themes() {
-	const fd = exec(`fd ".yaml" ${themeListDirectory}`)
-	const files = fd.split(/\s+/)
-	return files.map((f) => ({
-		name: f.split("/").pop(),
-		path: f,
-	}))
+/**
+ * Lists Base16 themes from the GitHub repository.
+ * @returns A list of theme file details or an empty array on failure.
+ */
+export async function listBase16Themes(): Promise<
+	{
+		name: string
+		download_url: string
+	}[]
+> {
+	try {
+		const response = await execAsync(`curl ${THEMES_LIST_URL}`)
+			.then((res) => {
+				// print(res)
+				return JSON.parse(res)
+			})
+			.catch((err) => {
+				printerr(err)
+			})
+
+		const themes = response.map(
+			(file: {
+				name: string
+				download_url: string
+			}) => ({
+				name: file.name,
+				download_url: file.download_url,
+			}),
+		)
+
+		return themes
+	} catch (error) {
+		return []
+	}
 }
 
+/**
+ * Applies a Base16 color scheme.
+ * @param theme The Base16 color scheme to apply.
+ */
 export function applyTheme(theme: Base16ColorScheme) {
 	const base16 = options.theme.base16
 	base16.base00.set(`${theme.base00}`)
